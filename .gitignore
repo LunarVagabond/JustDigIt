@@ -1,0 +1,62 @@
+# Godot-specific
+.import/
+export.cfg
+export_presets.cfg
+.godot/
+
+# Godot Mono (C#) specific
+.mono/
+data_*/             # temporary Godot mono build dirs
+mono_crash.*        # crash logs
+
+# C# build artifacts
+*.csproj
+*.sln
+*.user
+*.pidb
+*.suo
+*.tmp
+*.userprefs
+*.csproj.DotSettings.user
+*.vs/
+
+# VS Code / Rider / MonoDevelop / other IDE junk
+.vscode/
+.idea/
+*.sln.docstates
+*.ncb
+*.pdb
+*.opendb
+*.VC.db
+*.DotSettings.user
+
+# System files
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db
+desktop.ini
+
+# OS-specific temp files
+*.swp
+*.bak
+*.tmp
+
+# Build output
+/bin/
+obj/
+
+# Logs
+*.log
+
+# Backup files
+*.old
+*.orig
+
+# Optional: Ignore user-specific Godot editor settings
+editor_settings-*.tres
+
+# Optional: Ignore exports
+/builds/
+exports/
+
