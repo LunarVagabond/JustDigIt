@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://bw8elrs4u8n2u"]
+[gd_scene load_steps=11 format=3 uid="uid://bw8elrs4u8n2u"]
 
 [ext_resource type="Script" uid="uid://cqf4v58ixcgnm" path="res://Levels/MainMenu/MainMenu.cs" id="1_3u71f"]
 [ext_resource type="Texture2D" uid="uid://cd34cg6bn50jd" path="res://Assets/Images/JDIBanner.png" id="1_q7u2s"]
 [ext_resource type="Texture2D" uid="uid://d00lqwd6moxgq" path="res://Assets/TileSets/Complete_UI_Essential_Pack_Free/Sprites/UI_Flat_Bar01a.png" id="2_3u71f"]
 [ext_resource type="Theme" uid="uid://cvpd73uf43lw7" path="res://Assets/Themes/UIBoldTheme.tres" id="3_p4dqk"]
 [ext_resource type="Theme" uid="uid://dtf1wfsufav3c" path="res://Assets/Themes/UIItalicTheme.tres" id="4_4syi3"]
+[ext_resource type="Texture2D" uid="uid://bxq6mkkplba83" path="res://Assets/TileSets/Complete_UI_Essential_Pack_Free/Sprites/UI_Flat_IconPlay01a.png" id="6_3vsjx"]
+[ext_resource type="Texture2D" uid="uid://cj6gmka8ft68t" path="res://Assets/TileSets/Complete_UI_Essential_Pack_Free/Sprites/UI_Flat_IconArrow01a.png" id="7_cq3bu"]
+[ext_resource type="Texture2D" uid="uid://c27bn4ulxqfbf" path="res://Assets/TileSets/Complete_UI_Essential_Pack_Free/Sprites/UI_Flat_IconCross01a.png" id="8_exb2m"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qfsla"]
 font_size = 54
@@ -21,6 +24,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3u71f")
+NextLevel = "uid://bw8elrs4u8n2u"
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -102,18 +106,21 @@ unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("4_4syi3")
 text = "Start Game"
+icon = ExtResource("6_3vsjx")
 
 [node name="OptionsButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsContainer/CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("4_4syi3")
 text = "Options"
+icon = ExtResource("7_cq3bu")
 
 [node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsContainer/CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("4_4syi3")
 text = "Exit"
+icon = ExtResource("8_exb2m")
 
 [node name="AuthorLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
