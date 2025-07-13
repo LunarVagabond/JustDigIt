@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dipw064j485kr" path="res://Entities/Player/mining_rig.tscn" id="4_tekja"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ix6vc"]
-radius = 6.0
+radius = 5.0
 height = 24.6667
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4wf4l"]
