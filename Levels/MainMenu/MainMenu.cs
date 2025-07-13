@@ -16,11 +16,12 @@ public partial class MainMenu : Control
 
   public override void _Ready()
   {
-    GD.Print("Loaded");
+    Input.MouseMode = Input.MouseModeEnum.Visible;
     StartButton = GetNode<Button>("%StartButton");
     OptionsButton = GetNode<Button>("%OptionsButton");
     ExitButton = GetNode<Button>("%ExitButton");
     sceneTransition = GetNodeOrNull<SceneTransition>("/root/SceneTransition");
+    sceneTransition.FadeIn(); 
     WireSignals();
   }
 

@@ -50,12 +50,4 @@ public partial class Player : CharacterBody2D
 		Velocity = velocity;
 		MoveAndSlide();
 	}
-
-	public override void _UnhandledInput(InputEvent @event)
-	{
-		if (@event.IsActionPressed("ui_cancel"))
-		{
-			Input.MouseMode = Input.MouseModeEnum.Visible;
-		}
-	}
 }
