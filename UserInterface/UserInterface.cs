@@ -1,8 +1,6 @@
 using Godot;
-using System;
-using System.Threading.Tasks;
 
-public partial class UserInterface : Control
+public partial class UserInterface : CanvasLayer
 {
 	private TextureRect CurrentItemTexture;
 	private ProgressBar OxygenBar;
@@ -14,7 +12,7 @@ public partial class UserInterface : Control
 
 	public override void _Ready()
 	{
-		Visible = false; // Most scenes we will hide this in the engine but we do want it in the game to show up
+		Visible = true; // Most scenes we will hide this in the engine but we do want it in the game to show up
 		CurrentItemTexture = GetNodeOrNull<TextureRect>("%CurrentItem");
 		OxygenBar = GetNodeOrNull<ProgressBar>("%OxygenBar");
 		LightBar = GetNodeOrNull<ProgressBar>("%LightBar");
@@ -22,6 +20,7 @@ public partial class UserInterface : Control
 		GoldCountLabel = GetNodeOrNull<Label>("%GoldCountLabel");
 		DialogLabel = GetNodeOrNull<Label>("%DialogAreaLabel");
 		DialogAreaPanel = GetNodeOrNull<PanelContainer>("%DialogAreaPanel");
+		DialogAreaPanel.Visible = false;
 	}
 
 	/// <summary>
