@@ -4,6 +4,14 @@ public partial class Player : CharacterBody2D
 {
 	public const float Speed = 300.0f;
 	public const float JumpVelocity = -400.0f;
+	private SceneTransition sceneTransition;
+
+	public override void _Ready()
+	{
+		sceneTransition = GetNodeOrNull<SceneTransition>("/root/SceneTransition");
+		sceneTransition.FadeIn();
+	}
+
 
 	public override void _PhysicsProcess(double delta)
 	{

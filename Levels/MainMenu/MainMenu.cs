@@ -21,9 +21,6 @@ public partial class MainMenu : Control
     OptionsButton = GetNode<Button>("%OptionsButton");
     ExitButton = GetNode<Button>("%ExitButton");
     sceneTransition = GetNodeOrNull<SceneTransition>("/root/SceneTransition");
-    // FIXME: Any level should call this themself or even the player 
-    // when the level becomes ready not here (Testing Only)
-    sceneTransition.FadeIn();
     WireSignals();
   }
 
