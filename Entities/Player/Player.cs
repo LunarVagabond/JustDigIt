@@ -6,7 +6,7 @@ public partial class Player : CharacterBody2D
 	public const float Speed = 200.0f;
 	public const float JumpVelocity = -200.0f;
 	private SceneTransition sceneTransition;
-	private AnimatedSprite2D playerSprite;
+	private AnimatedSprite2D playerSprite; // TODO: fix sprite or change, then FlipH
 
 	public override void _Ready()
 	{
@@ -40,17 +40,6 @@ public partial class Player : CharacterBody2D
 		Vector2 direction = Input.GetVector(IA.MOVE_LEFT, IA.MOVE_RIGHT, IA.MOVE_UP, IA.MOVE_DOWN);
 		if (direction != Vector2.Zero)
 		{
-			// if (direction.X > 0)
-			// {
-			// 	// playerSprite.Scale = playerSprite.Scale with { X = 1 };
-			// 	// playerSprite.FlipH = false;
-			// }
-			// else if (direction.X < 0)
-			// {
-			// 	// playerSprite.FlipH = true;
-			// 	// playerSprite.Scale = playerSprite.Scale with { X = -1 };
-			// }
-
 			velocity.X = direction.X * Speed;
 		}
 		else
@@ -66,7 +55,6 @@ public partial class Player : CharacterBody2D
 	{
 		if (@event.IsActionPressed("ui_cancel"))
 		{
-			// GD.Print("escaped");
 			Input.MouseMode = Input.MouseModeEnum.Visible;
 		}
 	}
