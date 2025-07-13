@@ -1,15 +1,21 @@
 using Godot;
 using IA = CustomInputActions.InputActions;
+
 public partial class Player : CharacterBody2D
 {
-	public const float Speed = 300.0f;
-	public const float JumpVelocity = -400.0f;
+	public const float Speed = 200.0f;
+	public const float JumpVelocity = -200.0f;
 	private SceneTransition sceneTransition;
+	private AnimatedSprite2D playerSprite; // TODO: fix sprite or change, then FlipH
 
 	public override void _Ready()
 	{
 		sceneTransition = GetNodeOrNull<SceneTransition>("/root/SceneTransition");
 		sceneTransition.FadeIn();
+
+		playerSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+
+		Input.MouseMode = Input.MouseModeEnum.ConfinedHidden; // Is there a better spot for this?
 	}
 
 
@@ -43,5 +49,13 @@ public partial class Player : CharacterBody2D
 
 		Velocity = velocity;
 		MoveAndSlide();
+	}
+
+	public override void _UnhandledInput(InputEvent @event)
+	{
+		if (@event.IsActionPressed("ui_cancel"))
+		{
+			Input.MouseMode = Input.MouseModeEnum.Visible;
+		}
 	}
 }
