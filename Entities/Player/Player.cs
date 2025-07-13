@@ -6,11 +6,14 @@ public partial class Player : CharacterBody2D
 	public const float Speed = 200.0f;
 	public const float JumpVelocity = -200.0f;
 	private SceneTransition sceneTransition;
+	private AnimatedSprite2D playerSprite;
 
 	public override void _Ready()
 	{
 		sceneTransition = GetNodeOrNull<SceneTransition>("/root/SceneTransition");
 		sceneTransition.FadeIn();
+
+		playerSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 
 		Input.MouseMode = Input.MouseModeEnum.ConfinedHidden; // Is there a better spot for this?
 	}
@@ -37,6 +40,17 @@ public partial class Player : CharacterBody2D
 		Vector2 direction = Input.GetVector(IA.MOVE_LEFT, IA.MOVE_RIGHT, IA.MOVE_UP, IA.MOVE_DOWN);
 		if (direction != Vector2.Zero)
 		{
+			// if (direction.X > 0)
+			// {
+			// 	// playerSprite.Scale = playerSprite.Scale with { X = 1 };
+			// 	// playerSprite.FlipH = false;
+			// }
+			// else if (direction.X < 0)
+			// {
+			// 	// playerSprite.FlipH = true;
+			// 	// playerSprite.Scale = playerSprite.Scale with { X = -1 };
+			// }
+
 			velocity.X = direction.X * Speed;
 		}
 		else

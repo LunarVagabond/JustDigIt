@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://f4dffg6dwx43"
-path="res://.godot/imported/UM_BackGround 16x16.png-f73dc59dde96dc55fa4411cfdb0747a8.ctex"
+path="res://.godot/imported/UM_BackGround 16x16.png-f1d8be27b9289c4f8cc6e468f6a88724.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/TileSets/Underground_Mine_TileSet/UM_BackGround 16x16.png"
-dest_files=["res://.godot/imported/UM_BackGround 16x16.png-f73dc59dde96dc55fa4411cfdb0747a8.ctex"]
+source_file="res://Assets/TileSets/UM_BackGround 16x16.png"
+dest_files=["res://.godot/imported/UM_BackGround 16x16.png-f1d8be27b9289c4f8cc6e468f6a88724.ctex"]
 
 [params]
 
