@@ -1,8 +1,6 @@
 using Godot;
-using System;
-using System.Threading.Tasks;
 
-public partial class UserInterface : Control
+public partial class UserInterface : CanvasLayer
 {
 	private TextureRect CurrentItemTexture;
 	private ProgressBar OxygenBar;
@@ -22,6 +20,7 @@ public partial class UserInterface : Control
 		GoldCountLabel = GetNodeOrNull<Label>("%GoldCountLabel");
 		DialogLabel = GetNodeOrNull<Label>("%DialogAreaLabel");
 		DialogAreaPanel = GetNodeOrNull<PanelContainer>("%DialogAreaPanel");
+		DialogAreaPanel.Visible = false;
 	}
 
 	/// <summary>

@@ -1,10 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://btsexkhcceg6k"]
+[gd_scene load_steps=18 format=3 uid="uid://btsexkhcceg6k"]
 
 [ext_resource type="Script" uid="uid://x1tbk0to6k02" path="res://Entities/Player/Player.cs" id="1_lu8i8"]
 [ext_resource type="Texture2D" uid="uid://c4gg0fgpu71tr" path="res://Assets/Sprites/Punk/Punk_idle.png" id="2_tekja"]
 [ext_resource type="Texture2D" uid="uid://b28cwpcqwu4vv" path="res://Assets/Sprites/Punk/Punk_run.png" id="3_5c2io"]
 [ext_resource type="PackedScene" uid="uid://dipw064j485kr" path="res://Entities/Player/mining_rig.tscn" id="4_tekja"]
-[ext_resource type="PackedScene" uid="uid://g0a6qdusewav" path="res://UserInterface/user_interface.tscn" id="4_tekja"]
+[ext_resource type="PackedScene" uid="uid://g0a6qdusewav" path="res://UserInterface/user_interface.tscn" id="5_5c2io"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ix6vc"]
 radius = 5.0
@@ -114,9 +114,7 @@ zoom = Vector2(4, 4)
 
 [node name="MiningRig" parent="." instance=ExtResource("4_tekja")]
 
-[editable path="MiningRig"]
-
-frame_progress = 0.983276
-
-[node name="CanvasLayer" parent="." instance=ExtResource("4_tekja")]
+[node name="UI" parent="." instance=ExtResource("5_5c2io")]
 visible = false
+
+[editable path="UI"]
