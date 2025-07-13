@@ -9,22 +9,18 @@ script = ExtResource("1_rufk4")
 
 [node name="RayCastRight" type="RayCast2D" parent="."]
 position = Vector2(0, -12)
-scale = Vector2(1, 1)
 target_position = Vector2(14, 0)
 
 [node name="RayCastLeft" type="RayCast2D" parent="."]
 position = Vector2(0, -12)
-scale = Vector2(1, 1)
 target_position = Vector2(-14, 0)
 
 [node name="RayCastUp" type="RayCast2D" parent="."]
 position = Vector2(0, -12)
-scale = Vector2(1, 1)
 target_position = Vector2(0, -24)
 
 [node name="RayCastDown" type="RayCast2D" parent="."]
 position = Vector2(0, -12)
-scale = Vector2(1, 1)
 target_position = Vector2(0, 20)
 
 [node name="MiningTarget" type="MeshInstance2D" parent="."]

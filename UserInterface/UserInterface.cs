@@ -14,7 +14,7 @@ public partial class UserInterface : Control
 
 	public override void _Ready()
 	{
-		Visible = true; // Most scenes we will hide this in the engine but we do want it in the game to show up
+		Visible = false; // Most scenes we will hide this in the engine but we do want it in the game to show up
 		CurrentItemTexture = GetNodeOrNull<TextureRect>("%CurrentItem");
 		OxygenBar = GetNodeOrNull<ProgressBar>("%OxygenBar");
 		LightBar = GetNodeOrNull<ProgressBar>("%LightBar");
