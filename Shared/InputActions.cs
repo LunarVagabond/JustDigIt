@@ -15,7 +15,10 @@ namespace CustomInputActions
     public const string MOVE_DOWN = "move_down";
     public const string JUMP = "jump";
     public const string INTERACT = "interact";
+    #endregion
 
+    #region Actions
+    public const string MINE = "mine";
     #endregion
 
     #region UI
