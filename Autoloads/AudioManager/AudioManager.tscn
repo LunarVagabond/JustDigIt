@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://bich76n4x0jq2"]
+
+[ext_resource type="Script" uid="uid://c43ciqwo8ughy" path="res://Autoloads/AudioManager/AudioManager.cs" id="1_yb57a"]
+[ext_resource type="AudioStream" uid="uid://ijllmoq4voj0" path="res://Assets/Music/BGMusicUnsettlingStory.mp3" id="2_6j1eo"]
+
+[node name="AudioManager" type="Node"]
+script = ExtResource("1_yb57a")
+MaxSimultaneousSfx = 5
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_6j1eo")
+autoplay = true
+bus = &"Music"
+
+[node name="SFXPlayers" type="Node" parent="."]
+
+[node name="SFXStreamPlayer0" type="AudioStreamPlayer" parent="SFXPlayers"]
+
+[node name="SFXStreamPlayer1" type="AudioStreamPlayer" parent="SFXPlayers"]
+
+[node name="SFXStreamPlayer2" type="AudioStreamPlayer" parent="SFXPlayers"]
+
+[node name="SFXStreamPlayer3" type="AudioStreamPlayer" parent="SFXPlayers"]
+
+[node name="SFXStreamPlayer4" type="AudioStreamPlayer" parent="SFXPlayers"]
