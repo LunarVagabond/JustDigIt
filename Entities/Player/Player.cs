@@ -15,6 +15,8 @@ public partial class Player : CharacterBody2D
 	private MiningRig miningRig;
 	private int depthOffset = 1;
 	private int currentDepth = 1;
+	private PickupEvents pickupEventsGlobal;
+
 
 	[Export]
 	public Timer poisonTimer;
@@ -37,6 +39,8 @@ public partial class Player : CharacterBody2D
 		ui.DepthLevelLabel.Text = $"Depth: {miningRig.level.LocalToMap(GlobalPosition).Y + depthOffset}m";
 		ui.darknessEffect.UpdateDarknessLarge(GlobalPosition);
 		poisonTimer.Timeout += HandlePoisonTimeout;
+		pickupEventsGlobal = GetNode<PickupEvents>("/root/PickupEvents");
+		pickupEventsGlobal.PickupCollected += (Pickup p, Node a) => GD.Print($"Got Item: {p.itemType}");
 	}
 
 

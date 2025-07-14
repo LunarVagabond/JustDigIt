@@ -21,6 +21,7 @@ GameManager="*res://Autoloads/GameManager.cs"
 SceneTransition="*res://Autoloads/SceneTransition/scene_transition.tscn"
 AudioManager="*res://Autoloads/AudioManager/AudioManager.tscn"
 VfxManager="*res://Autoloads/VfxManager/VFXManager.cs"
+PickupEvents="*res://Autoloads/PickupEvents.cs"
 
 [display]
 
