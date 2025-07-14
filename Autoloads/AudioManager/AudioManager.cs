@@ -55,8 +55,7 @@ public partial class AudioManager : Node
         _musicPlayer.Play();
     }
 
-    public void StopMusic()
-    {
-        _musicPlayer.Stop();
-    }
+    public void StopMusic() => _musicPlayer.Stop(); // Stops the player, doing play again after this will start music over
+    public void PauseMusic() => _musicPlayer.StreamPaused = true;
+    public void ResumeMusic() => _musicPlayer.StreamPaused = false;
 }
