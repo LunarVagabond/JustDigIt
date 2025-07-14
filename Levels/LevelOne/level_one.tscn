@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://ba8m4jeqc5qd5"]
+[gd_scene load_steps=16 format=4 uid="uid://ba8m4jeqc5qd5"]
 
 [ext_resource type="PackedScene" uid="uid://btsexkhcceg6k" path="res://Entities/Player/player.tscn" id="1_5ksg8"]
 [ext_resource type="Texture2D" uid="uid://dj8f3bseepj6a" path="res://Assets/TileSets/Brackeys/world_tileset.png" id="2_7pha4"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dda3ne2evh8ev" path="res://Assets/TileSets/Castle_Platform_TileSet/castle-tileset.png" id="4_jo4kj"]
 [ext_resource type="PackedScene" uid="uid://dsb7x65mdcwh7" path="res://Entities/Interactables/Passageway/passageway_down.tscn" id="6_mh6um"]
 [ext_resource type="PackedScene" uid="uid://cfgansgch7u2s" path="res://Entities/Interactables/GenericPickup/pickup.tscn" id="8_hxr6c"]
+[ext_resource type="Resource" uid="uid://cfsql276lcccj" path="res://Resources/Pickups/Bubble.tres" id="9_m54pb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7pha4"]
 texture = ExtResource("2_hcdvr")
@@ -1130,4 +1131,4 @@ NextLevel = "uid://bw8elrs4u8n2u"
 
 [node name="Pickup" parent="." instance=ExtResource("8_hxr6c")]
 position = Vector2(76, -9)
-itemType = 2
+Item = ExtResource("9_m54pb")

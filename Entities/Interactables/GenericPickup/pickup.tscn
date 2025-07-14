@@ -1,11 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfgansgch7u2s"]
+[gd_scene load_steps=3 format=3 uid="uid://cfgansgch7u2s"]
 
 [ext_resource type="Script" uid="uid://cntgaupx58x0a" path="res://Entities/Interactables/GenericPickup/Pickup.cs" id="1_o1ehy"]
-[ext_resource type="Texture2D" uid="uid://f424t65tijpi" path="res://Assets/Sprites/coin.png" id="2_bw4qr"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_o1ehy"]
-atlas = ExtResource("2_bw4qr")
-region = Rect2(3, 3, 10, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e1njk"]
 size = Vector2(10, 10)
@@ -15,7 +10,6 @@ collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_o1ehy")
 Worth = 2
-Icon = SubResource("AtlasTexture_o1ehy")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
