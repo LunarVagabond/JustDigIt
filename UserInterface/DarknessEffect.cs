@@ -49,7 +49,6 @@ public partial class DarknessEffect : Control
 
 	public void HandleEnergyDrain(ProgressBar bar, CharacterStats currentStats, Vector2 playerPos)
 	{
-		GD.Print(currentSightRadius);
 		if ((currentStats.energy == 0 || forceMinimalSight) && currentSightRadius != SightRadius.Off)
 		{
 			currentSightRadius = SightRadius.VerySmall;

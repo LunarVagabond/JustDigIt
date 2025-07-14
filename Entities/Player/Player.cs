@@ -35,6 +35,7 @@ public partial class Player : CharacterBody2D
 		ui.LightBar.Value = stats.energy;
 		ui.GoldCountLabel.Text = $"{stats.coins}";
 		ui.DepthLevelLabel.Text = $"Depth: {miningRig.level.LocalToMap(GlobalPosition).Y + depthOffset}m";
+		ui.darknessEffect.UpdateDarknessLarge(GlobalPosition);
 		poisonTimer.Timeout += HandlePoisonTimeout;
 	}
 
@@ -42,7 +43,6 @@ public partial class Player : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		HandleStats();
-		// Radius param should be between 0-1 & 0 is full balck. 
 		Vector2 velocity = Velocity;
 
 		// Add the gravity.
