@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ka1tvmjvyfm7"
-path="res://.godot/imported/Punk_jump.png-bfa35dbde9192ccfe93dccad5eb004a9.ctex"
+uid="uid://ckh13vyvwf8gt"
+path="res://.godot/imported/Owlet_Monster_Walk+Attack_6.png-36fed2fc0b2441509eb2e13589f05935.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Punk/Punk_jump.png"
-dest_files=["res://.godot/imported/Punk_jump.png-bfa35dbde9192ccfe93dccad5eb004a9.ctex"]
+source_file="res://Assets/Sprites/Owlet_Monster/Owlet_Monster_Walk+Attack_6.png"
+dest_files=["res://.godot/imported/Owlet_Monster_Walk+Attack_6.png-36fed2fc0b2441509eb2e13589f05935.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4bsxodjqj2te"
-path="res://.godot/imported/Punk_doublejump.png-2fc2903636749f12e1381ed624097ad4.ctex"
+uid="uid://bplxrcq2qibs6"
+path="res://.godot/imported/Owlet_Monster_Climb_4.png-ba296394738ffe981fe13eeb28ae9c72.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Punk/Punk_doublejump.png"
-dest_files=["res://.godot/imported/Punk_doublejump.png-2fc2903636749f12e1381ed624097ad4.ctex"]
+source_file="res://Assets/Sprites/Owlet_Monster/Owlet_Monster_Climb_4.png"
+dest_files=["res://.godot/imported/Owlet_Monster_Climb_4.png-ba296394738ffe981fe13eeb28ae9c72.ctex"]
 
 [params]
 

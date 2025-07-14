@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://l3xyip3cf013"
-path="res://.godot/imported/Punk_punch.png-998c0fd4a6439242e46dc7282e4006ee.ctex"
+uid="uid://do85in3d0g106"
+path="res://.godot/imported/Walk_Run_Push_Dust_6.png-a4730360e7e9db43731d4ad8bf648efe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Punk/Punk_punch.png"
-dest_files=["res://.godot/imported/Punk_punch.png-998c0fd4a6439242e46dc7282e4006ee.ctex"]
+source_file="res://Assets/Sprites/Owlet_Monster/Walk_Run_Push_Dust_6.png"
+dest_files=["res://.godot/imported/Walk_Run_Push_Dust_6.png-a4730360e7e9db43731d4ad8bf648efe.ctex"]
 
 [params]
 
