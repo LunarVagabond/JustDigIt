@@ -19,6 +19,7 @@ namespace CustomInputActions
 
     #region Actions
     public const string MINE = "mine";
+    public const string TOGGLE_MOUSE_VISIBILITY = "toggle_mouse_visibility";
     #endregion
 
     #region UI

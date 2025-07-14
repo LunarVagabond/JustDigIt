@@ -11,31 +11,51 @@ public partial class Player : CharacterBody2D
 	public enum AnimState { Idle, Run, Climb, Death, Jump, }
 
 	public AnimState CurrentState = AnimState.Idle;
+	private UserInterface ui;
+	private MiningRig miningRig;
+	private int depthOffset = 1;
+
+	[Export]
+	public Timer poisonTimer;
+	[Export]
+	public CharacterStats stats;
 
 	public override void _Ready()
 	{
+		// Scene Transition
 		sceneTransition = GetNodeOrNull<SceneTransition>("/root/SceneTransition");
 		sceneTransition.FadeIn();
+		// Get Nodes
 		playerSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		Input.MouseMode = Input.MouseModeEnum.ConfinedHidden; // Is there a better spot for this?
+		ui = GetNode<UserInterface>("UI");
+		miningRig = GetNode<MiningRig>("MiningRig");
+		// Set UI Display values
+		ui.OxygenBar.Value = stats.oxygen;
+		ui.LightBar.Value = stats.energy;
+		ui.GoldCountLabel.Text = $"{stats.coins}";
+		ui.DepthLevelLabel.Text = $"Depth: {miningRig.level.LocalToMap(GlobalPosition).Y + depthOffset}m";
+		poisonTimer.Timeout += HandlePoisonTimeout;
 	}
 
 
 	public override void _PhysicsProcess(double delta)
 	{
+		HandleStats();
+
 		Vector2 velocity = Velocity;
 
 		// Add the gravity.
 		if (!IsOnFloor())
 		{
 			velocity += GetGravity() * (float)delta;
+			SetAnimationState(AnimState.Jump); // FIXME: this isn't playing probably need to seperate logic into a state machine of sorts
 		}
 
 		// Handle Jump.
 		if (Input.IsActionJustPressed(IA.JUMP) && IsOnFloor())
 		{
 			velocity.Y = JumpVelocity;
-			SetAnimationState(AnimState.Jump); // FIXME: this isn't playing probably need to seperate logic into a state machine of sorts
+			// SetAnimationState(AnimState.Jump); // FIXME: this isn't playing probably need to seperate logic into a state machine of sorts
 		}
 
 		// Get the input direction and handle the movement/deceleration.
@@ -52,7 +72,10 @@ public partial class Player : CharacterBody2D
 		else
 		{
 			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-			SetAnimationState(AnimState.Idle);
+			if (IsOnFloor())
+			{
+				SetAnimationState(AnimState.Idle);
+			}
 		}
 
 		Velocity = velocity;
@@ -62,5 +85,28 @@ public partial class Player : CharacterBody2D
 	private void SetAnimationState(AnimState state)
 	{
 		playerSprite.Play(state.ToString().ToLower());
+	}
+
+	private void HandleStats()
+	{
+		// Loose Oxygen & Energy / Update Depth & Coins
+		if (stats.poisoned)
+		{
+			ui.OxygenBar.Value -= ui.OxygenBar.Step * stats.poisonEffect;
+		}
+		else
+		{
+			ui.OxygenBar.Value -= ui.OxygenBar.Step;
+		}
+		ui.LightBar.Value -= ui.LightBar.Step;
+		ui.GoldCountLabel.Text = $"{stats.coins}";
+		ui.DepthLevelLabel.Text = $"Depth: {miningRig.level.LocalToMap(GlobalPosition).Y + depthOffset}m";
+	}
+
+	private void HandlePoisonTimeout()
+	{
+		stats.poisoned = false;
+		// poisonTimer.Stop();
+		GD.Print("Poison gone!");
 	}
 }
