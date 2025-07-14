@@ -21,7 +21,7 @@ public partial class SceneTransition : CanvasLayer
 
   public void ChangeScene(string nextScene)
   {
-    audioManager.StopMusic();
+    audioManager.PauseMusic();
     Tween tween = GetTree().CreateTween();
     tween.TweenProperty(fader, "color:a", 1.0, 1.0f);
     tween.TweenInterval(0.1f);
