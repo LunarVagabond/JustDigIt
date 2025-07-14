@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GameManager="*res://Autoloads/GameManager.cs"
 SceneTransition="*res://Autoloads/SceneTransition/scene_transition.tscn"
 AudioManager="*res://Autoloads/AudioManager/AudioManager.tscn"
+VfxManager="*res://Autoloads/VfxManager/VFXManager.cs"
 
 [display]
 

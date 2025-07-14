@@ -13,6 +13,7 @@ public partial class Player : CharacterBody2D
 	public AnimState CurrentState = AnimState.Idle;
 	private UserInterface ui;
 	private MiningRig miningRig;
+	private int depthOffset = 1;
 
 	[Export]
 	public CharacterStats stats;
@@ -31,7 +32,7 @@ public partial class Player : CharacterBody2D
 		ui.OxygenBar.Value = stats.oxygen;
 		ui.LightBar.Value = stats.energy;
 		ui.GoldCountLabel.Text = $"{stats.coins}";
-		ui.DepthLevelLabel.Text = $"Depth: {GlobalPosition.Y}m";
+		ui.DepthLevelLabel.Text = $"Depth: {miningRig.level.LocalToMap(GlobalPosition).Y + depthOffset}m";
 	}
 
 
@@ -43,7 +44,7 @@ public partial class Player : CharacterBody2D
 		ui.OxygenBar.Value -= ui.OxygenBar.Step;
 		ui.LightBar.Value -= ui.LightBar.Step;
 		ui.GoldCountLabel.Text = $"{stats.coins}";
-		ui.DepthLevelLabel.Text = $"Depth: {miningRig.level.LocalToMap(GlobalPosition).Y}m";
+		ui.DepthLevelLabel.Text = $"Depth: {miningRig.level.LocalToMap(GlobalPosition).Y + depthOffset}m";
 
 		// Add the gravity.
 		if (!IsOnFloor())

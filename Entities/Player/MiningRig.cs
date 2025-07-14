@@ -5,16 +5,21 @@ using IA = CustomInputActions.InputActions;
 
 public partial class MiningRig : Node2D
 {
+	[Signal]
+	public delegate void TileRemovedEventHandler(Vector2 rigLocation, float coinProbability);
+
 	private int miningRadius = 21;
 	private int miningRadiusYOffset = -16;
+	private int miningRadiusXOffset = 1;
 	private float MouseSensitivity = 2.0f;
 	private MeshInstance2D miningTarget;
 	public TileMapLayer level;
 	private Player player;
 	private Godot.Collections.Array<Vector2> crackedTiles = [];
+	private Godot.Collections.Array<float> coinProbability = [];
 	private AudioManager audioManager;
-
 	private AudioStream miningSFX = GD.Load<AudioStream>("res://Assets/SFX/weapon-axe-hit-01-153372.mp3");
+	public VFXManager vfxManager;
 
 	public override void _Ready()
 	{
@@ -23,7 +28,10 @@ public partial class MiningRig : Node2D
 		miningTarget = GetNode<MeshInstance2D>("MiningTarget");
 		level = GetNode<TileMapLayer>("/root/LevelOne/Level");
 		audioManager = GetNodeOrNull<AudioManager>("/root/AudioManager");
+		vfxManager = GetNodeOrNull<VFXManager>("/root/VfxManager");
 		player = GetParent<Player>();
+		TileRemoved += HandleTileRemoved;
+		GD.Print(vfxManager);
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -42,23 +50,46 @@ public partial class MiningRig : Node2D
 				audioManager.PlaySfx(miningSFX);
 				level.SetCell(tile, -1); // deletes tile at layer 2 and pos
 				int index = crackedTiles.IndexOf(tile);
+				// GD.Print(coinProbability[index]);
+				EmitSignal(SignalName.TileRemoved, miningTarget.GlobalPosition, coinProbability[index]);
+				// EmitSignal(SignalName.TileRemoved, ToGlobal(level.ToLocal(tile)), coinProbability[index]);
 				crackedTiles.RemoveAt(index);
-				// EmitSignal(SignalName.TileRemoved, tile);
+				coinProbability.RemoveAt(index);
 			}
 			else
 			{
 				// https://docs.godotengine.org/en/stable/classes/class_tilemap.html#class-tilemap-method-get-cell-source-id
 				// ideas -- https://www.youtube.com/watch?v=LNhFMaTYhZ8
 				int sourceID = level.GetCellSourceId(tile);
+				Vector2I atlasCoord = level.GetCellAtlasCoords(tile);
+				float probability = GetResourceProbability(atlasCoord);
+
 				if (sourceID == 0)
 				{
 					level.SetCell(tile, 1, new Vector2I(5, 0)); // Vector2I is atlas coordinates
 					crackedTiles.Add(tile);
+					coinProbability.Add(probability);
 					audioManager.PlaySfx(miningSFX);
-					GD.Print(crackedTiles.Count);
+					// GD.Print($"{crackedTiles.Count} -- {probability} -- {atlasCoord}");
 				}
 			}
 		}
+	}
+
+	private float GetResourceProbability(Vector2I tile)
+	{
+		float probability = tile switch
+		{
+			// TODO: These float values should prob be an enum
+			Vector2I(7, 16) => 0.1f,
+			Vector2I(13, 16) => 0.15f,
+			Vector2I(21, 16) => 0.2f,
+			Vector2I(29, 16) => 0.25f,
+			Vector2I(30, 11) => 0.5f,
+			_ => 0.05f
+		};
+
+		return probability;
 	}
 
 	public override void _Input(InputEvent @event)
@@ -74,7 +105,19 @@ public partial class MiningRig : Node2D
 			// Reposition mouse along circular radius relative to player
 			mouseGlobalPosition = playerPosition + (mouseDirection * miningRadius);
 			mouseGlobalPosition.Y += miningRadiusYOffset;
+			mouseGlobalPosition.X += miningRadiusXOffset;
 			miningTarget.GlobalPosition = mouseGlobalPosition;
+		}
+	}
+
+
+	private void HandleTileRemoved(Vector2 targetLocation, float probability)
+	{
+		GD.Print($"{targetLocation} -- {probability}");
+		Random rnd = new Random();
+		if ((float)rnd.NextDouble() < probability)
+		{
+			vfxManager.SpawnCoin(targetLocation);
 		}
 	}
 }
