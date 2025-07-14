@@ -9,7 +9,7 @@ public partial class MiningRig : Node2D
 	private int miningRadiusYOffset = -16;
 	private float MouseSensitivity = 2.0f;
 	private MeshInstance2D miningTarget;
-	private TileMapLayer level;
+	public TileMapLayer level;
 	private Player player;
 	private Godot.Collections.Array<Vector2> crackedTiles = [];
 	private AudioManager audioManager;

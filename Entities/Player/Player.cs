@@ -11,18 +11,39 @@ public partial class Player : CharacterBody2D
 	public enum AnimState { Idle, Run, Climb, Death, Jump, }
 
 	public AnimState CurrentState = AnimState.Idle;
+	private UserInterface ui;
+	private MiningRig miningRig;
+
+	[Export]
+	public CharacterStats stats;
 
 	public override void _Ready()
 	{
+		// Scene Transition
 		sceneTransition = GetNodeOrNull<SceneTransition>("/root/SceneTransition");
 		sceneTransition.FadeIn();
+		// Get Nodes
 		playerSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+		ui = GetNode<UserInterface>("UI");
+		miningRig = GetNode<MiningRig>("MiningRig");
+		// Set UI Display values
+		GD.Print(GlobalPosition);
+		ui.OxygenBar.Value = stats.oxygen;
+		ui.LightBar.Value = stats.energy;
+		ui.GoldCountLabel.Text = $"{stats.coins}";
+		ui.DepthLevelLabel.Text = $"Depth: {GlobalPosition.Y}m";
 	}
 
 
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Velocity;
+
+		// Loose Oxygen & Energy / Update Depth & Coins
+		ui.OxygenBar.Value -= ui.OxygenBar.Step;
+		ui.LightBar.Value -= ui.LightBar.Step;
+		ui.GoldCountLabel.Text = $"{stats.coins}";
+		ui.DepthLevelLabel.Text = $"Depth: {miningRig.level.LocalToMap(GlobalPosition).Y}m";
 
 		// Add the gravity.
 		if (!IsOnFloor())

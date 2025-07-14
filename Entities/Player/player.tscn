@@ -1,13 +1,18 @@
-[gd_scene load_steps=41 format=3 uid="uid://btsexkhcceg6k"]
+[gd_scene load_steps=43 format=3 uid="uid://btsexkhcceg6k"]
 
 [ext_resource type="Script" uid="uid://x1tbk0to6k02" path="res://Entities/Player/Player.cs" id="1_lu8i8"]
 [ext_resource type="Texture2D" uid="uid://drvnbq0kadr1c" path="res://Assets/Sprites/Owlet_Monster/Owlet_Monster_Idle_4.png" id="2_5c2io"]
 [ext_resource type="Texture2D" uid="uid://bplxrcq2qibs6" path="res://Assets/Sprites/Owlet_Monster/Owlet_Monster_Climb_4.png" id="2_7a1se"]
+[ext_resource type="Script" uid="uid://11eoovtmlcx2" path="res://Resources/CharacterStats.cs" id="2_lub02"]
 [ext_resource type="Texture2D" uid="uid://bdswoknkyg7gs" path="res://Assets/Sprites/Owlet_Monster/Owlet_Monster_Run_6.png" id="3_5c2io"]
 [ext_resource type="Texture2D" uid="uid://c3tod8a57c7p0" path="res://Assets/Sprites/Owlet_Monster/Owlet_Monster_Death_8.png" id="3_lub02"]
 [ext_resource type="PackedScene" uid="uid://dipw064j485kr" path="res://Entities/Player/mining_rig.tscn" id="4_tekja"]
 [ext_resource type="PackedScene" uid="uid://g0a6qdusewav" path="res://UserInterface/user_interface.tscn" id="5_5c2io"]
 [ext_resource type="Texture2D" uid="uid://bffmvrtvld67y" path="res://Assets/Sprites/Owlet_Monster/Owlet_Monster_Jump_8.png" id="5_x1y6q"]
+
+[sub_resource type="Resource" id="Resource_x1y6q"]
+script = ExtResource("2_lub02")
+metadata/_custom_type_script = "uid://11eoovtmlcx2"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ix6vc"]
 radius = 5.83333
@@ -255,6 +260,7 @@ animations = [{
 scale = Vector2(1.2, 1.2)
 collision_layer = 4
 script = ExtResource("1_lu8i8")
+stats = SubResource("Resource_x1y6q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.66667, -10.8333)
@@ -275,4 +281,3 @@ zoom = Vector2(4, 4)
 [node name="MiningRig" parent="." instance=ExtResource("4_tekja")]
 
 [node name="UI" parent="." instance=ExtResource("5_5c2io")]
-visible = false

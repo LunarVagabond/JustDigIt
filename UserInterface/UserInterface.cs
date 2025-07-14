@@ -2,13 +2,13 @@ using Godot;
 
 public partial class UserInterface : CanvasLayer
 {
-	private TextureRect CurrentItemTexture;
-	private ProgressBar OxygenBar;
-	private ProgressBar LightBar;
-	private Label DepthLevelLabel;
-	private Label DialogLabel;
-	private Label GoldCountLabel;
-	private PanelContainer DialogAreaPanel;
+	public TextureRect CurrentItemTexture;
+	public ProgressBar OxygenBar;
+	public ProgressBar LightBar;
+	public Label DepthLevelLabel;
+	public Label DialogLabel;
+	public Label GoldCountLabel;
+	public PanelContainer DialogAreaPanel;
 
 	public override void _Ready()
 	{
