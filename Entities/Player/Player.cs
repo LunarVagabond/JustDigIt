@@ -43,10 +43,6 @@ public partial class Player : CharacterBody2D
 	{
 		HandleStats();
 		// Radius param should be between 0-1 & 0 is full balck. 
-		// ui.darknessEffect.UpdateDarkness(GlobalPosition, .1f); // FIXME: We need to map depth to this param somehow
-		ui.darknessEffect.UpdateDarknessMed(GlobalPosition); // FIXME: We need to map depth to this param somehow
-
-
 		Vector2 velocity = Velocity;
 
 		// Add the gravity.
@@ -102,7 +98,7 @@ public partial class Player : CharacterBody2D
 		{
 			ui.OxygenBar.Value -= ui.OxygenBar.Step;
 		}
-		ui.LightBar.Value -= ui.LightBar.Step;
+		ui.darknessEffect.HandleEnergyDrain(ui.LightBar, stats, GlobalPosition);
 		ui.GoldCountLabel.Text = $"{stats.coins}";
 		ui.DepthLevelLabel.Text = $"Depth: {miningRig.level.LocalToMap(GlobalPosition).Y + depthOffset}m";
 	}

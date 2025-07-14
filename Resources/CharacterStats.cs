@@ -5,7 +5,7 @@ using System;
 public partial class CharacterStats : Resource
 {
     [Signal]
-	public delegate void LevelUpNotificationEventHandler();
+    public delegate void LevelUpNotificationEventHandler();
 
     public int coins = 0;
     public float oxygen = 100.0f; // rather than increasing with XP, skills/equipment will slow down loss
@@ -14,7 +14,7 @@ public partial class CharacterStats : Resource
     public int crafting = 1;
     public int mining = 1;
     public int zone; // world level player is in
-    public bool poisoned = false;
+    public bool poisoned = false; // FIXME: This might be able to be a list of enumns that we add / remove from the player (i.e. player.Statuses {Posined, OutOfOxygen})
     public float poisonEffect = 2.0f;
     public float poisonDuration = 5.0f;
     private int level = 1; // player exp level

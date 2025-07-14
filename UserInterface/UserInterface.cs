@@ -22,6 +22,7 @@ public partial class UserInterface : CanvasLayer
 		DialogLabel = GetNodeOrNull<Label>("%DialogAreaLabel");
 		DialogAreaPanel = GetNodeOrNull<PanelContainer>("%DialogAreaPanel");
 		darknessEffect = GetNode<DarknessEffect>("DarknessEffect");
+		darknessEffect.Visible = true;
 		DialogAreaPanel.Visible = false;
 	}
 
@@ -67,4 +68,5 @@ public partial class UserInterface : CanvasLayer
 			timer.Start();
 		};
 	}
+
 }
