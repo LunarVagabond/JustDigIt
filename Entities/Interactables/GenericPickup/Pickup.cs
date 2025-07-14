@@ -24,7 +24,7 @@ public partial class Pickup : Area2D
 
 
 	// Based on collision settings this will and should only ever be the player
-	public virtual void OnItemBodyEnter(Node2D body)
+	public void OnItemBodyEnter(Node2D body)
 	{
 		pickupEventsGlobal.EmitSignal(PickupEvents.SignalName.PickupCollected, this, body);
 		QueueFree();

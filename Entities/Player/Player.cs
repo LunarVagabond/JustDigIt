@@ -40,7 +40,7 @@ public partial class Player : CharacterBody2D
 		ui.darknessEffect.UpdateDarknessLarge(GlobalPosition);
 		poisonTimer.Timeout += HandlePoisonTimeout;
 		pickupEventsGlobal = GetNode<PickupEvents>("/root/PickupEvents");
-		pickupEventsGlobal.PickupCollected += (Pickup pickup, Node a) => GD.Print($"Got Item: {pickup.Item.itemType}");
+		pickupEventsGlobal.PickupCollected += (Pickup pickup) => GD.Print($"Got Item: {pickup.Item.itemType}");
 	}
 
 
