@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=4 uid="uid://ba8m4jeqc5qd5"]
+[gd_scene load_steps=12 format=4 uid="uid://ba8m4jeqc5qd5"]
 
 [ext_resource type="PackedScene" uid="uid://btsexkhcceg6k" path="res://Entities/Player/player.tscn" id="1_5ksg8"]
 [ext_resource type="Texture2D" uid="uid://dj8f3bseepj6a" path="res://Assets/TileSets/Brackeys/world_tileset.png" id="2_7pha4"]
 [ext_resource type="Texture2D" uid="uid://bn1n0ku5njf4k" path="res://Assets/TileSets/Cave_TileSet/Brown_Tile_Terrain (16 x 16).png" id="2_hcdvr"]
 [ext_resource type="Texture2D" uid="uid://45lqhihhanr" path="res://Assets/TileSets/Underground_Mine_TileSet/UM_UndergroundMine_TileSet 16x16.png" id="3_ychhn"]
 [ext_resource type="Texture2D" uid="uid://dda3ne2evh8ev" path="res://Assets/TileSets/Castle_Platform_TileSet/castle-tileset.png" id="4_jo4kj"]
+[ext_resource type="PackedScene" uid="uid://dsb7x65mdcwh7" path="res://Entities/Interactables/Passageway/passageway_down.tscn" id="6_mh6um"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7pha4"]
 texture = ExtResource("2_hcdvr")
@@ -713,3 +714,7 @@ tile_set = SubResource("TileSet_ychhn")
 
 [node name="Player" parent="." instance=ExtResource("1_5ksg8")]
 position = Vector2(7, 0)
+
+[node name="PassagewayDown" parent="." instance=ExtResource("6_mh6um")]
+position = Vector2(118, 0)
+NextLevel = "uid://bw8elrs4u8n2u"
