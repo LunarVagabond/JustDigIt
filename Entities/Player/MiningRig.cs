@@ -12,6 +12,9 @@ public partial class MiningRig : Node2D
 	private TileMapLayer level;
 	private Player player;
 	private Godot.Collections.Array<Vector2> crackedTiles = [];
+	private AudioManager audioManager;
+
+	private AudioStream miningSFX = GD.Load<AudioStream>("res://Assets/SFX/weapon-axe-hit-01-153372.mp3");
 
 	public override void _Ready()
 	{
@@ -19,6 +22,7 @@ public partial class MiningRig : Node2D
 
 		miningTarget = GetNode<MeshInstance2D>("MiningTarget");
 		level = GetNode<TileMapLayer>("/root/LevelOne/Level");
+		audioManager = GetNodeOrNull<AudioManager>("/root/AudioManager");
 		player = GetParent<Player>();
 	}
 
@@ -35,7 +39,7 @@ public partial class MiningRig : Node2D
 
 			if (crackedTiles.Contains(tile))
 			{
-				GD.Print("HERE");
+				audioManager.PlaySfx(miningSFX);
 				level.SetCell(tile, -1); // deletes tile at layer 2 and pos
 				int index = crackedTiles.IndexOf(tile);
 				crackedTiles.RemoveAt(index);
@@ -50,6 +54,7 @@ public partial class MiningRig : Node2D
 				{
 					level.SetCell(tile, 1, new Vector2I(5, 0)); // Vector2I is atlas coordinates
 					crackedTiles.Add(tile);
+					audioManager.PlaySfx(miningSFX);
 					GD.Print(crackedTiles.Count);
 				}
 			}
@@ -58,6 +63,7 @@ public partial class MiningRig : Node2D
 
 	public override void _Input(InputEvent @event)
 	{
+		// Moves the dig locator around the player (?)
 		if (@event is InputEventMouseMotion eventMouseMotion)
 		{
 			eventMouseMotion.ScreenVelocity *= MouseSensitivity;
