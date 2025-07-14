@@ -25,7 +25,7 @@ namespace CustomInputActions
     #endregion
 
     #region UI
-    public const string Pause = "pause";
+    public const string MENU_TOGGLE = "menu";
     #endregion
   }
 }

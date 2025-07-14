@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://g0a6qdusewav"]
+[gd_scene load_steps=14 format=3 uid="uid://g0a6qdusewav"]
 
 [ext_resource type="Script" uid="uid://dxuh6ha84e8q6" path="res://UserInterface/UserInterface.cs" id="1_3o1tv"]
 [ext_resource type="Texture2D" uid="uid://b4l46oo36xwo3" path="res://Assets/Images/BorderedPanel.png" id="1_71fg6"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://f424t65tijpi" path="res://Assets/Sprites/coin.png" id="2_v7due"]
 [ext_resource type="FontFile" uid="uid://bgmj2a24edgt2" path="res://Assets/Fonts/Libre/Literata/static/Literata-Italic.ttf" id="3_cp462"]
 [ext_resource type="FontFile" uid="uid://gc7kn1gk7axp" path="res://Assets/Fonts/Libre/Literata/static/Literata-Bold.ttf" id="3_mm0wo"]
+[ext_resource type="PackedScene" uid="uid://dyyowyrojq34b" path="res://UserInterface/options_menu.tscn" id="6_l8ojb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mm0wo"]
 bg_color = Color(0.194852, 0.707383, 0.917869, 1)
@@ -130,6 +131,10 @@ expand_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
+
+[node name="OptionsMenu" parent="MarginContainer/VMainContainer/CenterScreenContainer" instance=ExtResource("6_l8ojb")]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Footer" type="HBoxContainer" parent="MarginContainer/VMainContainer"]
 layout_mode = 2

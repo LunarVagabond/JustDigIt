@@ -1,5 +1,5 @@
 using Godot;
-
+using IA = CustomInputActions.InputActions;
 public partial class UserInterface : CanvasLayer
 {
 	public TextureRect CurrentItemTexture;
@@ -10,6 +10,8 @@ public partial class UserInterface : CanvasLayer
 	public Label GoldCountLabel;
 	public PanelContainer DialogAreaPanel;
 	public DarknessEffect darknessEffect;
+
+	private OptionsMenu optionsMenu;
 
 	public override void _Ready()
 	{
@@ -22,9 +24,18 @@ public partial class UserInterface : CanvasLayer
 		DialogLabel = GetNodeOrNull<Label>("%DialogAreaLabel");
 		DialogAreaPanel = GetNodeOrNull<PanelContainer>("%DialogAreaPanel");
 		darknessEffect = GetNode<DarknessEffect>("DarknessEffect");
+		optionsMenu = GetNode<OptionsMenu>("MarginContainer/VMainContainer/CenterScreenContainer/OptionsMenu");
+
+		optionsMenu.Visible = false;
 		darknessEffect.Visible = true;
 		DialogAreaPanel.Visible = false;
 	}
+
+	public override void _Input(InputEvent @event)
+	{
+		if (@event.IsActionPressed(IA.MENU_TOGGLE)) optionsMenu.ToggleVisable();
+	}
+
 
 	/// <summary>
 	/// Allows us to set the dialog from anywhere that has access to the User Interface.

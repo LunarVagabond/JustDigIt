@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bw8elrs4u8n2u"]
+[gd_scene load_steps=12 format=3 uid="uid://bw8elrs4u8n2u"]
 
 [ext_resource type="Script" uid="uid://cqf4v58ixcgnm" path="res://Levels/MainMenu/MainMenu.cs" id="1_3u71f"]
 [ext_resource type="Texture2D" uid="uid://cd34cg6bn50jd" path="res://Assets/Images/JDIBanner.png" id="1_q7u2s"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bxq6mkkplba83" path="res://Assets/TileSets/Complete_UI_Essential_Pack_Free/Sprites/UI_Flat_IconPlay01a.png" id="6_3vsjx"]
 [ext_resource type="Texture2D" uid="uid://cj6gmka8ft68t" path="res://Assets/TileSets/Complete_UI_Essential_Pack_Free/Sprites/UI_Flat_IconArrow01a.png" id="7_cq3bu"]
 [ext_resource type="Texture2D" uid="uid://c27bn4ulxqfbf" path="res://Assets/TileSets/Complete_UI_Essential_Pack_Free/Sprites/UI_Flat_IconCross01a.png" id="8_exb2m"]
+[ext_resource type="PackedScene" uid="uid://dyyowyrojq34b" path="res://UserInterface/options_menu.tscn" id="9_cq3bu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qfsla"]
 font_size = 54
@@ -121,6 +122,10 @@ layout_mode = 2
 theme = ExtResource("4_4syi3")
 text = "Exit"
 icon = ExtResource("8_exb2m")
+
+[node name="OptionsMenu" parent="MarginContainer/VBoxContainer/ButtonsContainer" instance=ExtResource("9_cq3bu")]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="AuthorLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

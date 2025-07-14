@@ -7,6 +7,7 @@ public partial class MainMenu : Control
   #endregion
 
   #region Required UI (Not Exported)
+  private OptionsMenu optionsMenu;
   private Button StartButton;
   private Button OptionsButton;
   private Button ExitButton;
@@ -21,7 +22,9 @@ public partial class MainMenu : Control
     OptionsButton = GetNode<Button>("%OptionsButton");
     ExitButton = GetNode<Button>("%ExitButton");
     sceneTransition = GetNodeOrNull<SceneTransition>("/root/SceneTransition");
-    sceneTransition.FadeIn(); 
+    optionsMenu = GetNode<OptionsMenu>("MarginContainer/VBoxContainer/ButtonsContainer/OptionsMenu"); // Maybe use unique name here
+    optionsMenu.Visible = false;
+    sceneTransition.FadeIn();
     WireSignals();
   }
 
@@ -32,7 +35,11 @@ public partial class MainMenu : Control
     ExitButton.Pressed += OnExitPress;
   }
 
-  private void OnStartPress() => sceneTransition.ChangeScene(NextLevel);
-  private void OnOptionsPress() => GD.Print("Options don't do anything yet");
+  private void OnStartPress()
+  {
+    if (optionsMenu.Visible == true) optionsMenu.ToggleVisable();
+    sceneTransition.ChangeScene(NextLevel);
+  }
+  private void OnOptionsPress() => optionsMenu.ToggleVisable();
   private void OnExitPress() => GetTree().Quit();
 }
