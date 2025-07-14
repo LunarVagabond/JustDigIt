@@ -15,8 +15,8 @@ script = ExtResource("2_lub02")
 metadata/_custom_type_script = "uid://11eoovtmlcx2"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ix6vc"]
-radius = 5.83333
-height = 22.9999
+radius = 5.0
+height = 19.9999
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nhbkt"]
 atlas = ExtResource("2_7a1se")
@@ -256,18 +256,19 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("poisonTimer")]
 scale = Vector2(1.2, 1.2)
 collision_layer = 4
 script = ExtResource("1_lu8i8")
+poisonTimer = NodePath("PoisonTimer")
 stats = SubResource("Resource_x1y6q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.66667, -10.8333)
+position = Vector2(1.667, -10)
 shape = SubResource("CapsuleShape2D_ix6vc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(1.66667, -12.5)
+position = Vector2(2.5, -12.5)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_nhbkt")
 animation = &"jump"
@@ -279,5 +280,8 @@ frame_progress = 1.0
 zoom = Vector2(4, 4)
 
 [node name="MiningRig" parent="." instance=ExtResource("4_tekja")]
+position = Vector2(2, 3)
 
 [node name="UI" parent="." instance=ExtResource("5_5c2io")]
+
+[node name="PoisonTimer" type="Timer" parent="."]

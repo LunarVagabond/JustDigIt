@@ -14,6 +14,9 @@ public partial class CharacterStats : Resource
     public int crafting = 1;
     public int mining = 1;
     public int zone; // world level player is in
+    public bool poisoned = false;
+    public float poisonEffect = 2.0f;
+    public float poisonDuration = 5.0f;
     private int level = 1; // player exp level
     private float baseXP = 50.0f;
     private float increase20perc = 1.2f;

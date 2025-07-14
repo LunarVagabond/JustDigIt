@@ -20,6 +20,7 @@ public partial class MiningRig : Node2D
 	private AudioManager audioManager;
 	private AudioStream miningSFX = GD.Load<AudioStream>("res://Assets/SFX/weapon-axe-hit-01-153372.mp3");
 	public VFXManager vfxManager;
+	private float hazardProbability = 0.1f; 
 
 	public override void _Ready()
 	{
@@ -31,7 +32,6 @@ public partial class MiningRig : Node2D
 		vfxManager = GetNodeOrNull<VFXManager>("/root/VfxManager");
 		player = GetParent<Player>();
 		TileRemoved += HandleTileRemoved;
-		GD.Print(vfxManager);
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -50,9 +50,7 @@ public partial class MiningRig : Node2D
 				audioManager.PlaySfx(miningSFX);
 				level.SetCell(tile, -1); // deletes tile at layer 2 and pos
 				int index = crackedTiles.IndexOf(tile);
-				// GD.Print(coinProbability[index]);
 				EmitSignal(SignalName.TileRemoved, miningTarget.GlobalPosition, coinProbability[index]);
-				// EmitSignal(SignalName.TileRemoved, ToGlobal(level.ToLocal(tile)), coinProbability[index]);
 				crackedTiles.RemoveAt(index);
 				coinProbability.RemoveAt(index);
 			}
@@ -113,11 +111,16 @@ public partial class MiningRig : Node2D
 
 	private void HandleTileRemoved(Vector2 targetLocation, float probability)
 	{
-		GD.Print($"{targetLocation} -- {probability}");
+		// GD.Print($"{targetLocation} -- {probability}");
 		Random rnd = new Random();
-		if ((float)rnd.NextDouble() < probability)
+		float roll = (float)rnd.NextDouble();
+		if (roll < probability)
 		{
 			vfxManager.SpawnCoin(targetLocation);
+		}
+		else if (roll > hazardProbability)
+		{
+			vfxManager.SpawnPoison(targetLocation);
 		}
 	}
 }

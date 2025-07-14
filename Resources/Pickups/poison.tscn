@@ -1,0 +1,145 @@
+[gd_scene load_steps=22 format=3 uid="uid://s32yxl1nq28"]
+
+[ext_resource type="Texture2D" uid="uid://clie03oqmhf8j" path="res://Assets/Sprites/nyknck/toxic_fume_nyknck/FX001.png" id="1_euq30"]
+[ext_resource type="Script" uid="uid://0xmlmxohn1vt" path="res://Resources/Pickups/Poison.cs" id="1_wqrgv"]
+[ext_resource type="Texture2D" uid="uid://baqda71jb01lj" path="res://Assets/Sprites/nyknck/toxic_fume_nyknck/FX002.png" id="2_wqrgv"]
+[ext_resource type="Texture2D" uid="uid://cfs1sc8c7i23" path="res://Assets/Sprites/nyknck/toxic_fume_nyknck/FX003.png" id="3_l1y10"]
+[ext_resource type="Texture2D" uid="uid://bq8i4hx3hvjem" path="res://Assets/Sprites/nyknck/toxic_fume_nyknck/FX004.png" id="4_710a6"]
+[ext_resource type="Texture2D" uid="uid://bfjaciv3u10ft" path="res://Assets/Sprites/nyknck/toxic_fume_nyknck/FX005.png" id="5_h8aa1"]
+[ext_resource type="Texture2D" uid="uid://cgt3l2gxagtdd" path="res://Assets/Sprites/nyknck/toxic_fume_nyknck/FX006.png" id="6_1brcq"]
+[ext_resource type="Texture2D" uid="uid://bx4d4br5so6ti" path="res://Assets/Sprites/nyknck/toxic_fume_nyknck/FX007.png" id="7_iywv0"]
+[ext_resource type="Texture2D" uid="uid://n6uqkic50k2e" path="res://Assets/Sprites/nyknck/toxic_fume_nyknck/FX008.png" id="8_a6qcb"]
+[ext_resource type="Texture2D" uid="uid://bi4p76stny0x4" path="res://Assets/Sprites/nyknck/toxic_fume_nyknck/FX009.png" id="9_w32kp"]
+[ext_resource type="Texture2D" uid="uid://c2s2btgugqcik" path="res://Assets/Sprites/nyknck/toxic_fume_nyknck/FX010.png" id="10_w4sf0"]
+[ext_resource type="Texture2D" uid="uid://dcc2h1inkisac" path="res://Assets/Sprites/nyknck/toxic_fume_nyknck/FX011.png" id="11_aw2cc"]
+[ext_resource type="Texture2D" uid="uid://l0c6rc7fbm6k" path="res://Assets/Sprites/nyknck/toxic_fume_nyknck/FX012.png" id="12_sve6r"]
+[ext_resource type="Texture2D" uid="uid://dcpqobd52vr08" path="res://Assets/Sprites/nyknck/toxic_fume_nyknck/FX013.png" id="13_x6mbd"]
+[ext_resource type="Texture2D" uid="uid://d1rqv43divlfm" path="res://Assets/Sprites/nyknck/toxic_fume_nyknck/FX014.png" id="14_ytl6s"]
+[ext_resource type="Texture2D" uid="uid://ojfkcy717xty" path="res://Assets/Sprites/nyknck/toxic_fume_nyknck/FX015.png" id="15_3j6m6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wqrgv"]
+radius = 8.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fk0wt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_euq30")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_wqrgv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_l1y10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_710a6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_h8aa1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_1brcq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_iywv0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_a6qcb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_w32kp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_w4sf0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_aw2cc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_sve6r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_x6mbd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ytl6s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_3j6m6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_wqrgv"]
+resource_name = "cloud"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_l1y10"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_710a6"]
+_data = {
+&"RESET": SubResource("Animation_l1y10"),
+&"cloud": SubResource("Animation_wqrgv")
+}
+
+[node name="Poison" type="Area2D"]
+collision_mask = 4
+script = ExtResource("1_wqrgv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wqrgv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_fk0wt")
+autoplay = "default"
+frame = 8
+frame_progress = 0.948342
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_710a6")
+}
+autoplay = "cloud"

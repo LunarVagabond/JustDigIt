@@ -10,6 +10,6 @@ public partial class Coin : Node2D
 			await ToSignal(this, "ready");
 		}
 		GlobalPosition = targetLocation;
-		GD.Print($"Coin Created: {targetLocation} -- {GlobalPosition}");
+		// GD.Print($"Coin Created: {targetLocation} -- {GlobalPosition}");
 	}
 }
