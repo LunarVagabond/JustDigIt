@@ -15,11 +15,16 @@ bus = &"Music"
 [node name="SFXPlayers" type="Node" parent="."]
 
 [node name="SFXStreamPlayer0" type="AudioStreamPlayer" parent="SFXPlayers"]
+bus = &"SFX"
 
 [node name="SFXStreamPlayer1" type="AudioStreamPlayer" parent="SFXPlayers"]
+bus = &"SFX"
 
 [node name="SFXStreamPlayer2" type="AudioStreamPlayer" parent="SFXPlayers"]
+bus = &"SFX"
 
 [node name="SFXStreamPlayer3" type="AudioStreamPlayer" parent="SFXPlayers"]
+bus = &"SFX"
 
 [node name="SFXStreamPlayer4" type="AudioStreamPlayer" parent="SFXPlayers"]
+bus = &"SFX"
