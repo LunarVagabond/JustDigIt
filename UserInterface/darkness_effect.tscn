@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://psb0vivimmhp"]
+
+[ext_resource type="Shader" uid="uid://u6qt7lg4uvl4" path="res://Assets/Shaders/DarknessOverlay.gdshader" id="1_iv7i4"]
+[ext_resource type="Script" uid="uid://cw2dqpk32k8oa" path="res://UserInterface/DarknessEffect.cs" id="1_m4dcc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m4dcc"]
+shader = ExtResource("1_iv7i4")
+shader_parameter/player_screen_pos = Vector2(0, 0)
+shader_parameter/radius = 0.2
+shader_parameter/softness = 0.05
+shader_parameter/aspect_ratio = 0.0
+
+[node name="DarknessEffect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m4dcc")
+
+[node name="DarknessOverlay" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_m4dcc")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)

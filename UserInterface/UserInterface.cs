@@ -9,6 +9,7 @@ public partial class UserInterface : CanvasLayer
 	public Label DialogLabel;
 	public Label GoldCountLabel;
 	public PanelContainer DialogAreaPanel;
+	public DarknessEffect darknessEffect;
 
 	public override void _Ready()
 	{
@@ -20,6 +21,7 @@ public partial class UserInterface : CanvasLayer
 		GoldCountLabel = GetNodeOrNull<Label>("%GoldCountLabel");
 		DialogLabel = GetNodeOrNull<Label>("%DialogAreaLabel");
 		DialogAreaPanel = GetNodeOrNull<PanelContainer>("%DialogAreaPanel");
+		darknessEffect = GetNode<DarknessEffect>("DarknessEffect");
 		DialogAreaPanel.Visible = false;
 	}
 

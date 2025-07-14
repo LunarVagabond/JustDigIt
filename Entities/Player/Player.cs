@@ -14,6 +14,7 @@ public partial class Player : CharacterBody2D
 	private UserInterface ui;
 	private MiningRig miningRig;
 	private int depthOffset = 1;
+	private int currentDepth = 1;
 
 	[Export]
 	public Timer poisonTimer;
@@ -41,6 +42,10 @@ public partial class Player : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		HandleStats();
+		// Radius param should be between 0-1 & 0 is full balck. 
+		// ui.darknessEffect.UpdateDarkness(GlobalPosition, .1f); // FIXME: We need to map depth to this param somehow
+		ui.darknessEffect.UpdateDarknessMed(GlobalPosition); // FIXME: We need to map depth to this param somehow
+
 
 		Vector2 velocity = Velocity;
 
@@ -55,7 +60,6 @@ public partial class Player : CharacterBody2D
 		if (Input.IsActionJustPressed(IA.JUMP) && IsOnFloor())
 		{
 			velocity.Y = JumpVelocity;
-			// SetAnimationState(AnimState.Jump); // FIXME: this isn't playing probably need to seperate logic into a state machine of sorts
 		}
 
 		// Get the input direction and handle the movement/deceleration.

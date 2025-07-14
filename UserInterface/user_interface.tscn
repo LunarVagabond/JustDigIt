@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://g0a6qdusewav"]
+[gd_scene load_steps=13 format=3 uid="uid://g0a6qdusewav"]
 
 [ext_resource type="Script" uid="uid://dxuh6ha84e8q6" path="res://UserInterface/UserInterface.cs" id="1_3o1tv"]
 [ext_resource type="Texture2D" uid="uid://b4l46oo36xwo3" path="res://Assets/Images/BorderedPanel.png" id="1_71fg6"]
+[ext_resource type="PackedScene" uid="uid://psb0vivimmhp" path="res://UserInterface/darkness_effect.tscn" id="2_1yg0r"]
 [ext_resource type="Texture2D" uid="uid://f424t65tijpi" path="res://Assets/Sprites/coin.png" id="2_v7due"]
 [ext_resource type="FontFile" uid="uid://bgmj2a24edgt2" path="res://Assets/Fonts/Libre/Literata/static/Literata-Italic.ttf" id="3_cp462"]
 [ext_resource type="FontFile" uid="uid://gc7kn1gk7axp" path="res://Assets/Fonts/Libre/Literata/static/Literata-Bold.ttf" id="3_mm0wo"]
@@ -37,6 +38,8 @@ shadow_color = Color(0, 0, 0, 1)
 
 [node name="UserInterface" type="CanvasLayer"]
 script = ExtResource("1_3o1tv")
+
+[node name="DarknessEffect" parent="." instance=ExtResource("2_1yg0r")]
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
