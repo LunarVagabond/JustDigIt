@@ -20,14 +20,14 @@ public partial class MiningRig : Node2D
 	private AudioManager audioManager;
 	private AudioStream miningSFX = GD.Load<AudioStream>("res://Assets/SFX/weapon-axe-hit-01-153372.mp3");
 	public VFXManager vfxManager;
-	private float hazardProbability = 0.1f; 
+	private float hazardProbability = 0.1f;
 
 	public override void _Ready()
 	{
 		base._Ready();
 
 		miningTarget = GetNode<MeshInstance2D>("MiningTarget");
-		level = GetNode<TileMapLayer>("/root/LevelOne/Level");
+		level = GetNodeOrNull<TileMapLayer>("/root/LevelOne/Level");
 		audioManager = GetNodeOrNull<AudioManager>("/root/AudioManager");
 		vfxManager = GetNodeOrNull<VFXManager>("/root/VfxManager");
 		player = GetParent<Player>();
