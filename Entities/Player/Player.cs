@@ -17,7 +17,6 @@ public partial class Player : CharacterBody2D
 		sceneTransition = GetNodeOrNull<SceneTransition>("/root/SceneTransition");
 		sceneTransition.FadeIn();
 		playerSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		Input.MouseMode = Input.MouseModeEnum.ConfinedHidden; // Is there a better spot for this?
 	}
 
 
