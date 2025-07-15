@@ -20,7 +20,7 @@ public partial class MiningRig : Node2D
 	private AudioManager audioManager;
 	private AudioStream miningSFX = GD.Load<AudioStream>("res://Assets/SFX/weapon-axe-hit-01-153372.mp3");
 	public VFXManager vfxManager;
-	private float hazardProbability = 0.1f;
+	private float hazardProbability = 0.8f;
 
 	public override void _Ready()
 	{
@@ -134,10 +134,10 @@ public partial class MiningRig : Node2D
 			vfxManager.SpawnPickup(targetLocation, "coin"); // Fix loose string, make enum
 			GD.Print("Coin Spawned");
 		}
-		// else if (roll > hazardProbability)
-		// {
-		// 	vfxManager.SpawnPoison(targetLocation); // Probably can make a hazard resource like pickup...
-		// 	// vfxManager.SpawnPickup(targetLocation, "poison");
-		// }
+		else if (roll > hazardProbability)
+		{
+			vfxManager.SpawnPoison(targetLocation); // Probably can make a hazard resource like pickup...
+			// vfxManager.SpawnPickup(targetLocation, "poison");
+		}
 	}
 }

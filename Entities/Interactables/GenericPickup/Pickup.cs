@@ -20,11 +20,13 @@ public partial class Pickup : Area2D
 	public override void _Ready()
 	{
 		iconNode = GetNode<TextureRect>("Control/ItemIcon");
-		pickupEventsGlobal = GetNode<PickupEvents>("/root/PickupEvents");
+		pickupEventsGlobal = GetNode<PickupEvents>("/root/PickupEvents"); // change to game manager
 		if (Item is not null) // Errors for dynamically loaded pickups
 		{
-			iconNode.Texture = Item.icon;	
+			iconNode.Texture = Item.icon;
 		}
+		// pickupEventsGlobal.PickupCollected += HandlePickupCollected;
+		// GD.Print(pickupEventsGlobal, pickupEventsGlobal is PickupEvents);
 	}
 
 	// Create the resource dynamically during game actions -- I need help figuring out how to dynamically assign resource type
@@ -52,7 +54,9 @@ public partial class Pickup : Area2D
 	// Based on collision settings this will and should only ever be the player
 	public void OnItemBodyEnter(Node2D body)
 	{
-		pickupEventsGlobal.EmitSignal(PickupEvents.SignalName.PickupCollected, this, body);
-		QueueFree();
+		// pickupEventsGlobal.EmitSignal(PickupEvents.SignalName.PickupCollected, this, body);
+		GD.Print("PickupCollected Event emitted");
+		pickupEventsGlobal.HandlePickupCollected(this); // Change this to game manager
+		// QueueFree(); // Want to leave in for testing, until PickupEvent figured out
 	}
 }
