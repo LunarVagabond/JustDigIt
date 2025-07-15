@@ -2,13 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://f424t65tijpi" path="res://Assets/Sprites/coin.png" id="1_b4sut"]
 [ext_resource type="Script" uid="uid://co8om57qkxag2" path="res://Resources/Pickups/PickupRes.cs" id="1_c4doe"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wh3hd"]
-atlas = ExtResource("1_b4sut")
-region = Rect2(3, 3, 10, 10)
+[ext_resource type="AudioStream" uid="uid://b3u8aspxprofe" path="res://Assets/SFX/coin.wav" id="1_wh3hd"]
 
 [resource]
 script = ExtResource("1_c4doe")
-icon = SubResource("AtlasTexture_wh3hd")
+icon = ExtResource("1_b4sut")
 itemType = 2
+SoundEffect = ExtResource("1_wh3hd")
 metadata/_custom_type_script = "uid://co8om57qkxag2"

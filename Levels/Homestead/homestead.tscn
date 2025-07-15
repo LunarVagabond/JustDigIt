@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://cjg683kf64875"]
+[gd_scene load_steps=25 format=4 uid="uid://cjg683kf64875"]
 
 [ext_resource type="Texture2D" uid="uid://g503qtb8fk2i" path="res://Assets/TileSets/GandalfHardcore FREE Platformer Assets/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 5.png" id="1_u32fr"]
 [ext_resource type="Texture2D" uid="uid://d0v4e65o86h22" path="res://Assets/TileSets/GandalfHardcore FREE Platformer Assets/GandalfHardcore Background layers/Normal BG/GandalfHardcore Background layers_layer 1.png" id="2_0t5yc"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://bf71dk8g2hkji" path="res://Shared/text_popper.tscn" id="9_mdlls"]
 [ext_resource type="PackedScene" uid="uid://dsb7x65mdcwh7" path="res://Entities/Interactables/Passageway/passageway_down.tscn" id="10_5qtdj"]
 [ext_resource type="PackedScene" uid="uid://bepusx1aixh0d" path="res://Shared/world_boundry.tscn" id="10_f2pec"]
+[ext_resource type="PackedScene" uid="uid://dn31kcty2gh01" path="res://Entities/Interactables/Coin/coin.tscn" id="12_0gd17"]
+[ext_resource type="PackedScene" uid="uid://mdqhduqnbsrd" path="res://Entities/Interactables/Oxygen/oxygen.tscn" id="13_lmt7x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0gd17"]
 texture = ExtResource("1_u32fr")
@@ -3758,3 +3760,11 @@ TimeToShow = 2.0
 position = Vector2(984, 633)
 DialogToShow = "Ahh the Old Mine"
 TimeToShow = 3.0
+
+[node name="Pickups" type="Node" parent="."]
+
+[node name="Oxygen" parent="Pickups" instance=ExtResource("13_lmt7x")]
+position = Vector2(1301, 630)
+
+[node name="Coin" parent="Pickups" instance=ExtResource("12_0gd17")]
+position = Vector2(1422, 625)

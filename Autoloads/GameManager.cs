@@ -22,4 +22,14 @@ public partial class GameManager : Node
             }
         }
     }
+
+    // TODO: Handle different types here and add to the player stats or something in this
+    public void HandlePickupCollected(Pickup.ItemType itemType, float value)
+    {
+        GD.Print("Got to handle pickup global spot");
+        if (itemType == Pickup.ItemType.Coin)
+        {
+            GD.Print("Coin Gathered!");
+        }
+    }
 }

@@ -15,7 +15,6 @@ public partial class Player : CharacterBody2D
 	private MiningRig miningRig;
 	private int depthOffset = 1;
 	private int currentDepth = 1;
-	private PickupEvents pickupEventsGlobal;
 
 	public bool MiningRigEnabled = false;
 
@@ -41,9 +40,6 @@ public partial class Player : CharacterBody2D
 		ui.GoldCountLabel.Text = $"{stats.coins}";
 		ui.darknessEffect.UpdateDarknessLarge(GlobalPosition);
 		poisonTimer.Timeout += HandlePoisonTimeout;
-		pickupEventsGlobal = GetNode<PickupEvents>("/root/PickupEvents");
-		pickupEventsGlobal.PickupCollected += (Pickup pickup) => GD.Print($"Got Item: {pickup.Item.itemType}");
-
 	}
 
 	public override void _PhysicsProcess(double delta)

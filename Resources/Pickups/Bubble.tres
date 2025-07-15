@@ -1,13 +1,12 @@
 [gd_resource type="Resource" script_class="PickupRes" load_steps=4 format=3 uid="uid://cfsql276lcccj"]
 
+[ext_resource type="AudioStream" uid="uid://x0irkorqcgdd" path="res://Assets/SFX/weapon-axe-hit-01-153372.mp3" id="1_23mki"]
 [ext_resource type="Texture2D" uid="uid://rfo6eiperjll" path="res://Assets/Sprites/bubble.png" id="1_663c2"]
 [ext_resource type="Script" uid="uid://co8om57qkxag2" path="res://Resources/Pickups/PickupRes.cs" id="1_acvcr"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_23mki"]
-atlas = ExtResource("1_663c2")
-
 [resource]
 script = ExtResource("1_acvcr")
-icon = SubResource("AtlasTexture_23mki")
+icon = ExtResource("1_663c2")
 itemType = 0
+SoundEffect = ExtResource("1_23mki")
 metadata/_custom_type_script = "uid://co8om57qkxag2"

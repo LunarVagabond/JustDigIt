@@ -6,9 +6,15 @@ public partial class Pickup : Area2D
 	[Export] public PickupRes Item;
 	[Export] public int Worth;
 
-	private TextureRect iconNode;
-	protected PickupEvents pickupEventsGlobal;
-	private String tresPath = "res://Resources/Pickups/";
+	// NOTE: Could be shared but for now this is the only thing that requires a pickup animation
+	private const string PICKUP_ANIMATION = "Pickup";
+
+	private Sprite2D iconNode;
+	private AnimationPlayer animationPlayer;
+	protected GameManager gameManager;
+	private AudioManager audioManager;
+	private string tresPath = "res://Resources/Pickups/";
+
 
 	public enum ItemType
 	{
@@ -19,8 +25,11 @@ public partial class Pickup : Area2D
 
 	public override void _Ready()
 	{
-		iconNode = GetNode<TextureRect>("Control/ItemIcon");
-		pickupEventsGlobal = GetNode<PickupEvents>("/root/PickupEvents"); // change to game manager
+		iconNode = GetNode<Sprite2D>("Sprite2D");
+		gameManager = GetNode<GameManager>("/root/GameManager");
+		audioManager = GetNode<AudioManager>("/root/AudioManager");
+
+		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		if (Item is not null) // Errors for dynamically loaded pickups
 		{
 			iconNode.Texture = Item.icon;
@@ -56,7 +65,10 @@ public partial class Pickup : Area2D
 	{
 		// pickupEventsGlobal.EmitSignal(PickupEvents.SignalName.PickupCollected, this, body);
 		GD.Print("PickupCollected Event emitted");
-		pickupEventsGlobal.HandlePickupCollected(this); // Change this to game manager
+		gameManager.HandlePickupCollected(Item.itemType, Worth); // if we pass the whole object after queue free call we error instead pass type and value
+		animationPlayer.Play(PICKUP_ANIMATION);
 		// QueueFree(); // Want to leave in for testing, until PickupEvent figured out
 	}
+
+	private void PlaySoundEffect() => audioManager.PlaySfx(Item.SoundEffect);
 }

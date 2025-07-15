@@ -1,0 +1,81 @@
+[gd_scene load_steps=9 format=3 uid="uid://dn31kcty2gh01"]
+
+[ext_resource type="PackedScene" uid="uid://cfgansgch7u2s" path="res://Entities/Interactables/GenericPickup/pickup.tscn" id="1_2j1rf"]
+[ext_resource type="Texture2D" uid="uid://f424t65tijpi" path="res://Assets/Sprites/coin.png" id="2_3ckx5"]
+[ext_resource type="Resource" uid="uid://ctuyc4f0drb63" path="res://Resources/Pickups/Coin.tres" id="2_npnae"]
+
+[sub_resource type="Animation" id="Animation_o1ehy"]
+resource_name = "Pickup"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"PlaySoundEffect"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_3ckx5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bw4qr"]
+_data = {
+&"Pickup": SubResource("Animation_o1ehy"),
+&"RESET": SubResource("Animation_3ckx5")
+}
+
+[sub_resource type="Animation" id="Animation_npnae"]
+length = 1.75
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.154246, 0.304986, 0.44521, 0.585434, 0.732669, 0.879903, 1.03064, 1.16667, 1.32161, 1.45482, 1.60556),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qb26s"]
+_data = {
+&"Default": SubResource("Animation_npnae")
+}
+
+[node name="Coin" instance=ExtResource("1_2j1rf")]
+Item = ExtResource("2_npnae")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_3ckx5")
+hframes = 12
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+&"": SubResource("AnimationLibrary_bw4qr"),
+&"coin": SubResource("AnimationLibrary_qb26s")
+}
+autoplay = "coin/Default"
