@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PickupRes" load_steps=4 format=3 uid="uid://bs6qg5fc3oddu"]
+[gd_resource type="Resource" script_class="PickupRes" load_steps=4 format=3 uid="uid://ctuyc4f0drb63"]
 
 [ext_resource type="Texture2D" uid="uid://f424t65tijpi" path="res://Assets/Sprites/coin.png" id="1_b4sut"]
 [ext_resource type="Script" uid="uid://co8om57qkxag2" path="res://Resources/Pickups/PickupRes.cs" id="1_c4doe"]
