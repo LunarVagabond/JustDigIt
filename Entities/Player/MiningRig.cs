@@ -130,11 +130,14 @@ public partial class MiningRig : Node2D
 		float roll = (float)rnd.NextDouble();
 		if (roll < probability)
 		{
-			vfxManager.SpawnCoin(targetLocation);
+			// vfxManager.SpawnCoin(targetLocation);
+			vfxManager.SpawnPickup(targetLocation, "coin"); // Fix loose string, make enum
+			GD.Print("Coin Spawned");
 		}
-		else if (roll > hazardProbability)
-		{
-			vfxManager.SpawnPoison(targetLocation);
-		}
+		// else if (roll > hazardProbability)
+		// {
+		// 	vfxManager.SpawnPoison(targetLocation); // Probably can make a hazard resource like pickup...
+		// 	// vfxManager.SpawnPickup(targetLocation, "poison");
+		// }
 	}
 }
