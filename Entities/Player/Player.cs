@@ -17,7 +17,7 @@ public partial class Player : CharacterBody2D
 	private int currentDepth = 1;
 	private PickupEvents pickupEventsGlobal;
 
-	private bool MiningRigEnabled;
+	public bool MiningRigEnabled = false;
 
 
 	[Export]
@@ -33,7 +33,7 @@ public partial class Player : CharacterBody2D
 		// Get Nodes
 		playerSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		ui = GetNode<UserInterface>("UI");
-		if (MiningRigEnabled) DoMiningRigStuff(); // FIXME: This is wrong but it's broken on homestead
+		miningRig = GetNode<MiningRig>("MiningRig");
 
 		// Set UI Display values
 		ui.OxygenBar.Value = stats.oxygen;
@@ -46,17 +46,9 @@ public partial class Player : CharacterBody2D
 
 	}
 
-	private void DoMiningRigStuff()
-	{
-		miningRig = GetNode<MiningRig>("MiningRig");
-		ui.DepthLevelLabel.Text = $"Depth: {miningRig.level.LocalToMap(GlobalPosition).Y + depthOffset}m";
-
-	}
-
-
 	public override void _PhysicsProcess(double delta)
 	{
-		HandleStats();
+		if (MiningRigEnabled) HandleStats();
 		Vector2 velocity = Velocity;
 
 		// Add the gravity.
@@ -114,14 +106,12 @@ public partial class Player : CharacterBody2D
 		}
 		ui.darknessEffect.HandleEnergyDrain(ui.LightBar, stats, GlobalPosition);
 		ui.GoldCountLabel.Text = $"{stats.coins}";
-		// FIXME: This is wrong but it's broken on homestead
-		if (MiningRigEnabled) ui.DepthLevelLabel.Text = $"Depth: {miningRig.level.LocalToMap(GlobalPosition).Y + depthOffset}m";
+		ui.DepthLevelLabel.Text = $"Depth: {miningRig.level.LocalToMap(GlobalPosition).Y + depthOffset}m";
 	}
 
 	private void HandlePoisonTimeout()
 	{
 		stats.poisoned = false;
-		// poisonTimer.Stop();
 		GD.Print("Poison gone!");
 	}
 }

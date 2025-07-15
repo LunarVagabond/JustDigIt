@@ -27,11 +27,25 @@ public partial class MiningRig : Node2D
 		base._Ready();
 
 		miningTarget = GetNode<MeshInstance2D>("MiningTarget");
-		level = GetNodeOrNull<TileMapLayer>("/root/LevelOne/Level");
+		level = GetNodeOrNull<TileMapLayer>("/root/LevelOne/Level"); // FIXME: dynamically select level
 		audioManager = GetNodeOrNull<AudioManager>("/root/AudioManager");
 		vfxManager = GetNodeOrNull<VFXManager>("/root/VfxManager");
 		player = GetParent<Player>();
 		TileRemoved += HandleTileRemoved;
+
+		// Prob need a more robust way to check this, along with dynamically loading level
+		GD.Print(level);
+		if (level is null)
+		{
+			SetPhysicsProcess(false);
+			SetProcessInput(false);
+			miningTarget.Visible = false;
+			player.MiningRigEnabled = false;
+		}
+		else
+		{
+			player.MiningRigEnabled = true;
+		}
 	}
 
 	public override void _PhysicsProcess(double delta)
