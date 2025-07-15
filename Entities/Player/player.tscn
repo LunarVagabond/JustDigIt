@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://g0a6qdusewav" path="res://UserInterface/user_interface.tscn" id="5_5c2io"]
 [ext_resource type="Texture2D" uid="uid://bffmvrtvld67y" path="res://Assets/Sprites/Owlet_Monster/Owlet_Monster_Jump_8.png" id="5_x1y6q"]
 
-[sub_resource type="Resource" id="Resource_x1y6q"]
+[sub_resource type="Resource" id="Resource_lub02"]
 script = ExtResource("2_lub02")
 metadata/_custom_type_script = "uid://11eoovtmlcx2"
 
@@ -261,7 +261,7 @@ scale = Vector2(1.2, 1.2)
 collision_layer = 4
 script = ExtResource("1_lu8i8")
 poisonTimer = NodePath("PoisonTimer")
-stats = SubResource("Resource_x1y6q")
+stats = SubResource("Resource_lub02")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.667, -10)
@@ -283,5 +283,6 @@ zoom = Vector2(4, 4)
 position = Vector2(2, 3)
 
 [node name="UI" parent="." instance=ExtResource("5_5c2io")]
+visible = false
 
 [node name="PoisonTimer" type="Timer" parent="."]

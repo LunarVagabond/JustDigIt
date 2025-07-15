@@ -11,9 +11,14 @@ public partial class Player : CharacterBody2D
 	public enum AnimState { Idle, Run, Climb, Death, Jump, }
 
 	public AnimState CurrentState = AnimState.Idle;
-	private UserInterface ui;
+	public UserInterface ui;
 	private MiningRig miningRig;
 	private int depthOffset = 1;
+	private int currentDepth = 1;
+	private PickupEvents pickupEventsGlobal;
+
+	private bool MiningRigEnabled;
+
 
 	[Export]
 	public Timer poisonTimer;
@@ -28,20 +33,30 @@ public partial class Player : CharacterBody2D
 		// Get Nodes
 		playerSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		ui = GetNode<UserInterface>("UI");
-		miningRig = GetNode<MiningRig>("MiningRig");
+		if (MiningRigEnabled) DoMiningRigStuff(); // FIXME: This is wrong but it's broken on homestead
+
 		// Set UI Display values
 		ui.OxygenBar.Value = stats.oxygen;
 		ui.LightBar.Value = stats.energy;
 		ui.GoldCountLabel.Text = $"{stats.coins}";
-		ui.DepthLevelLabel.Text = $"Depth: {miningRig.level.LocalToMap(GlobalPosition).Y + depthOffset}m";
+		ui.darknessEffect.UpdateDarknessLarge(GlobalPosition);
 		poisonTimer.Timeout += HandlePoisonTimeout;
+		pickupEventsGlobal = GetNode<PickupEvents>("/root/PickupEvents");
+		pickupEventsGlobal.PickupCollected += (Pickup pickup) => GD.Print($"Got Item: {pickup.Item.itemType}");
+
+	}
+
+	private void DoMiningRigStuff()
+	{
+		miningRig = GetNode<MiningRig>("MiningRig");
+		ui.DepthLevelLabel.Text = $"Depth: {miningRig.level.LocalToMap(GlobalPosition).Y + depthOffset}m";
+
 	}
 
 
 	public override void _PhysicsProcess(double delta)
 	{
 		HandleStats();
-
 		Vector2 velocity = Velocity;
 
 		// Add the gravity.
@@ -55,7 +70,6 @@ public partial class Player : CharacterBody2D
 		if (Input.IsActionJustPressed(IA.JUMP) && IsOnFloor())
 		{
 			velocity.Y = JumpVelocity;
-			// SetAnimationState(AnimState.Jump); // FIXME: this isn't playing probably need to seperate logic into a state machine of sorts
 		}
 
 		// Get the input direction and handle the movement/deceleration.
@@ -98,9 +112,10 @@ public partial class Player : CharacterBody2D
 		{
 			ui.OxygenBar.Value -= ui.OxygenBar.Step;
 		}
-		ui.LightBar.Value -= ui.LightBar.Step;
+		ui.darknessEffect.HandleEnergyDrain(ui.LightBar, stats, GlobalPosition);
 		ui.GoldCountLabel.Text = $"{stats.coins}";
-		ui.DepthLevelLabel.Text = $"Depth: {miningRig.level.LocalToMap(GlobalPosition).Y + depthOffset}m";
+		// FIXME: This is wrong but it's broken on homestead
+		if (MiningRigEnabled) ui.DepthLevelLabel.Text = $"Depth: {miningRig.level.LocalToMap(GlobalPosition).Y + depthOffset}m";
 	}
 
 	private void HandlePoisonTimeout()

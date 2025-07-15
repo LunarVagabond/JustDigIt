@@ -20,10 +20,12 @@ namespace CustomInputActions
     #region Actions
     public const string MINE = "mine";
     public const string TOGGLE_MOUSE_VISIBILITY = "toggle_mouse_visibility";
+    public const string TURN_LAMP_UP = "increase_light";
+    public const string TURN_LAMP_DOWN = "decrease_light";
     #endregion
 
     #region UI
-    public const string Pause = "pause";
+    public const string MENU_TOGGLE = "menu";
     #endregion
   }
 }
