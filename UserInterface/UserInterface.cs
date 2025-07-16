@@ -12,6 +12,7 @@ public partial class UserInterface : CanvasLayer
 	public DarknessEffect darknessEffect;
 
 	private OptionsMenu optionsMenu;
+	private Player player;
 
 	public override void _Ready()
 	{
@@ -25,10 +26,16 @@ public partial class UserInterface : CanvasLayer
 		DialogAreaPanel = GetNodeOrNull<PanelContainer>("%DialogAreaPanel");
 		darknessEffect = GetNode<DarknessEffect>("DarknessEffect");
 		optionsMenu = GetNode<OptionsMenu>("MarginContainer/VMainContainer/CenterScreenContainer/OptionsMenu");
+		player = GetParent() as Player;
 
 		optionsMenu.Visible = false;
 		darknessEffect.Visible = true;
 		DialogAreaPanel.Visible = false;
+
+		// Set Initial Values
+		OxygenBar.Value = player.stats.oxygen;
+		LightBar.Value = player.stats.energy;
+		GoldCountLabel.Text = $"{player.stats.coins}";
 	}
 
 	public override void _Input(InputEvent @event)

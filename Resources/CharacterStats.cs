@@ -10,12 +10,12 @@ public partial class CharacterStats : Resource
     public int coins = 0;
     public float oxygen = 100.0f; // rather than increasing with XP, skills/equipment will slow down loss
     public float energy = 100.0f; // rather than increasing with XP, skills/equipment will slow down loss
-    // public int skillPoints = 0; // will eventually use to choose skill upgrades
+                                  // public int skillPoints = 0; // will eventually use to choose skill upgrades
+    public int depth = 1;
     public int crafting = 1;
     public int mining = 1;
     public int zone; // world level player is in
-    public bool poisoned = false; // FIXME: This might be able to be a list of enumns that we add / remove from the player (i.e. player.Statuses {Posined, OutOfOxygen})
-    public float poisonEffect = 2.0f;
+    public float PoisonEffect = 2.0f;
     public float poisonDuration = 5.0f;
     private int level = 1; // player exp level
     private float baseXP = 50.0f;

@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dn31kcty2gh01"]
+[gd_scene load_steps=10 format=3 uid="uid://dn31kcty2gh01"]
 
 [ext_resource type="PackedScene" uid="uid://cfgansgch7u2s" path="res://Entities/Interactables/GenericPickup/pickup.tscn" id="1_2j1rf"]
 [ext_resource type="Texture2D" uid="uid://f424t65tijpi" path="res://Assets/Sprites/coin.png" id="2_3ckx5"]
-[ext_resource type="Resource" uid="uid://ctuyc4f0drb63" path="res://Resources/Pickups/Coin.tres" id="2_npnae"]
+[ext_resource type="Script" uid="uid://ca75y3ncflum" path="res://Entities/Interactables/Coin/Coin.cs" id="2_npnae"]
+[ext_resource type="Resource" uid="uid://ctuyc4f0drb63" path="res://Resources/Pickups/Coin.tres" id="3_qb26s"]
 
 [sub_resource type="Animation" id="Animation_o1ehy"]
 resource_name = "Pickup"
@@ -46,7 +47,8 @@ _data = {
 }
 
 [sub_resource type="Animation" id="Animation_npnae"]
-length = 1.75
+resource_name = "Default"
+length = 1.66
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -67,7 +69,9 @@ _data = {
 }
 
 [node name="Coin" instance=ExtResource("1_2j1rf")]
-Item = ExtResource("2_npnae")
+script = ExtResource("2_npnae")
+Item = ExtResource("3_qb26s")
+Worth = 0
 
 [node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("2_3ckx5")
@@ -76,6 +80,5 @@ hframes = 12
 [node name="AnimationPlayer" parent="." index="2"]
 libraries = {
 &"": SubResource("AnimationLibrary_bw4qr"),
-&"coin": SubResource("AnimationLibrary_qb26s")
+&"child": SubResource("AnimationLibrary_qb26s")
 }
-autoplay = "coin/Default"

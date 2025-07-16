@@ -1,3 +1,4 @@
+using System.Transactions;
 using Godot;
 using IA = CustomInputActions.InputActions;
 
@@ -13,8 +14,15 @@ public partial class Player : CharacterBody2D
 	public AnimState CurrentState = AnimState.Idle;
 	public UserInterface ui;
 	private MiningRig miningRig;
+	public bool poisoned = false;
+	public float OxygenLossRate = 1.0f;
+	float drain;
+	public float PoisonEffect;
 	private int depthOffset = 1;
 	private int currentDepth = 1;
+	public int currentCoins;
+	public float currentOxygen;
+	public float currentEnergy;
 
 	public bool MiningRigEnabled = false;
 
@@ -34,11 +42,15 @@ public partial class Player : CharacterBody2D
 		ui = GetNode<UserInterface>("UI");
 		miningRig = GetNode<MiningRig>("MiningRig");
 
-		// Set UI Display values
-		ui.OxygenBar.Value = stats.oxygen;
-		ui.LightBar.Value = stats.energy;
-		ui.GoldCountLabel.Text = $"{stats.coins}";
+		// Set current stat values
+		currentDepth = stats.depth;
+		currentCoins = stats.coins;
+		currentOxygen = stats.oxygen;
+		currentEnergy = stats.energy;
+		PoisonEffect = stats.PoisonEffect;
+		drain = OxygenLossRate;
 		ui.darknessEffect.UpdateDarknessLarge(GlobalPosition);
+		// Signals
 		poisonTimer.Timeout += HandlePoisonTimeout;
 	}
 
@@ -92,22 +104,32 @@ public partial class Player : CharacterBody2D
 	private void HandleStats()
 	{
 		// Loose Oxygen & Energy / Update Depth & Coins
-		if (stats.poisoned)
-		{
-			ui.OxygenBar.Value -= ui.OxygenBar.Step * stats.poisonEffect;
-		}
-		else
-		{
-			ui.OxygenBar.Value -= ui.OxygenBar.Step;
-		}
-		ui.darknessEffect.HandleEnergyDrain(ui.LightBar, stats, GlobalPosition);
-		ui.GoldCountLabel.Text = $"{stats.coins}";
-		ui.DepthLevelLabel.Text = $"Depth: {miningRig.level.LocalToMap(GlobalPosition).Y + depthOffset}m";
+		// currentCoins handled bu PickupCollected event in GameManager
+		// if (poisoned) currentOxygen -= (float)ui.OxygenBar.Step * PoisonEffect;
+		if (poisoned) drain = OxygenLossRate * PoisonEffect; // This is prob overcomplicated, but my brain hurts
+		currentOxygen -= (float) ui.OxygenBar.Step * drain;
+		currentDepth = miningRig.level.LocalToMap(GlobalPosition).Y + depthOffset;
+		// Handles both the UI and the energy stat directly
+		ui.darknessEffect.HandleEnergyDrain(ui.LightBar, this, GlobalPosition);
+		// Update UI
+		ui.OxygenBar.Value = currentOxygen;
+		ui.DepthLevelLabel.Text = $"Depth: {currentDepth}m";
+		ui.GoldCountLabel.Text = $"{currentCoins}";
+	}
+
+	private void SaveStats()
+	{
+		stats.oxygen = currentOxygen;
+		stats.energy = currentEnergy;
+		stats.depth = currentDepth;
+		stats.coins = currentCoins;
+		// other stats will be handled by CharacterStats itself, i.e. XP, player level, zone, skills, etc.
 	}
 
 	private void HandlePoisonTimeout()
 	{
-		stats.poisoned = false;
+		poisoned = false;
+		drain = OxygenLossRate;
 		GD.Print("Poison gone!");
 	}
 }
