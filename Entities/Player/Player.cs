@@ -26,6 +26,8 @@ public partial class Player : CharacterBody2D
 
 	public bool MiningRigEnabled = false;
 
+	private GameManager gameManager;
+
 
 	[Export]
 	public Timer poisonTimer;
@@ -34,6 +36,7 @@ public partial class Player : CharacterBody2D
 
 	public override void _Ready()
 	{
+		gameManager = GetNode<GameManager>("/root/GameManager");
 		// Scene Transition
 		sceneTransition = GetNodeOrNull<SceneTransition>("/root/SceneTransition");
 		sceneTransition.FadeIn();
@@ -52,6 +55,8 @@ public partial class Player : CharacterBody2D
 		ui.darknessEffect.UpdateDarknessLarge(GlobalPosition);
 		// Signals
 		poisonTimer.Timeout += HandlePoisonTimeout;
+
+		gameManager.player = this; // Set player in game manger once the player dictates it's ready
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -107,7 +112,7 @@ public partial class Player : CharacterBody2D
 		// currentCoins handled bu PickupCollected event in GameManager
 		// if (poisoned) currentOxygen -= (float)ui.OxygenBar.Step * PoisonEffect;
 		if (poisoned) drain = OxygenLossRate * PoisonEffect; // This is prob overcomplicated, but my brain hurts
-		currentOxygen -= (float) ui.OxygenBar.Step * drain;
+		currentOxygen -= (float)ui.OxygenBar.Step * drain;
 		currentDepth = miningRig.level.LocalToMap(GlobalPosition).Y + depthOffset;
 		// Handles both the UI and the energy stat directly
 		ui.darknessEffect.HandleEnergyDrain(ui.LightBar, this, GlobalPosition);

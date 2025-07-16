@@ -1,14 +1,10 @@
+using System.Threading.Tasks;
 using Godot;
 using IA = CustomInputActions.InputActions;
 
 public partial class GameManager : Node
 {
-    // Player player;
-
-    // public override void _Ready()
-    // {
-    //     player = GetTree().GetFirstNodeInGroup("Player") as Player;
-    // }
+    public Player player { get; set; }
 
     // NOTE: Moved this out from player so ALL scenes get this interaction by default
     public override void _UnhandledInput(InputEvent @event)
@@ -38,5 +34,13 @@ public partial class GameManager : Node
             GD.Print("Coin Gathered!");
             player.currentCoins += 1;
         }
+    }
+
+    // We can probably (?) use this to access the player safely. 
+    // TBH though it may be overkill an not needed with how player gets setup now
+    private async Task<Player> AccessPlayer()
+    {
+        if (player is null) await ToSignal(player, "ready");
+        return player;
     }
 }

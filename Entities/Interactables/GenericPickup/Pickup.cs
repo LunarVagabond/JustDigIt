@@ -1,7 +1,6 @@
 using System;
 using Godot;
 
-[GlobalClass]
 public partial class Pickup : Area2D
 {
 	[Export] public PickupRes Item;
@@ -21,7 +20,8 @@ public partial class Pickup : Area2D
 	{
 		Oxygen,
 		Battery,
-		Coin
+		Coin,
+		Poison
 	}
 
 	public override void _Ready()
@@ -37,27 +37,29 @@ public partial class Pickup : Area2D
 	}
 
 	// Create the resource dynamically during game actions -- I need help figuring out how to dynamically assign resource type
-	public async void Setup(Vector2 spawnLocation, String pickupType)
-	{
-		if (!IsInsideTree())
-		{
-			await ToSignal(this, "ready");
-		}
-		GlobalPosition = spawnLocation;
+	// FIXME: We can go over the comment here. I think the pickup scene might be a bit convoluted (my bad haha)
+	// Going to comment out for now delete after discussion (?)
+	// public async void Setup(Vector2 spawnLocation, ItemType pickupType)
+	// {
+	// 	if (!IsInsideTree())
+	// 	{
+	// 		await ToSignal(this, "ready");
+	// 	}
+	// 	GlobalPosition = spawnLocation;
 
-		PickupRes item = pickupType switch
-		{
-			"coin" => ResourceLoader.Load($"{tresPath}Coin.tres") as PickupRes,
-			"poison" => ResourceLoader.Load($"{tresPath}Poison.tres") as PickupRes,
-			"oxygen" => ResourceLoader.Load($"{tresPath}Bubble.tres") as PickupRes,
-			"electicitiy" => ResourceLoader.Load($"{tresPath}Battery.tres") as PickupRes,
-			_ => ResourceLoader.Load($"{tresPath}Coin") as PickupRes
-		};
+	// 	PickupRes item = pickupType switch
+	// 	{
+	// 		ItemType.Coin => ResourceLoader.Load($"{tresPath}Coin.tres") as PickupRes,
+	// 		ItemType.Poison => ResourceLoader.Load($"{tresPath}Poison.tres") as PickupRes,
+	// 		ItemType.Oxygen => ResourceLoader.Load($"{tresPath}Bubble.tres") as PickupRes,
+	// 		ItemType.Battery => ResourceLoader.Load($"{tresPath}Battery.tres") as PickupRes,
+	// 		_ => ResourceLoader.Load($"{tresPath}Coin") as PickupRes
+	// 	};
 
-		Item = item;
-		iconNode.Texture = Item.icon;
-		animationPlayer.Play($"{DEFAULT_ANIMATION}");
-	}
+	// 	Item = item;
+	// 	iconNode.Texture = Item.icon;
+	// 	animationPlayer.Play($"{DEFAULT_ANIMATION}");
+	// }
 
 	// Based on collision settings this will and should only ever be the player
 	public void OnItemBodyEnter(Node2D body)

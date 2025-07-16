@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://mdqhduqnbsrd"]
+[gd_scene load_steps=8 format=3 uid="uid://dnfvw17j6e7ki"]
 
 [ext_resource type="PackedScene" uid="uid://cfgansgch7u2s" path="res://Entities/Interactables/GenericPickup/pickup.tscn" id="1_f454i"]
-[ext_resource type="Script" uid="uid://cjs1h0veek2e2" path="res://Entities/Interactables/Oxygen/Oxygen.cs" id="2_jvxgn"]
 [ext_resource type="Resource" uid="uid://cfsql276lcccj" path="res://Resources/Pickups/Bubble.tres" id="3_p3ves"]
 
 [sub_resource type="Animation" id="Animation_o1ehy"]
@@ -66,8 +65,8 @@ _data = {
 }
 
 [node name="Oxygen" instance=ExtResource("1_f454i")]
-script = ExtResource("2_jvxgn")
 Item = ExtResource("3_p3ves")
+Worth = 0
 
 [node name="AnimationPlayer" parent="." index="2"]
 libraries = {
