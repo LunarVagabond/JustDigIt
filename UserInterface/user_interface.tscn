@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://g0a6qdusewav"]
+[gd_scene load_steps=15 format=3 uid="uid://g0a6qdusewav"]
 
 [ext_resource type="Script" uid="uid://dxuh6ha84e8q6" path="res://UserInterface/UserInterface.cs" id="1_3o1tv"]
 [ext_resource type="Texture2D" uid="uid://b4l46oo36xwo3" path="res://Assets/Images/BorderedPanel.png" id="1_71fg6"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://bgmj2a24edgt2" path="res://Assets/Fonts/Libre/Literata/static/Literata-Italic.ttf" id="3_cp462"]
 [ext_resource type="FontFile" uid="uid://gc7kn1gk7axp" path="res://Assets/Fonts/Libre/Literata/static/Literata-Bold.ttf" id="3_mm0wo"]
 [ext_resource type="PackedScene" uid="uid://dyyowyrojq34b" path="res://UserInterface/options_menu.tscn" id="6_l8ojb"]
+[ext_resource type="PackedScene" uid="uid://ctjy042sf0l4g" path="res://UserInterface/CraftingMenu/crafting_menu.tscn" id="8_7061l"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mm0wo"]
 bg_color = Color(0.194852, 0.707383, 0.917869, 1)
@@ -38,6 +39,7 @@ outline_color = Color(0, 0, 0, 1)
 shadow_color = Color(0, 0, 0, 1)
 
 [node name="UserInterface" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_3o1tv")
 
 [node name="DarknessEffect" parent="." instance=ExtResource("2_1yg0r")]
@@ -164,3 +166,6 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Some Text can Go In here When Ready"
 label_settings = SubResource("LabelSettings_cp462")
+
+[node name="CraftingMenu" parent="MarginContainer" instance=ExtResource("8_7061l")]
+layout_mode = 2

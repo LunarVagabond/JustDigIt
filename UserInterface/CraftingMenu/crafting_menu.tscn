@@ -1,0 +1,84 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctjy042sf0l4g"]
+
+[ext_resource type="Script" uid="uid://dihp8g1kclmo0" path="res://UserInterface/CraftingMenu/CraftingMenu.cs" id="1_60rj2"]
+[ext_resource type="StyleBox" uid="uid://btcgqvfpj1bbb" path="res://Assets/StyleBoxes/BorderedBox.tres" id="1_lme1y"]
+[ext_resource type="PackedScene" uid="uid://c5uuyd03ru5xc" path="res://UserInterface/CraftingMenu/recipe.tscn" id="1_y2bnf"]
+
+[node name="CraftingMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_60rj2")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(1000, 600)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="MenuHLayout" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/PanelContainer/MarginContainer/MenuHLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/PanelContainer/MarginContainer/MenuHLayout/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_lme1y")
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer/MarginContainer/MenuHLayout/ScrollContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="RecepiesContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/MenuHLayout/ScrollContainer/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="Recipe" parent="CenterContainer/PanelContainer/MarginContainer/MenuHLayout/ScrollContainer/PanelContainer/MarginContainer/RecepiesContainer" instance=ExtResource("1_y2bnf")]
+layout_mode = 2
+
+[node name="RightSidePanel" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/MenuHLayout"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 75
+
+[node name="Blueprint" type="PanelContainer" parent="CenterContainer/PanelContainer/MarginContainer/MenuHLayout/RightSidePanel"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_lme1y")
+
+[node name="Buttons" type="PanelContainer" parent="CenterContainer/PanelContainer/MarginContainer/MenuHLayout/RightSidePanel"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_lme1y")
+
+[node name="CraftButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/MenuHLayout/RightSidePanel/Buttons"]
+layout_mode = 2
+text = "Craft"
+
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/MenuHLayout/RightSidePanel/Buttons/CraftButton" to="." method="OnCrafterPressed"]

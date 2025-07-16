@@ -26,6 +26,7 @@ namespace CustomInputActions
 
     #region UI
     public const string MENU_TOGGLE = "menu";
+    public const string CRAFTING_TOGGLE = "crafting_menu";
     #endregion
   }
 }
