@@ -12,8 +12,6 @@ public partial class VFXManager : Node
 	public void SpawnPickup(Vector2 spawnLocation, Pickup.ItemType pickupType)
 	{
 		Pickup newPickup;
-		// PickupRes pickupResource = ResourceLoader.Load<PickupRes>(pickupResPaths[pickupType]);
-
 		switch (pickupType)
 		{
 			case Pickup.ItemType.Coin:
@@ -22,10 +20,9 @@ public partial class VFXManager : Node
 			case Pickup.ItemType.Oxygen:
 				newPickup = oxygen.Instantiate<Pickup>();
 				break;
-			// FIXME: This scene doesn't exist yet
-			// case Pickup.ItemType.Battery:
-			//   newPickup = battery.Instantiate<Pickup>();
-			// 	break;
+			case Pickup.ItemType.Battery:
+				newPickup = oxygen.Instantiate<Pickup>(); // FIXME: Battery DNE, so falling back for now to oxygen
+				break;
 			default:
 				GD.PrintErr($"Incorrect ItemType came through for spawn: {pickupType}");
 				newPickup = oxygen.Instantiate<Pickup>();

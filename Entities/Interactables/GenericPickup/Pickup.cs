@@ -30,10 +30,6 @@ public partial class Pickup : Area2D
 		gameManager = GetNode<GameManager>("/root/GameManager");
 		audioManager = GetNode<AudioManager>("/root/AudioManager");
 		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-		if (Item is not null) // Errors for dynamically loaded pickups
-		{
-			iconNode.Texture = Item.icon;
-		}
 	}
 
 	// Create the resource dynamically during game actions -- I need help figuring out how to dynamically assign resource type
