@@ -58,7 +58,6 @@ theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
 [node name="CraftingMenu" parent="MarginContainer" instance=ExtResource("8_7061l")]
-visible = false
 layout_mode = 2
 
 [node name="VMainContainer" type="VBoxContainer" parent="MarginContainer"]
@@ -139,7 +138,6 @@ size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="OptionsMenu" parent="MarginContainer/VMainContainer/CenterScreenContainer" instance=ExtResource("6_l8ojb")]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 

@@ -29,6 +29,7 @@ script = ExtResource("2_nrxel")
 layout_mode = 2
 
 [node name="Icon" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = SubResource("PlaceholderTexture2D_e1ry6")
 
