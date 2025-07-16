@@ -47,11 +47,13 @@ _data = {
 &"RESET": SubResource("Animation_3ckx5")
 }
 
-[node name="Pickup" type="Area2D"]
+[node name="Pickup" type="Area2D" node_paths=PackedStringArray("iconNode", "animationPlayer")]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_o1ehy")
 Worth = 2
+iconNode = NodePath("Sprite2D")
+animationPlayer = NodePath("AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_e1njk")

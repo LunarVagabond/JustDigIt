@@ -9,8 +9,8 @@ public partial class Pickup : Area2D
 	// NOTE: Could be shared but for now this is the only thing that requires a pickup animation
 	private const string PICKUP_ANIMATION = "Pickup";
 	private const string DEFAULT_ANIMATION = "child/Default";
-	private Sprite2D iconNode;
-	protected AnimationPlayer animationPlayer;
+	[Export] private Sprite2D iconNode;
+	[Export] protected AnimationPlayer animationPlayer;
 	protected GameManager gameManager;
 	protected AudioManager audioManager;
 	private string tresPath = "res://Resources/Pickups/";
@@ -26,10 +26,8 @@ public partial class Pickup : Area2D
 
 	public override void _Ready()
 	{
-		iconNode = GetNode<Sprite2D>("Sprite2D");
 		gameManager = GetNode<GameManager>("/root/GameManager");
 		audioManager = GetNode<AudioManager>("/root/AudioManager");
-		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 	}
 
 	// Create the resource dynamically during game actions -- I need help figuring out how to dynamically assign resource type
