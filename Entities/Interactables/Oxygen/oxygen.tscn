@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://mdqhduqnbsrd"]
+
+[ext_resource type="PackedScene" uid="uid://cfgansgch7u2s" path="res://Entities/Interactables/GenericPickup/pickup.tscn" id="1_f454i"]
+[ext_resource type="Resource" uid="uid://cfsql276lcccj" path="res://Resources/Pickups/Bubble.tres" id="2_jvxgn"]
+
+[node name="Oxygen" instance=ExtResource("1_f454i")]
+Item = ExtResource("2_jvxgn")
