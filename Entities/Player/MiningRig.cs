@@ -137,8 +137,8 @@ public partial class MiningRig : Node2D
 		}
 		else if (roll > hazardProbability)
 		{
-			vfxManager.SpawnPoison(targetLocation); // Probably can make a hazard resource like pickup...
-			// vfxManager.SpawnPickup(targetLocation, "poison");
+			// vfxManager.SpawnPoison(targetLocation); // Probably can make a hazard resource like pickup...
+			vfxManager.SpawnPickup(targetLocation, "oxygen");
 		}
 	}
 }

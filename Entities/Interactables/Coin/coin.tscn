@@ -1,8 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://dn31kcty2gh01"]
+[gd_scene load_steps=11 format=3 uid="uid://dn31kcty2gh01"]
 
 [ext_resource type="PackedScene" uid="uid://cfgansgch7u2s" path="res://Entities/Interactables/GenericPickup/pickup.tscn" id="1_2j1rf"]
 [ext_resource type="Texture2D" uid="uid://f424t65tijpi" path="res://Assets/Sprites/coin.png" id="2_3ckx5"]
-[ext_resource type="Resource" uid="uid://ctuyc4f0drb63" path="res://Resources/Pickups/Coin.tres" id="2_npnae"]
+[ext_resource type="Script" uid="uid://ca75y3ncflum" path="res://Entities/Interactables/Coin/Coin.cs" id="2_npnae"]
+[ext_resource type="Resource" uid="uid://ctuyc4f0drb63" path="res://Resources/Pickups/Coin.tres" id="3_qb26s"]
 
 [sub_resource type="Animation" id="Animation_o1ehy"]
 resource_name = "Pickup"
@@ -39,19 +40,19 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_wsj5j"]
-resource_name = "test"
+[sub_resource type="Animation" id="Animation_qb26s"]
+resource_name = "Deafult"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bw4qr"]
 _data = {
+&"Deafult": SubResource("Animation_qb26s"),
 &"Pickup": SubResource("Animation_o1ehy"),
-&"RESET": SubResource("Animation_3ckx5"),
-&"test": SubResource("Animation_wsj5j")
+&"RESET": SubResource("Animation_3ckx5")
 }
 
 [sub_resource type="Animation" id="Animation_npnae"]
 resource_name = "Default"
-length = 1.75
+length = 1.66
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -71,100 +72,10 @@ _data = {
 &"Default": SubResource("Animation_npnae")
 }
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_npnae"]
-atlas = ExtResource("2_3ckx5")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qb26s"]
-atlas = ExtResource("2_3ckx5")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_litkl"]
-atlas = ExtResource("2_3ckx5")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_53oxf"]
-atlas = ExtResource("2_3ckx5")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2cdq3"]
-atlas = ExtResource("2_3ckx5")
-region = Rect2(64, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l681m"]
-atlas = ExtResource("2_3ckx5")
-region = Rect2(80, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vhd1h"]
-atlas = ExtResource("2_3ckx5")
-region = Rect2(96, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hvg5i"]
-atlas = ExtResource("2_3ckx5")
-region = Rect2(112, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vic2n"]
-atlas = ExtResource("2_3ckx5")
-region = Rect2(128, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sxraj"]
-atlas = ExtResource("2_3ckx5")
-region = Rect2(144, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rh2tc"]
-atlas = ExtResource("2_3ckx5")
-region = Rect2(160, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6yskj"]
-atlas = ExtResource("2_3ckx5")
-region = Rect2(176, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_g5ll6"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_npnae")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qb26s")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_litkl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_53oxf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2cdq3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_l681m")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vhd1h")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hvg5i")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vic2n")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sxraj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rh2tc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6yskj")
-}],
-"loop": true,
-"name": &"default",
-"speed": 8.0
-}]
-
 [node name="Coin" instance=ExtResource("1_2j1rf")]
-Item = ExtResource("2_npnae")
+script = ExtResource("2_npnae")
+Item = ExtResource("3_qb26s")
+Worth = 0
 
 [node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("2_3ckx5")
@@ -175,8 +86,3 @@ libraries = {
 &"": SubResource("AnimationLibrary_bw4qr"),
 &"coin": SubResource("AnimationLibrary_qb26s")
 }
-autoplay = "coin/Default"
-
-[node name="AnimatedSprite2D" parent="." index="3"]
-sprite_frames = SubResource("SpriteFrames_g5ll6")
-autoplay = "default"

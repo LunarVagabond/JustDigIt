@@ -3,17 +3,32 @@ using System;
 
 public partial class VFXManager : Node
 {
-	// public readonly PackedScene coin = ResourceLoader.Load<PackedScene>("res://Resources/Pickups/coin.tscn");
 	public readonly PackedScene poison = ResourceLoader.Load<PackedScene>("res://Resources/Pickups/poison.tscn");
 	public readonly PackedScene pickup = ResourceLoader.Load<PackedScene>("res://Entities//Interactables//GenericPickup//pickup.tscn");
+	public readonly PackedScene coin = ResourceLoader.Load<PackedScene>("res://Entities//Interactables//Coin//coin.tscn");
+	public readonly PackedScene oxygen = ResourceLoader.Load<PackedScene>("res://Entities//Interactables//Oxygen//oxygen.tscn");
 
 	public void SpawnPickup(Vector2 spawnLocation, String pickupType)
 	{
-		Pickup newPickup = pickup.Instantiate() as Pickup;
+		// This is messy, but I could not find a cleaner way to make it work.
+		Pickup newPickup;
+		if (pickupType == "coin")
+		{
+			newPickup = coin.Instantiate() as Coin;
+			newPickup = (Coin)newPickup;
+		}
+		else if (pickupType == "oxygen")
+		{
+			newPickup = oxygen.Instantiate() as Oxygen;
+			newPickup = (Oxygen)newPickup;
+		}
+		else
+		{
+			newPickup = pickup.Instantiate() as Pickup;
+		}
+		GD.Print(newPickup, newPickup.GetType());
 		newPickup.Setup(spawnLocation, pickupType);
 		AddChild(newPickup);
-		GD.Print(newPickup, newPickup.GetType());
-		// GD.Print("Pickup Entered Tree");
 	}
 
 	// public void SpawnCoin(Vector2 targetLocation)
