@@ -47,9 +47,9 @@ public partial class DarknessEffect : Control
 	}
 
 
-	public void HandleEnergyDrain(ProgressBar bar, CharacterStats currentStats, Vector2 playerPos)
+	public void HandleEnergyDrain(ProgressBar bar, Player player, Vector2 playerPos)
 	{
-		if ((currentStats.energy == 0 || forceMinimalSight) && currentSightRadius != SightRadius.Off)
+		if ((player.currentEnergy == 0 || forceMinimalSight) && currentSightRadius != SightRadius.Off)
 		{
 			currentSightRadius = SightRadius.VerySmall;
 			UpdateDarknessVerySmall(playerPos);
@@ -86,7 +86,7 @@ public partial class DarknessEffect : Control
 				break;
 		}
 		bar.Value -= amountDrain;
-		currentStats.energy = (float)bar.Value;
+		player.currentEnergy = (float)bar.Value;
 	}
 
 	/// <summary>

@@ -25,7 +25,7 @@ public partial class Poison : Area2D
 	{
 		if (body is Player player)
 		{
-			player.stats.poisoned = true;
+			player.poisoned = true;
 			player.poisonTimer.Start(player.stats.poisonDuration);
 			GD.Print("Poisoned!");
 		}

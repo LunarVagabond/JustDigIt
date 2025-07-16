@@ -14,8 +14,7 @@ public partial class CharacterStats : Resource
     public int crafting = 1;
     public int mining = 1;
     public int zone; // world level player is in
-    public bool poisoned = false; // FIXME: This might be able to be a list of enumns that we add / remove from the player (i.e. player.Statuses {Posined, OutOfOxygen})
-    public float poisonEffect = 2.0f;
+    public float PoisonEffect = 2.0f;
     public float poisonDuration = 5.0f;
     private int level = 1; // player exp level
     private float baseXP = 50.0f;

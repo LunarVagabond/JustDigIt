@@ -62,7 +62,7 @@ public partial class Pickup : Area2D
 	// Based on collision settings this will and should only ever be the player
 	public void OnItemBodyEnter(Node2D body)
 	{
-		gameManager.HandlePickupCollected(Item.itemType, Worth); // if we pass the whole object after queue free call we error instead pass type and value
+		gameManager.HandlePickupCollected(Item.itemType, Worth, body); // if we pass the whole object after queue free call we error instead pass type and value
 		animationPlayer.Play(PICKUP_ANIMATION);
 	}
 
