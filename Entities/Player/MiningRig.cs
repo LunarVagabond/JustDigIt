@@ -132,6 +132,7 @@ public partial class MiningRig : Node2D
 		{
 			// vfxManager.SpawnCoin(targetLocation);
 			vfxManager.SpawnPickup(targetLocation, "coin"); // Fix loose string, make enum
+			// vfxManager.SpawnPickup(targetLocation, "oxygen"); // Fix loose string, make enum
 			GD.Print("Coin Spawned");
 		}
 		else if (roll > hazardProbability)

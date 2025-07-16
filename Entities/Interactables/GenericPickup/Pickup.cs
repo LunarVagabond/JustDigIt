@@ -8,6 +8,7 @@ public partial class Pickup : Area2D
 
 	// NOTE: Could be shared but for now this is the only thing that requires a pickup animation
 	private const string PICKUP_ANIMATION = "Pickup";
+	private const string DEFAULT_ANIMATION = "Default";
 
 	private Sprite2D iconNode;
 	private AnimationPlayer animationPlayer;
@@ -36,6 +37,7 @@ public partial class Pickup : Area2D
 		}
 		// pickupEventsGlobal.PickupCollected += HandlePickupCollected;
 		// GD.Print(pickupEventsGlobal, pickupEventsGlobal is PickupEvents);
+		// animationPlayer.Play($"coin/{DEFAULT_ANIMATION}");
 	}
 
 	// Create the resource dynamically during game actions -- I need help figuring out how to dynamically assign resource type
@@ -51,7 +53,7 @@ public partial class Pickup : Area2D
 		{
 			"coin" => ResourceLoader.Load($"{tresPath}Coin.tres") as PickupRes,
 			"poison" => ResourceLoader.Load($"{tresPath}Poison.tres") as PickupRes,
-			"oxygen" => ResourceLoader.Load($"{tresPath}Oxygen.tres") as PickupRes,
+			"oxygen" => ResourceLoader.Load($"{tresPath}Bubble.tres") as PickupRes,
 			"electicitiy" => ResourceLoader.Load($"{tresPath}Battery.tres") as PickupRes,
 			_ => ResourceLoader.Load($"{tresPath}Coin") as PickupRes
 		};

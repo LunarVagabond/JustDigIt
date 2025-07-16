@@ -66,4 +66,8 @@ libraries = {
 &"": SubResource("AnimationLibrary_bw4qr")
 }
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1.19209e-07, 1.19209e-07)
+scale = Vector2(0.625, 0.625)
+
 [connection signal="body_entered" from="." to="." method="OnItemBodyEnter"]

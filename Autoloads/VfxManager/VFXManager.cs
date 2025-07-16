@@ -12,6 +12,7 @@ public partial class VFXManager : Node
 		Pickup newPickup = pickup.Instantiate() as Pickup;
 		newPickup.Setup(spawnLocation, pickupType);
 		AddChild(newPickup);
+		GD.Print(newPickup, newPickup.GetType());
 		// GD.Print("Pickup Entered Tree");
 	}
 

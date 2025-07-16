@@ -1,12 +1,16 @@
-[gd_resource type="Resource" script_class="PickupRes" load_steps=4 format=3 uid="uid://ctuyc4f0drb63"]
+[gd_resource type="Resource" script_class="PickupRes" load_steps=5 format=3 uid="uid://ctuyc4f0drb63"]
 
 [ext_resource type="Texture2D" uid="uid://f424t65tijpi" path="res://Assets/Sprites/coin.png" id="1_b4sut"]
 [ext_resource type="Script" uid="uid://co8om57qkxag2" path="res://Resources/Pickups/PickupRes.cs" id="1_c4doe"]
 [ext_resource type="AudioStream" uid="uid://b3u8aspxprofe" path="res://Assets/SFX/coin.wav" id="1_wh3hd"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wh3hd"]
+atlas = ExtResource("1_b4sut")
+region = Rect2(0, 0, 16, 16)
+
 [resource]
 script = ExtResource("1_c4doe")
-icon = ExtResource("1_b4sut")
+icon = SubResource("AtlasTexture_wh3hd")
 itemType = 2
 SoundEffect = ExtResource("1_wh3hd")
 metadata/_custom_type_script = "uid://co8om57qkxag2"

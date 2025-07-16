@@ -1,7 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://mdqhduqnbsrd"]
+[gd_scene load_steps=6 format=3 uid="uid://mdqhduqnbsrd"]
 
 [ext_resource type="PackedScene" uid="uid://cfgansgch7u2s" path="res://Entities/Interactables/GenericPickup/pickup.tscn" id="1_f454i"]
 [ext_resource type="Resource" uid="uid://cfsql276lcccj" path="res://Resources/Pickups/Bubble.tres" id="2_jvxgn"]
+[ext_resource type="Texture2D" uid="uid://rfo6eiperjll" path="res://Assets/Sprites/bubble.png" id="3_p3ves"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3by0d"]
+atlas = ExtResource("3_p3ves")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_652c0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3by0d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Oxygen" instance=ExtResource("1_f454i")]
 Item = ExtResource("2_jvxgn")
+
+[node name="Sprite2D" parent="." index="1"]
+visible = false
+
+[node name="AnimatedSprite2D" parent="." index="3"]
+sprite_frames = SubResource("SpriteFrames_652c0")
+autoplay = "default"

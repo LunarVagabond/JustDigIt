@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://ba8m4jeqc5qd5"]
+[gd_scene load_steps=24 format=4 uid="uid://ba8m4jeqc5qd5"]
 
 [ext_resource type="PackedScene" uid="uid://btsexkhcceg6k" path="res://Entities/Player/player.tscn" id="1_5ksg8"]
 [ext_resource type="Texture2D" uid="uid://dj8f3bseepj6a" path="res://Assets/TileSets/Brackeys/world_tileset.png" id="2_7pha4"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dsb7x65mdcwh7" path="res://Entities/Interactables/Passageway/passageway_down.tscn" id="6_mh6um"]
 [ext_resource type="Texture2D" uid="uid://c1uwruhyxwitk" path="res://Assets/TileSets/Dungeon_TileSet_DavidG.png" id="7_6unv3"]
 [ext_resource type="PackedScene" uid="uid://cfgansgch7u2s" path="res://Entities/Interactables/GenericPickup/pickup.tscn" id="8_hxr6c"]
+[ext_resource type="AudioStream" uid="uid://x0irkorqcgdd" path="res://Assets/SFX/weapon-axe-hit-01-153372.mp3" id="11_725ab"]
 [ext_resource type="Texture2D" uid="uid://rfo6eiperjll" path="res://Assets/Sprites/bubble.png" id="11_x67cc"]
 [ext_resource type="Script" uid="uid://co8om57qkxag2" path="res://Resources/Pickups/PickupRes.cs" id="12_725ab"]
 
@@ -1622,6 +1623,7 @@ atlas = ExtResource("11_x67cc")
 script = ExtResource("12_725ab")
 icon = SubResource("AtlasTexture_23mki")
 itemType = 0
+SoundEffect = ExtResource("11_725ab")
 metadata/_custom_type_script = "uid://co8om57qkxag2"
 
 [node name="LevelOne" type="Node2D"]
