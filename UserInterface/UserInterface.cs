@@ -92,4 +92,6 @@ public partial class UserInterface : CanvasLayer
 		};
 	}
 
+	// TODO: We can / should have some grand function that dictates why UI is visable when other UI is shown / hidden 
+	// For example when the Crafting menu is open we should hide the Oxygen / Energy bars
 }

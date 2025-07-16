@@ -1,9 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://ctjy042sf0l4g"]
+[gd_scene load_steps=10 format=3 uid="uid://ctjy042sf0l4g"]
 
 [ext_resource type="Script" uid="uid://dihp8g1kclmo0" path="res://UserInterface/CraftingMenu/CraftingMenu.cs" id="1_60rj2"]
 [ext_resource type="StyleBox" uid="uid://btcgqvfpj1bbb" path="res://Assets/StyleBoxes/BorderedBox.tres" id="1_lme1y"]
 [ext_resource type="PackedScene" uid="uid://c5uuyd03ru5xc" path="res://UserInterface/CraftingMenu/recipe.tscn" id="2_jxe4k"]
 [ext_resource type="FontFile" uid="uid://gc7kn1gk7axp" path="res://Assets/Fonts/Libre/Literata/static/Literata-Bold.ttf" id="4_jxe4k"]
+[ext_resource type="FontFile" uid="uid://bgmj2a24edgt2" path="res://Assets/Fonts/Libre/Literata/static/Literata-Italic.ttf" id="4_pcyxw"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_jxe4k"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kg5mr"]
+font = ExtResource("4_pcyxw")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_pcyxw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pcyxw"]
+font = ExtResource("4_pcyxw")
 
 [node name="CraftingMenu" type="Control" node_paths=PackedStringArray("recepiesContainer")]
 layout_mode = 3
@@ -72,6 +83,50 @@ theme_override_constants/separation = 75
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = ExtResource("1_lme1y")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/MenuHLayout/RightSidePanel/Blueprint"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/PanelContainer/MarginContainer/MenuHLayout/RightSidePanel/Blueprint/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MaterialsNeeded" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/MenuHLayout/RightSidePanel/Blueprint/VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/MenuHLayout/RightSidePanel/Blueprint/VBoxContainer/CenterContainer/MaterialsNeeded"]
+layout_mode = 2
+
+[node name="MatOne" type="TextureRect" parent="CenterContainer/PanelContainer/MarginContainer/MenuHLayout/RightSidePanel/Blueprint/VBoxContainer/CenterContainer/MaterialsNeeded/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_jxe4k")
+
+[node name="MatOneLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/MenuHLayout/RightSidePanel/Blueprint/VBoxContainer/CenterContainer/MaterialsNeeded/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Mat 1"
+label_settings = SubResource("LabelSettings_kg5mr")
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/MenuHLayout/RightSidePanel/Blueprint/VBoxContainer/CenterContainer/MaterialsNeeded"]
+layout_mode = 2
+
+[node name="MatTwo" type="TextureRect" parent="CenterContainer/PanelContainer/MarginContainer/MenuHLayout/RightSidePanel/Blueprint/VBoxContainer/CenterContainer/MaterialsNeeded/VBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_pcyxw")
+
+[node name="MatTwoLabel" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/MenuHLayout/RightSidePanel/Blueprint/VBoxContainer/CenterContainer/MaterialsNeeded/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Mat 2"
+label_settings = SubResource("LabelSettings_pcyxw")
+horizontal_alignment = 1
 
 [node name="Buttons" type="PanelContainer" parent="CenterContainer/PanelContainer/MarginContainer/MenuHLayout/RightSidePanel"]
 layout_mode = 2
