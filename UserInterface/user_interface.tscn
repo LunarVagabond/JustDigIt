@@ -57,6 +57,10 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
+[node name="CraftingMenu" parent="MarginContainer" instance=ExtResource("8_7061l")]
+visible = false
+layout_mode = 2
+
 [node name="VMainContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
@@ -135,6 +139,7 @@ size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="OptionsMenu" parent="MarginContainer/VMainContainer/CenterScreenContainer" instance=ExtResource("6_l8ojb")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -166,6 +171,3 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Some Text can Go In here When Ready"
 label_settings = SubResource("LabelSettings_cp462")
-
-[node name="CraftingMenu" parent="MarginContainer" instance=ExtResource("8_7061l")]
-layout_mode = 2

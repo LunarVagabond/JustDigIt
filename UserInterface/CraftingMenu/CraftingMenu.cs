@@ -28,4 +28,6 @@ public partial class CraftingMenu : Control
   {
     GD.Print("Crafting Button Pushed");
   }
+
+  private void OnClosePressed() => ToggleVisable();
 }
