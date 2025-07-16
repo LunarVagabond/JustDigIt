@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dn31kcty2gh01"]
+[gd_scene load_steps=10 format=3 uid="uid://dn31kcty2gh01"]
 
 [ext_resource type="PackedScene" uid="uid://cfgansgch7u2s" path="res://Entities/Interactables/GenericPickup/pickup.tscn" id="1_2j1rf"]
 [ext_resource type="Texture2D" uid="uid://f424t65tijpi" path="res://Assets/Sprites/coin.png" id="2_3ckx5"]
@@ -40,12 +40,8 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_qb26s"]
-resource_name = "Deafult"
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bw4qr"]
 _data = {
-&"Deafult": SubResource("Animation_qb26s"),
 &"Pickup": SubResource("Animation_o1ehy"),
 &"RESET": SubResource("Animation_3ckx5")
 }
@@ -84,5 +80,5 @@ hframes = 12
 [node name="AnimationPlayer" parent="." index="2"]
 libraries = {
 &"": SubResource("AnimationLibrary_bw4qr"),
-&"coin": SubResource("AnimationLibrary_qb26s")
+&"child": SubResource("AnimationLibrary_qb26s")
 }

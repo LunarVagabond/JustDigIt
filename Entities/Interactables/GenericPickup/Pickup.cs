@@ -9,7 +9,7 @@ public partial class Pickup : Area2D
 
 	// NOTE: Could be shared but for now this is the only thing that requires a pickup animation
 	private const string PICKUP_ANIMATION = "Pickup";
-	private const string DEFAULT_ANIMATION = "Default";
+	private const string DEFAULT_ANIMATION = "child/Default";
 	private Sprite2D iconNode;
 	protected AnimationPlayer animationPlayer;
 	protected GameManager gameManager;
@@ -56,7 +56,7 @@ public partial class Pickup : Area2D
 
 		Item = item;
 		iconNode.Texture = Item.icon;
-		animationPlayer.Play($"{pickupType}/{DEFAULT_ANIMATION}");
+		animationPlayer.Play($"{DEFAULT_ANIMATION}");
 	}
 
 	// Based on collision settings this will and should only ever be the player

@@ -6,6 +6,6 @@ public partial class Oxygen : Pickup
 	public override void _Ready()
 	{
 		base._Ready();
-		GD.Print("I am a bubble");
+		GD.Print("Oxygen spawned");
 	}
 }

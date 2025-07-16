@@ -6,6 +6,7 @@ public partial class Coin : Pickup
 	public override void _Ready()
 	{
 		base._Ready();
-		GD.Print("I am a coin");
+		GD.Print("Coin Spawned");
+		// GD.Print("I am a coin");
 	}
 }

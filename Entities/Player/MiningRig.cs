@@ -34,7 +34,6 @@ public partial class MiningRig : Node2D
 		TileRemoved += HandleTileRemoved;
 
 		// Prob need a more robust way to check this, along with dynamically loading level
-		GD.Print(level);
 		if (level is null)
 		{
 			SetPhysicsProcess(false);
@@ -132,13 +131,12 @@ public partial class MiningRig : Node2D
 		{
 			// vfxManager.SpawnCoin(targetLocation);
 			vfxManager.SpawnPickup(targetLocation, "coin"); // Fix loose string, make enum
-			// vfxManager.SpawnPickup(targetLocation, "oxygen"); // Fix loose string, make enum
-			GD.Print("Coin Spawned");
+			// GD.Print("Coin Spawned");
 		}
 		else if (roll > hazardProbability)
 		{
-			// vfxManager.SpawnPoison(targetLocation); // Probably can make a hazard resource like pickup...
-			vfxManager.SpawnPickup(targetLocation, "oxygen");
+			vfxManager.SpawnPoison(targetLocation); // Probably can make a hazard resource like pickup...
+													// vfxManager.SpawnPickup(targetLocation, "oxygen"); // for testing
 		}
 	}
 }
