@@ -10,7 +10,8 @@ public partial class CharacterStats : Resource
     public int coins = 0;
     public float oxygen = 100.0f; // rather than increasing with XP, skills/equipment will slow down loss
     public float energy = 100.0f; // rather than increasing with XP, skills/equipment will slow down loss
-    // public int skillPoints = 0; // will eventually use to choose skill upgrades
+                                  // public int skillPoints = 0; // will eventually use to choose skill upgrades
+    public int depth = 1;
     public int crafting = 1;
     public int mining = 1;
     public int zone; // world level player is in

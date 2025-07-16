@@ -43,6 +43,7 @@ public partial class Player : CharacterBody2D
 		miningRig = GetNode<MiningRig>("MiningRig");
 
 		// Set current stat values
+		currentDepth = stats.depth;
 		currentCoins = stats.coins;
 		currentOxygen = stats.oxygen;
 		currentEnergy = stats.energy;
@@ -118,7 +119,11 @@ public partial class Player : CharacterBody2D
 
 	private void SaveStats()
 	{
-		// Write current values to CharacterStats resource
+		stats.oxygen = currentOxygen;
+		stats.energy = currentEnergy;
+		stats.depth = currentDepth;
+		stats.coins = currentCoins;
+		// other stats will be handled by CharacterStats itself, i.e. XP, player level, zone, skills, etc.
 	}
 
 	private void HandlePoisonTimeout()
