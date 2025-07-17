@@ -15,7 +15,7 @@ script = ExtResource("2_lub02")
 metadata/_custom_type_script = "uid://11eoovtmlcx2"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ix6vc"]
-radius = 5.0
+radius = 4.16633
 height = 19.9999
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nhbkt"]

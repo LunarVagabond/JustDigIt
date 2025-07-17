@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://ba8m4jeqc5qd5"]
+[gd_scene load_steps=26 format=4 uid="uid://ba8m4jeqc5qd5"]
 
 [ext_resource type="PackedScene" uid="uid://btsexkhcceg6k" path="res://Entities/Player/player.tscn" id="1_5ksg8"]
 [ext_resource type="Texture2D" uid="uid://dj8f3bseepj6a" path="res://Assets/TileSets/Brackeys/world_tileset.png" id="2_7pha4"]
@@ -13,6 +13,8 @@
 [ext_resource type="AudioStream" uid="uid://x0irkorqcgdd" path="res://Assets/SFX/weapon-axe-hit-01-153372.mp3" id="11_725ab"]
 [ext_resource type="Texture2D" uid="uid://rfo6eiperjll" path="res://Assets/Sprites/bubble.png" id="11_x67cc"]
 [ext_resource type="Script" uid="uid://co8om57qkxag2" path="res://Resources/Pickups/PickupRes.cs" id="12_725ab"]
+[ext_resource type="PackedScene" uid="uid://ke77f3n803ta" path="res://Resources/Blueprint/PickaxeBlueprint.tscn" id="14_xs6u6"]
+[ext_resource type="PackedScene" uid="uid://bhceeva2d5tp2" path="res://Entities/Interactables/electric_lock.tscn" id="15_7rx5l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7pha4"]
 texture = ExtResource("2_hcdvr")
@@ -1643,6 +1645,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAgABAAkAAAABAAAAAgACAAkAAAADAAAAAgAEAAk
 tile_set = SubResource("TileSet_ychhn")
 
 [node name="Player" parent="." instance=ExtResource("1_5ksg8")]
+z_index = 10
 position = Vector2(7, 0)
 
 [node name="PassagewayDown" parent="." instance=ExtResource("6_mh6um")]
@@ -1652,3 +1655,10 @@ NextLevel = "uid://bw8elrs4u8n2u"
 [node name="Pickup" parent="." instance=ExtResource("8_hxr6c")]
 position = Vector2(76, -9)
 Item = SubResource("Resource_xs6u6")
+
+[node name="PickaxeBlueprint" parent="." instance=ExtResource("14_xs6u6")]
+position = Vector2(-101, -10)
+
+[node name="ElectricLock" parent="." instance=ExtResource("15_7rx5l")]
+visible = false
+position = Vector2(136, 216)

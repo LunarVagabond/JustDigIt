@@ -56,7 +56,7 @@ public partial class MiningRig : Node2D
 			Vector2I tile = level.LocalToMap(miningTarget.GlobalPosition);
 
 			// GD.Print("Mining action activated");
-			// GD.Print($"Position of mining target: {tile}");
+			GD.Print($"Position of mining target: {tile}");
 
 			if (crackedTiles.Contains(tile))
 			{
@@ -137,7 +137,6 @@ public partial class MiningRig : Node2D
 		else if (roll > hazardProbability)
 		{
 			vfxManager.SpawnPoison(targetLocation); // Probably can make a hazard resource like pickup...
-																							// vfxManager.SpawnPickup(targetLocation, "oxygen"); // for testing
 		}
 	}
 }

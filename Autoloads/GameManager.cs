@@ -5,6 +5,12 @@ using IA = CustomInputActions.InputActions;
 public partial class GameManager : Node
 {
     public Player player { get; set; }
+    // private CraftingMenu craftingMenu;
+    public UserInterface ui { get; set; }
+
+    public readonly PackedScene recipe = ResourceLoader.Load<PackedScene>("res://UserInterface/CraftingMenu/recipe.tscn");
+    // public readonly PackedScene coin = ResourceLoader.Load<PackedScene>("res://Entities/Interactables/Coin//coin.tscn");
+
 
     // NOTE: Moved this out from player so ALL scenes get this interaction by default
     public override void _UnhandledInput(InputEvent @event)
@@ -34,6 +40,27 @@ public partial class GameManager : Node
             GD.Print("Coin Gathered!");
             player.currentCoins += 1;
         }
+    }
+
+    public void HandleBlueprintCollected(BlueprintRes blueprint, Node2D body)
+    {
+        if (body is Player player)
+        {
+            GD.Print($"Blueprint {blueprint.craftItem} Gathered!");
+            ui.craftingMenu.AddRecpie(blueprint);
+        }
+    }
+
+    private void CreateRecipe(BlueprintRes blueprint)
+    {
+        Recipe newRecipe = recipe.Instantiate<Recipe>();
+        // Pickup newPickup = coin.Instantiate<Pickup>();
+        // newRecipe.Icon = (TextureRect) blueprint.craftItemTexture; // Prob need to change recipe scene
+        // Should be give recipe a resource that this just becomes?
+        newRecipe.GetNode<Label>("%RecipeName").Text = blueprint.craftItemTitle;
+        newRecipe.GetNode<Label>("%RecipeDescription").Text = blueprint.craftItemDescription;
+        GD.Print(newRecipe.GetNode<Label>("%RecipeName").Text);
+        AddChild(newRecipe); // Does this need to be added to the Crafting Menu?
     }
 
     // We can probably (?) use this to access the player safely. 

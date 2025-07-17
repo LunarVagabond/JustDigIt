@@ -1,0 +1,41 @@
+[gd_scene load_steps=11 format=3 uid="uid://ke77f3n803ta"]
+
+[ext_resource type="PackedScene" uid="uid://bdu5o87ga80ob" path="res://Resources/Blueprint/blueprint.tscn" id="1_t0hsw"]
+[ext_resource type="AudioStream" uid="uid://b3u8aspxprofe" path="res://Assets/SFX/coin.wav" id="2_ebhr7"]
+[ext_resource type="Script" uid="uid://c24fohp5piudm" path="res://Resources/Blueprint/BlueprintRes.cs" id="3_5xwib"]
+[ext_resource type="Texture2D" uid="uid://b2f1gs280syl2" path="res://Assets/Sprites/gamer247_pixil-frame-0 (5).png" id="3_ebhr7"]
+[ext_resource type="Texture2D" uid="uid://f424t65tijpi" path="res://Assets/Sprites/coin.png" id="4_0s7y0"]
+[ext_resource type="Texture2D" uid="uid://dj8f3bseepj6a" path="res://Assets/TileSets/Brackeys/world_tileset.png" id="5_i40dx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xwib"]
+atlas = ExtResource("3_ebhr7")
+region = Rect2(180, 60, 105, 105)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgvch"]
+atlas = ExtResource("4_0s7y0")
+region = Rect2(3, 3, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rpbvj"]
+atlas = ExtResource("5_i40dx")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="Resource" id="Resource_0s7y0"]
+script = ExtResource("3_5xwib")
+SoundEffect = ExtResource("2_ebhr7")
+craftItem = 1
+craftItemTitle = "Pickaxe"
+craftItemTexture = SubResource("AtlasTexture_5xwib")
+craftItemDescription = "+3 Mining Skill"
+skillValue = 3
+materialTexture1 = SubResource("AtlasTexture_pgvch")
+materialTexture2 = SubResource("AtlasTexture_rpbvj")
+materialName1 = "Coin"
+materialName2 = "Stone"
+materialCost1 = 10
+materialCost2 = 0
+metadata/_custom_type_script = "uid://c24fohp5piudm"
+
+[node name="PickaxeBlueprint" instance=ExtResource("1_t0hsw")]
+collision_layer = 2
+collision_mask = 4
+Item = SubResource("Resource_0s7y0")

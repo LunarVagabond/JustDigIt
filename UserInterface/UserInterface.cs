@@ -2,7 +2,7 @@ using Godot;
 using IA = CustomInputActions.InputActions;
 public partial class UserInterface : CanvasLayer
 {
-	public TextureRect CurrentItemTexture;
+	public TextureRect CurrentItem;
 	public ProgressBar OxygenBar;
 	public ProgressBar LightBar;
 	public Label DepthLevelLabel;
@@ -14,12 +14,12 @@ public partial class UserInterface : CanvasLayer
 	private OptionsMenu optionsMenu;
 	private Player player;
 
-	private CraftingMenu craftingMenu;
+	public CraftingMenu craftingMenu;
 
 	public override void _Ready()
 	{
 		Visible = true; // Most scenes we will hide this in the engine but we do want it in the game to show up
-		CurrentItemTexture = GetNodeOrNull<TextureRect>("%CurrentItem");
+		CurrentItem = GetNodeOrNull<TextureRect>("%CurrentItem");
 		OxygenBar = GetNodeOrNull<ProgressBar>("%OxygenBar");
 		LightBar = GetNodeOrNull<ProgressBar>("%LightBar");
 		DepthLevelLabel = GetNodeOrNull<Label>("%DepthLabel");
