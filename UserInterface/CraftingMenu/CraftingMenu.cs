@@ -5,6 +5,7 @@ public partial class CraftingMenu : Control
   [Export] private VBoxContainer recepiesContainer;
   [Export] private PackedScene recepieScene;
 
+  private Texture2D itemTexture;
   private TextureRect materialSlotOne;
   private TextureRect materialSlotTwo;
 
@@ -13,6 +14,8 @@ public partial class CraftingMenu : Control
   private Label MatOneCost;
   private Label MatTwoCost;
   private Player player;
+  private Blueprint.ItemType skillType;
+  private int skillValue;
 
   public override void _Ready()
   {
@@ -37,6 +40,8 @@ public partial class CraftingMenu : Control
   // Based on the blueprint pickup whne it happens we can add it into recipes here 
   // Also maybe we directly pass in a resrouce file instead of a whole object / scene
   // public void AddRecpie(Pickup pickup)
+
+  // NOTE -- all of this 3x reassigning from blueprint to recipe to local values here to do things seems messy
   public void AddRecpie(BlueprintRes blueprint)
   {
     Recipe r = recepieScene.Instantiate<Recipe>();
@@ -52,6 +57,8 @@ public partial class CraftingMenu : Control
     r.materialName2 = blueprint.materialName2;
     r.materialCost1 = blueprint.materialCost1;
     r.materialCost2 = blueprint.materialCost2;
+    r.skillType = blueprint.craftItem;
+    r.skillValue = blueprint.skillValue;
     r.RecipeSelected += HandleSelectionOfRecipe;
   }
 
@@ -59,6 +66,9 @@ public partial class CraftingMenu : Control
   {
     GD.Print("func emit");
     // change the data for the given recipe
+    itemTexture = r.Icon.Texture;
+    skillType = r.skillType;
+    skillValue = r.skillValue;
     materialSlotOne.Texture = r.materialTexture1;
     materialSlotTwo.Texture = r.materialTexture2;
     MatOneLabel.Text = r.materialName1;
@@ -99,9 +109,27 @@ public partial class CraftingMenu : Control
 
   private void OnCrafterPressed()
   {
-    player = GetTree().GetFirstNodeInGroup("Player") as Player;
-    GD.Print("Crafting Button Pushed", player);
-    // if (player)
+    Player player = GetParent().GetParent().GetParent() as Player; // Messy but couldnt get other ways to work.
+    GD.Print("Crafting Button Pushed", player, player.currentCoins);
+    int cost;
+    bool sufficient = int.TryParse(MatOneCost.Text, out cost);
+    if (player.currentCoins >= cost)
+    {
+      player.currentCoins -= cost;
+      GD.Print("Tool crafted and equipped!");
+      player.ui.CurrentItem.Texture = itemTexture;
+      if (skillType == Blueprint.ItemType.Pickaxe) // Messy
+      {
+        GD.Print($"Mining skill before tool equipped: {player.stats.mining}");
+        player.stats.mining += skillValue;
+        GD.Print($"Mining skill after tool equipped: {player.stats.mining}");
+      }
+      
+    }
+    else
+    {
+      GD.Print("Insufficient Resources");
+    }
   }
 
   private void OnClosePressed() => ToggleVisable();

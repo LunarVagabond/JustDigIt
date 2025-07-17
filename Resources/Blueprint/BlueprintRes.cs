@@ -10,6 +10,7 @@ public partial class BlueprintRes : Resource
     [Export] public  String craftItemTitle;
     [Export] public AtlasTexture craftItemTexture;
     [Export] public String craftItemDescription;
+    [Export] public int skillValue;
     [Export] public Texture2D materialTexture1;
     [Export] public Texture2D materialTexture2;
     [Export] public String materialName1;

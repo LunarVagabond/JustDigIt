@@ -12,6 +12,8 @@ public partial class Recipe : PanelContainer
   public String materialName2;
   public int materialCost1;
   public int materialCost2;
+  public int skillValue;
+  public Blueprint.ItemType skillType;
 
   public override void _Ready()
   {
