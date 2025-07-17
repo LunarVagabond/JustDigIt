@@ -12,6 +12,7 @@ public partial class CraftingMenu : Control
   private Label MatTwoLabel;
   private Label MatOneCost;
   private Label MatTwoCost;
+  private Player player;
 
   public override void _Ready()
   {
@@ -98,7 +99,9 @@ public partial class CraftingMenu : Control
 
   private void OnCrafterPressed()
   {
-    GD.Print("Crafting Button Pushed");
+    player = GetTree().GetFirstNodeInGroup("Player") as Player;
+    GD.Print("Crafting Button Pushed", player);
+    // if (player)
   }
 
   private void OnClosePressed() => ToggleVisable();

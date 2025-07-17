@@ -28,9 +28,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Blueprint" type="Area2D" node_paths=PackedStringArray("animatedSprite")]
+[node name="Blueprint" type="Area2D" node_paths=PackedStringArray("animatedSprite", "collisionShape")]
 script = ExtResource("1_x53nm")
 animatedSprite = NodePath("AnimatedSprite2D")
+collisionShape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 2

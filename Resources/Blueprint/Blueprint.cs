@@ -5,6 +5,7 @@ public partial class Blueprint : Area2D
 {
 	[Export] public BlueprintRes Item;
 	[Export] protected AnimatedSprite2D animatedSprite;
+	[Export] protected CollisionShape2D collisionShape;
 	protected GameManager gameManager;
 	protected AudioManager audioManager;
 	private const string PICKUP_ANIMATION = "Pickup";
@@ -26,6 +27,7 @@ public partial class Blueprint : Area2D
 
 	public void OnItemBodyEnter(Node2D body)
 	{
+		SetDeferred("monitoring", false); // So cannot pickup multiple times
 		gameManager.HandleBlueprintCollected(Item, body);
 		PlaySoundEffect();
 		animatedSprite.Play(PICKUP_ANIMATION);
