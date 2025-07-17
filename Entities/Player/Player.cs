@@ -13,7 +13,7 @@ public partial class Player : CharacterBody2D
 
 	public AnimState CurrentState = AnimState.Idle;
 	public UserInterface ui;
-	private MiningRig miningRig;
+	public MiningRig miningRig;
 	public bool poisoned = false;
 	public float OxygenLossRate = 1.0f;
 	float drain;

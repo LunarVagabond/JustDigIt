@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://cyp4fsfx3kw3k"]
+
+[ext_resource type="Script" uid="uid://cb7j5pypbh3sr" path="res://Entities/Interactables/Tools/Pickaxe.cs" id="1_adpih"]
+[ext_resource type="Texture2D" uid="uid://b2f1gs280syl2" path="res://Assets/Sprites/gamer247_pixil-frame-0 (5).png" id="2_kbhvq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uiplb"]
+atlas = ExtResource("2_kbhvq")
+region = Rect2(180, 60, 105, 105)
+
+[node name="Pickaxe" type="Node2D"]
+script = ExtResource("1_adpih")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_uiplb")
