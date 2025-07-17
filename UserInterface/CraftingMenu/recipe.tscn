@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://c5uuyd03ru5xc"]
+
+[ext_resource type="StyleBox" uid="uid://btcgqvfpj1bbb" path="res://Assets/StyleBoxes/BorderedBox.tres" id="1_enoxq"]
+[ext_resource type="FontFile" uid="uid://gc7kn1gk7axp" path="res://Assets/Fonts/Libre/Literata/static/Literata-Bold.ttf" id="1_vu6ls"]
+[ext_resource type="FontFile" uid="uid://bgmj2a24edgt2" path="res://Assets/Fonts/Libre/Literata/static/Literata-Italic.ttf" id="2_enoxq"]
+[ext_resource type="Script" uid="uid://cx1j73xw6rplp" path="res://UserInterface/CraftingMenu/Recipe.cs" id="2_nrxel"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_e1ry6"]
+size = Vector2(50, 50)
+
+[sub_resource type="LabelSettings" id="LabelSettings_tiiwh"]
+font = ExtResource("1_vu6ls")
+
+[sub_resource type="LabelSettings" id="LabelSettings_12btc"]
+font = ExtResource("2_enoxq")
+font_size = 12
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kogo2"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+
+[node name="Recipe" type="PanelContainer"]
+theme_override_styles/panel = ExtResource("1_enoxq")
+script = ExtResource("2_nrxel")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_e1ry6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Place Holder"
+label_settings = SubResource("LabelSettings_tiiwh")
+
+[node name="Description" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "This is a simple Description of the item"
+label_settings = SubResource("LabelSettings_12btc")
+
+[node name="SelectButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_enoxq")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kogo2")
+text = "Select"
+
+[connection signal="pressed" from="HBoxContainer/SelectButton" to="." method="OnSelected"]

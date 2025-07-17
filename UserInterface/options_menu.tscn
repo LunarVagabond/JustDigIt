@@ -12,6 +12,7 @@ font_size = 64
 font = ExtResource("2_vmoy0")
 
 [node name="OptionsMenu" type="Control"]
+z_index = 5
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

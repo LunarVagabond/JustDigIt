@@ -14,6 +14,8 @@ public partial class UserInterface : CanvasLayer
 	private OptionsMenu optionsMenu;
 	private Player player;
 
+	private CraftingMenu craftingMenu;
+
 	public override void _Ready()
 	{
 		Visible = true; // Most scenes we will hide this in the engine but we do want it in the game to show up
@@ -26,8 +28,10 @@ public partial class UserInterface : CanvasLayer
 		DialogAreaPanel = GetNodeOrNull<PanelContainer>("%DialogAreaPanel");
 		darknessEffect = GetNode<DarknessEffect>("DarknessEffect");
 		optionsMenu = GetNode<OptionsMenu>("MarginContainer/VMainContainer/CenterScreenContainer/OptionsMenu");
+		craftingMenu = GetNode<CraftingMenu>("MarginContainer/CraftingMenu");
 		player = GetParent() as Player;
 
+		craftingMenu.Visible = false;
 		optionsMenu.Visible = false;
 		darknessEffect.Visible = true;
 		DialogAreaPanel.Visible = false;
@@ -41,6 +45,7 @@ public partial class UserInterface : CanvasLayer
 	public override void _Input(InputEvent @event)
 	{
 		if (@event.IsActionPressed(IA.MENU_TOGGLE)) optionsMenu.ToggleVisable();
+		if (@event.IsActionPressed(IA.CRAFTING_TOGGLE)) craftingMenu.ToggleVisable();
 	}
 
 
@@ -87,4 +92,6 @@ public partial class UserInterface : CanvasLayer
 		};
 	}
 
+	// TODO: We can / should have some grand function that dictates why UI is visable when other UI is shown / hidden 
+	// For example when the Crafting menu is open we should hide the Oxygen / Energy bars
 }

@@ -11,6 +11,7 @@ public partial class AudioManager : Node
 
     public override void _Ready()
     {
+        ProcessMode = ProcessModeEnum.Always;
         _musicPlayer = GetNode<AudioStreamPlayer>("MusicPlayer");
 
         // Collect SFX players by naming convention
