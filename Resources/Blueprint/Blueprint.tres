@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="BlueprintRes" load_steps=3 format=3 uid="uid://upunow2ju80s"]
+
+[ext_resource type="AudioStream" uid="uid://b3u8aspxprofe" path="res://Assets/SFX/coin.wav" id="1_vlqhg"]
+[ext_resource type="Script" uid="uid://c24fohp5piudm" path="res://Resources/Blueprint/BlueprintRes.cs" id="2_rxld1"]
+
+[resource]
+script = ExtResource("2_rxld1")
+SoundEffect = ExtResource("1_vlqhg")
+itemType = 0
+craftItemTitle = ""
+craftItemDescription = ""
+materialName1 = ""
+materialName2 = ""
+materialCost1 = 0
+materialCost2 = 0
+metadata/_custom_type_script = "uid://c24fohp5piudm"

@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://bdu5o87ga80ob"]
+
+[ext_resource type="Texture2D" uid="uid://dlsci073dt1po" path="res://Assets/Sprites/nyknck/magic_book_nyknck/LS001.png" id="1_umoxk"]
+[ext_resource type="Script" uid="uid://disfqjb8jmsqg" path="res://Resources/Blueprint/Blueprint.cs" id="1_x53nm"]
+[ext_resource type="Texture2D" uid="uid://bevrendl1vrwt" path="res://Assets/Sprites/nyknck/magic_book_nyknck/LS002.png" id="2_x53nm"]
+[ext_resource type="Texture2D" uid="uid://bnu04f07v1agh" path="res://Assets/Sprites/nyknck/magic_book_nyknck/LS003.png" id="3_6l735"]
+[ext_resource type="Texture2D" uid="uid://dmh8ifjyulwq2" path="res://Assets/Sprites/nyknck/magic_book_nyknck/LS004.png" id="4_hll4x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uy56m"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ys8di"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_umoxk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_x53nm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6l735")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hll4x")
+}],
+"loop": false,
+"name": &"Pickup",
+"speed": 5.0
+}]
+
+[node name="Blueprint" type="Area2D" node_paths=PackedStringArray("animatedSprite")]
+script = ExtResource("1_x53nm")
+animatedSprite = NodePath("AnimatedSprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 2
+visibility_layer = 4
+shape = SubResource("CircleShape2D_uy56m")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ys8di")
+animation = &"Pickup"

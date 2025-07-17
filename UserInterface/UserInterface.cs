@@ -14,7 +14,7 @@ public partial class UserInterface : CanvasLayer
 	private OptionsMenu optionsMenu;
 	private Player player;
 
-	private CraftingMenu craftingMenu;
+	public CraftingMenu craftingMenu;
 
 	public override void _Ready()
 	{

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfwk34k62qymf"]
+
+[ext_resource type="PackedScene" uid="uid://bdu5o87ga80ob" path="res://Resources/Blueprint/blueprint.tscn" id="1_4ghtc"]
+
+[node name="Ladder" instance=ExtResource("1_4ghtc")]

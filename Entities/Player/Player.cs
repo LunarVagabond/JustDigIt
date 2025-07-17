@@ -57,6 +57,7 @@ public partial class Player : CharacterBody2D
 		poisonTimer.Timeout += HandlePoisonTimeout;
 
 		gameManager.player = this; // Set player in game manger once the player dictates it's ready
+		gameManager.ui = ui;
 	}
 
 	public override void _PhysicsProcess(double delta)

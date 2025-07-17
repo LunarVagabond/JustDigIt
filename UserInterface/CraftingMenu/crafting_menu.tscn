@@ -112,6 +112,13 @@ text = "Mat 1"
 label_settings = SubResource("LabelSettings_kg5mr")
 horizontal_alignment = 1
 
+[node name="MatOneCost" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/MenuHLayout/RightSidePanel/Blueprint/VBoxContainer/CenterContainer/MaterialsNeeded/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Mat 1 Cost"
+label_settings = SubResource("LabelSettings_kg5mr")
+horizontal_alignment = 1
+
 [node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/MenuHLayout/RightSidePanel/Blueprint/VBoxContainer/CenterContainer/MaterialsNeeded"]
 layout_mode = 2
 
@@ -125,6 +132,13 @@ texture = SubResource("PlaceholderTexture2D_pcyxw")
 unique_name_in_owner = true
 layout_mode = 2
 text = "Mat 2"
+label_settings = SubResource("LabelSettings_pcyxw")
+horizontal_alignment = 1
+
+[node name="MatTwoCost" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/MenuHLayout/RightSidePanel/Blueprint/VBoxContainer/CenterContainer/MaterialsNeeded/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Mat 2 Cost"
 label_settings = SubResource("LabelSettings_pcyxw")
 horizontal_alignment = 1
 
