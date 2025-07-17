@@ -58,12 +58,15 @@ public partial class CraftingMenu : Control
   {
     GD.Print("func emit");
     // change the data for the given recipe
-    materialSlotOne = r.materialTexture1;
-
+    materialSlotOne.Texture = r.materialTexture1;
+    materialSlotTwo.Texture = r.materialTexture2;
+    MatOneLabel.Text = r.materialName1;
+    MatTwoLabel.Text = r.materialName2;
+    MatOneCost.Text = $"{r.materialCost1}";
+    MatTwoCost.Text = $"{r.materialCost2}";
+    // Display current recipe in crafting menu
     materialSlotOne.Show();
     materialSlotTwo.Show();
-    MatOneLabel.Text = "Item Name One";
-    MatTwoLabel.Text = "Item Name Two";
     MatOneLabel.Show();
     MatTwoLabel.Show();
     MatOneCost.Show();
