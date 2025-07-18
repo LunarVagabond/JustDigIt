@@ -50,6 +50,7 @@ layout_mode = 2
 layout_mode = 2
 text = "Settings"
 label_settings = SubResource("LabelSettings_gud16")
+horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -131,6 +132,7 @@ size_flags_vertical = 3
 layout_mode = 2
 text = "Buttons"
 label_settings = SubResource("LabelSettings_gud16")
+horizontal_alignment = 1
 
 [node name="HSeparator3" type="HSeparator" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings"]
 layout_mode = 2
@@ -217,6 +219,6 @@ text = "Dig"
 
 [node name="Label2" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings/Grapple5"]
 layout_mode = 2
-text = "RMB"
+text = "LMB"
 
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="OnClosePressed"]
