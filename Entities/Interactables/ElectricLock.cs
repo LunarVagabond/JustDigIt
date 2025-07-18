@@ -24,7 +24,14 @@ public partial class ElectricLock : Area2D
 	{
 		if (@event.IsActionPressed(IA.INTERACT) && isOverlapping)
 		{
-			OpenLock();
+			if (player.levelKey)
+			{
+				OpenLock();
+			}
+			else
+			{
+				GD.Print("Door still locked");
+			}
 		}
 	}
 

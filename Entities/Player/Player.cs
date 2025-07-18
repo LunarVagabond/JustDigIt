@@ -23,10 +23,11 @@ public partial class Player : CharacterBody2D
 	public int currentCoins;
 	public float currentOxygen;
 	public float currentEnergy;
+	public bool levelKey = false; // prob needs an array in stats for all level keys?
 
 	public bool MiningRigEnabled = false;
 
-	private GameManager gameManager;
+	public GameManager gameManager;
 
 
 	[Export]

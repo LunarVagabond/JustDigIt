@@ -6,7 +6,7 @@ using IA = CustomInputActions.InputActions;
 public partial class MiningRig : Node2D
 {
 	[Signal]
-	public delegate void TileRemovedEventHandler(Vector2 rigLocation, float coinProbability);
+	public delegate void TileRemovedEventHandler(Vector2 rigLocation, float coinProbability, int sourceID);
 
 	private int miningRadius = 21;
 	private int miningRadiusYOffset = -16;
@@ -19,6 +19,7 @@ public partial class MiningRig : Node2D
 	private Godot.Collections.Array<float> coinProbability = [];
 	private AudioManager audioManager;
 	private AudioStream miningSFX = GD.Load<AudioStream>("res://Assets/SFX/weapon-axe-hit-01-153372.mp3");
+	// public readonly PackedScene key = ResourceLoader.Load<PackedScene>("res://Entities/Interactables/hidden_room_key.tscn");
 	public VFXManager vfxManager;
 	private float hazardProbability = 0.8f;
 
@@ -63,7 +64,7 @@ public partial class MiningRig : Node2D
 				audioManager.PlaySfx(miningSFX);
 				level.SetCell(tile, -1); // deletes tile at layer 2 and pos
 				int index = crackedTiles.IndexOf(tile);
-				EmitSignal(SignalName.TileRemoved, miningTarget.GlobalPosition, coinProbability[index]);
+				EmitSignal(SignalName.TileRemoved, miningTarget.GlobalPosition, coinProbability[index], 0); // hard coded last variable
 				crackedTiles.RemoveAt(index);
 				coinProbability.RemoveAt(index);
 			}
@@ -82,6 +83,12 @@ public partial class MiningRig : Node2D
 					coinProbability.Add(probability);
 					audioManager.PlaySfx(miningSFX);
 					// GD.Print($"{crackedTiles.Count} -- {probability} -- {atlasCoord}");
+				}
+				else if (sourceID == 1)
+				{
+					audioManager.PlaySfx(miningSFX);
+					level.SetCell(tile, -1);
+					EmitSignal(SignalName.TileRemoved, miningTarget.GlobalPosition, 0.0, 1);
 				}
 			}
 		}
@@ -123,12 +130,20 @@ public partial class MiningRig : Node2D
 	}
 
 
-	private void HandleTileRemoved(Vector2 targetLocation, float probability)
+	private void HandleTileRemoved(Vector2 targetLocation, float probability, int sourceID)
 	{
 		// GD.Print($"{targetLocation} -- {probability}");
 		Random rnd = new Random();
 		float roll = (float)rnd.NextDouble();
-		if (roll < probability)
+		if (sourceID == 1) // for key generation
+		{
+			GD.Print("Hidden Room key revealed!");
+			vfxManager.SpawnKey(targetLocation);
+			// Key hiddenRoomKey = key.Instantiate<Key>();
+			// newPickup.GlobalPosition = spawnLocation;
+			// AddChild(newPickup);
+		}
+		else if (roll < probability)
 		{
 			// vfxManager.SpawnCoin(targetLocation);
 			vfxManager.SpawnPickup(targetLocation, Pickup.ItemType.Coin); // Fix loose string, make enum
