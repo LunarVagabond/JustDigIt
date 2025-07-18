@@ -1,9 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://xs1miss75ng5"]
+[gd_scene load_steps=5 format=3 uid="uid://xs1miss75ng5"]
 
 [ext_resource type="Script" uid="uid://x7a1gkvi7b8n" path="res://Shared/TextPopper.cs" id="1_5u8x5"]
+[ext_resource type="FontFile" uid="uid://gc7kn1gk7axp" path="res://Assets/Fonts/Libre/Literata/static/Literata-Bold.ttf" id="2_npp1h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qcwo3"]
 radius = 28.0179
+
+[sub_resource type="LabelSettings" id="LabelSettings_0geud"]
+font = ExtResource("2_npp1h")
+font_color = Color(1, 0.419608, 0.419608, 1)
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 1)
 
 [node name="TextPopper" type="Area2D"]
 collision_layer = 2
@@ -13,4 +21,14 @@ script = ExtResource("1_5u8x5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qcwo3")
 
+[node name="InteractLabel" type="Label" parent="."]
+offset_left = -19.0
+offset_top = -45.0
+offset_right = 21.0
+offset_bottom = -21.0
+text = "E"
+label_settings = SubResource("LabelSettings_0geud")
+horizontal_alignment = 1
+
 [connection signal="body_entered" from="." to="." method="OnPlayerEntered"]
+[connection signal="body_exited" from="." to="." method="OnPlayerExit"]
