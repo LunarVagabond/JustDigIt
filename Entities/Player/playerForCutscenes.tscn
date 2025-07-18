@@ -254,12 +254,11 @@ animations = [{
 radius = 2.5
 height = 5.0
 
-[node name="PlayerForCutScene" type="CharacterBody2D" node_paths=PackedStringArray("poisonTimer")]
+[node name="PlayerForCutScene" type="CharacterBody2D"]
 scale = Vector2(1.2, 1.2)
 collision_layer = 4
 floor_max_angle = 1.39626
 script = ExtResource("1_fcyx7")
-poisonTimer = NodePath("")
 stats = SubResource("Resource_lub02")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
