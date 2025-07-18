@@ -6,16 +6,19 @@ public partial class ElectricLock : Area2D
 {
 	private Label InteractButtonLabel;
 	private Player player;
-	private TileMapLayer background;
+	private TileMapLayer hiddenRoom;
+	private TileMapLayer hiddenRoomCovering;
 
 	private bool isOverlapping = false; // FIXME: this is a messy way of doing this but hey it works for now
 
 	public override void _Ready()
 	{
-		background = GetNodeOrNull<TileMapLayer>("/root/LevelOne/Background"); // FIXME: dynamically select level
+		hiddenRoom = GetNodeOrNull<TileMapLayer>("/root/LevelOne/HiddenRoom"); // FIXME: dynamically select level
+		hiddenRoomCovering = GetNodeOrNull<TileMapLayer>("/root/LevelOne/HiddenRoomCovering");
 		InteractButtonLabel = GetNode<Label>("InteractionLabel");
 		InteractButtonLabel.Visible = false;
 		BodyEntered += OnBodyEntered;
+		Visible = false;
 	}
 	public override void _UnhandledInput(InputEvent @event)
 	{
@@ -33,7 +36,8 @@ public partial class ElectricLock : Area2D
 			player = body as Player;
 			InteractButtonLabel.Visible = true;
 			isOverlapping = true;
-			GD.Print(player, InteractButtonLabel.Visible, isOverlapping);
+			Visible = true;
+			// GD.Print(player, InteractButtonLabel.Visible, isOverlapping);
 		}
 	}
 	private void OnBodyExited(Node2D body)
@@ -47,9 +51,10 @@ public partial class ElectricLock : Area2D
 		GD.Print("Lock opened!");
 
 		// For now, manually designated doors to open
-		background.SetCell(new Vector2I(9, 12), 4, new Vector2I(4, 10), 1);
-		background.SetCell(new Vector2I(9, 13), 4, new Vector2I(4, 11), 1);
+		hiddenRoom.SetCell(new Vector2I(9, 12), 4, new Vector2I(4, 10), 1);
+		hiddenRoom.SetCell(new Vector2I(9, 13), 4, new Vector2I(4, 11), 1);
 		// background.SetCell(new Vector2I(9, 12), -1);
 		// background.SetCell(new Vector2I(9, 13), -1);
+		hiddenRoomCovering.QueueFree(); // Make Hidden Room fully visible
 	}
 }

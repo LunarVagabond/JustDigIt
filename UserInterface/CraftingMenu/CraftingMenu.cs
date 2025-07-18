@@ -91,7 +91,7 @@ public partial class CraftingMenu : Control
     {
       Visible = false;
       GetTree().Paused = false;
-      Input.MouseMode = Input.MouseModeEnum.Captured;
+      Input.MouseMode = Input.MouseModeEnum.ConfinedHidden;
     }
     else
     {

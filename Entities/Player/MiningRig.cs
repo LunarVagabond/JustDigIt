@@ -92,6 +92,7 @@ public partial class MiningRig : Node2D
 		float probability = tile switch
 		{
 			// TODO: These float values should prob be an enum
+			Vector2I(1, 3) => 0.0f, // for hidden room edge
 			Vector2I(7, 16) => 0.1f,
 			Vector2I(13, 16) => 0.15f,
 			Vector2I(21, 16) => 0.2f,
