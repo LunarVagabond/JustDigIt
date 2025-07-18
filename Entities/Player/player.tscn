@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://btsexkhcceg6k"]
+[gd_scene load_steps=44 format=3 uid="uid://btsexkhcceg6k"]
 
 [ext_resource type="Script" uid="uid://x1tbk0to6k02" path="res://Entities/Player/Player.cs" id="1_lu8i8"]
 [ext_resource type="Texture2D" uid="uid://drvnbq0kadr1c" path="res://Assets/Sprites/Owlet_Monster/Owlet_Monster_Idle_4.png" id="2_5c2io"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dipw064j485kr" path="res://Entities/Player/mining_rig.tscn" id="4_tekja"]
 [ext_resource type="PackedScene" uid="uid://g0a6qdusewav" path="res://UserInterface/user_interface.tscn" id="5_5c2io"]
 [ext_resource type="Texture2D" uid="uid://bffmvrtvld67y" path="res://Assets/Sprites/Owlet_Monster/Owlet_Monster_Jump_8.png" id="5_x1y6q"]
+[ext_resource type="PackedScene" uid="uid://dguj0lo4n5d70" path="res://Entities/Interactables/Tools/grappling_hook.tscn" id="10_x1y6q"]
 
 [sub_resource type="Resource" id="Resource_lub02"]
 script = ExtResource("2_lub02")
@@ -287,3 +288,6 @@ position = Vector2(2, 3)
 visible = false
 
 [node name="PoisonTimer" type="Timer" parent="."]
+
+[node name="GrapplingHook" parent="." instance=ExtResource("10_x1y6q")]
+position = Vector2(10.8333, -9.16667)

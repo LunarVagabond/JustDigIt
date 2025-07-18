@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://1muwcng6f8xs" path="res://Assets/TileSets/GandalfHardcore FREE Platformer Assets/Floor Tiles1.png" id="6_5qtdj"]
 [ext_resource type="Texture2D" uid="uid://cbvn5guoiaxh0" path="res://Assets/TileSets/GandalfHardcore FREE Platformer Assets/Pixel Art Furnace and Sawmill.png" id="6_lppee"]
 [ext_resource type="PackedScene" uid="uid://btsexkhcceg6k" path="res://Entities/Player/player.tscn" id="7_0t5yc"]
-[ext_resource type="PackedScene" path="res://Shared/text_popper.tscn" id="9_mdlls"]
+[ext_resource type="PackedScene" uid="uid://xs1miss75ng5" path="res://Shared/text_popper.tscn" id="9_mdlls"]
 [ext_resource type="PackedScene" uid="uid://dsb7x65mdcwh7" path="res://Entities/Interactables/Passageway/passageway_down.tscn" id="10_5qtdj"]
 [ext_resource type="PackedScene" path="res://Shared/world_boundry.tscn" id="10_f2pec"]
 [ext_resource type="PackedScene" uid="uid://dgmw8rnsanxfm" path="res://Entities/Interactables/Coin/coin.tscn" id="12_0gd17"]

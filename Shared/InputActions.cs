@@ -22,6 +22,7 @@ namespace CustomInputActions
     public const string TOGGLE_MOUSE_VISIBILITY = "toggle_mouse_visibility";
     public const string TURN_LAMP_UP = "increase_light";
     public const string TURN_LAMP_DOWN = "decrease_light";
+    public const string FIRE_GRAPPLING_HOOK = "fire_grappling_hook";
     #endregion
 
     #region UI

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b024cluicgqqj" path="res://Entities/Interactables/ElectricLock.cs" id="1_0c4m0"]
 [ext_resource type="Texture2D" uid="uid://dpr3n52kdnm66" path="res://Assets/TileSets/Side_Scroll_Shooter_Tileset/Assets/Buildings.png" id="1_pfi8c"]
-[ext_resource type="PackedScene" path="res://Shared/text_popper.tscn" id="3_q16vb"]
+[ext_resource type="PackedScene" uid="uid://xs1miss75ng5" path="res://Shared/text_popper.tscn" id="3_q16vb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0c4m0"]
 atlas = ExtResource("1_pfi8c")
@@ -43,3 +43,5 @@ vertical_alignment = 1
 [node name="TextPopper" parent="." instance=ExtResource("3_q16vb")]
 DialogToShow = "What's in here? I need to find a way to unlock this door..."
 TimeToShow = 3.0
+
+[editable path="TextPopper"]

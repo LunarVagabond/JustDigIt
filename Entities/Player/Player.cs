@@ -1,3 +1,4 @@
+using System;
 using System.Transactions;
 using Godot;
 using IA = CustomInputActions.InputActions;
@@ -113,6 +114,8 @@ public partial class Player : CharacterBody2D
 		// Loose Oxygen & Energy / Update Depth & Coins
 		// currentCoins handled bu PickupCollected event in GameManager
 		// if (poisoned) currentOxygen -= (float)ui.OxygenBar.Step * PoisonEffect;
+		OxygenLossRate = MathF.Round(currentDepth / 10.0f, 1); // Can play around with this
+		GD.Print($"Current rate of oxygen loss {OxygenLossRate}");
 		if (poisoned) drain = OxygenLossRate * PoisonEffect; // This is prob overcomplicated, but my brain hurts
 		currentOxygen -= (float)ui.OxygenBar.Step * drain;
 		currentDepth = miningRig.level.LocalToMap(GlobalPosition).Y + depthOffset;

@@ -1828,5 +1828,4 @@ Item = SubResource("Resource_xs6u6")
 position = Vector2(-101, -10)
 
 [node name="ElectricLock" parent="." instance=ExtResource("15_7rx5l")]
-visible = false
 position = Vector2(136, 216)
