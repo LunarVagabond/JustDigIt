@@ -34,10 +34,10 @@ layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 10
+theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
@@ -119,5 +119,104 @@ layout_mode = 2
 text = "100%"
 alignment = 1
 max_length = 4
+
+[node name="HSeparator2" type="HSeparator" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ButtonMappings" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label2" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings"]
+layout_mode = 2
+text = "Buttons"
+label_settings = SubResource("LabelSettings_gud16")
+
+[node name="HSeparator3" type="HSeparator" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings"]
+layout_mode = 2
+
+[node name="MovementButton" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings/MovementButton"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Move Left / Right"
+
+[node name="Label2" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings/MovementButton"]
+layout_mode = 2
+text = "A / D"
+
+[node name="JumpButton" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings/JumpButton"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Jump"
+
+[node name="Label2" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings/JumpButton"]
+layout_mode = 2
+text = "Space"
+
+[node name="Grapple" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings/Grapple"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Return to Homestead"
+
+[node name="Label2" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings/Grapple"]
+layout_mode = 2
+text = "F"
+
+[node name="Grapple2" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings/Grapple2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Interact"
+
+[node name="Label2" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings/Grapple2"]
+layout_mode = 2
+text = "E"
+
+[node name="Grapple3" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings/Grapple3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Crafting "
+
+[node name="Label2" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings/Grapple3"]
+layout_mode = 2
+text = "I"
+
+[node name="Grapple4" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings/Grapple4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Light Usage"
+
+[node name="Label2" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings/Grapple4"]
+layout_mode = 2
+text = "Up / Down Arrow"
+
+[node name="Grapple5" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings/Grapple5"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Dig"
+
+[node name="Label2" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMappings/Grapple5"]
+layout_mode = 2
+text = "RMB"
 
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="OnClosePressed"]
