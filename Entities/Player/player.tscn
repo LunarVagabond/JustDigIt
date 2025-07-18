@@ -291,3 +291,4 @@ visible = false
 
 [node name="GrapplingHook" parent="." instance=ExtResource("10_x1y6q")]
 position = Vector2(10.8333, -9.16667)
+NextLevel = "uid://cjg683kf64875"

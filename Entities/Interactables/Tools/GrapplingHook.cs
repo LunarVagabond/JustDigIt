@@ -6,6 +6,9 @@ public partial class GrapplingHook : Node2D
 {
 	AnimationPlayer animationPlayer;
 	private const string FIRE_ANIMATION = "Fire";
+	private SceneTransition sceneTransition => GetNodeOrNull<SceneTransition>("/root/SceneTransition");
+
+	[Export(PropertyHint.File, "*.tscn")] private string NextLevel;
 
 	public override void _Ready()
 	{
@@ -26,6 +29,7 @@ public partial class GrapplingHook : Node2D
 	private void OnAnimationFinished(StringName name)
 	{
 		Visible = false;
+		sceneTransition.ChangeScene(NextLevel);
 	}
 
 }
