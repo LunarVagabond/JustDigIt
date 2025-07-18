@@ -1,8 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bf71dk8g2hkji"]
+[gd_scene load_steps=3 format=3 uid="uid://xs1miss75ng5"]
 
 [ext_resource type="Script" uid="uid://x7a1gkvi7b8n" path="res://Shared/TextPopper.cs" id="1_5u8x5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qcwo3"]
+radius = 28.0179
 
 [node name="TextPopper" type="Area2D"]
 collision_layer = 2

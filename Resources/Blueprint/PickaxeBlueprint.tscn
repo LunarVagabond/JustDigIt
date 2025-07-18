@@ -25,8 +25,8 @@ SoundEffect = ExtResource("2_ebhr7")
 craftItem = 1
 craftItemTitle = "Pickaxe"
 craftItemTexture = SubResource("AtlasTexture_5xwib")
-craftItemDescription = "+3 Mining Skill"
-skillValue = 3
+craftItemDescription = "+1 Mining Skill"
+skillValue = 1
 materialTexture1 = SubResource("AtlasTexture_pgvch")
 materialTexture2 = SubResource("AtlasTexture_rpbvj")
 materialName1 = "Coin"
@@ -39,3 +39,7 @@ metadata/_custom_type_script = "uid://c24fohp5piudm"
 collision_layer = 2
 collision_mask = 4
 Item = SubResource("Resource_0s7y0")
+
+[node name="TextPopper" parent="." index="2"]
+DialogToShow = "PickAxe Blueprint"
+TimeToShow = 3.0
