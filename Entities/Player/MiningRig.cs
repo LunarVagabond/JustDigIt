@@ -8,9 +8,9 @@ public partial class MiningRig : Node2D
 	[Signal]
 	public delegate void TileRemovedEventHandler(Vector2 rigLocation, float coinProbability, int sourceID);
 
-	private int miningRadius = 21;
+	private int miningRadius = 20;
 	private int miningRadiusYOffset = -16;
-	private int miningRadiusXOffset = 1;
+	private int miningRadiusXOffset = 2;
 	private float MouseSensitivity = 2.0f;
 	private MeshInstance2D miningTarget;
 	public TileMapLayer level;
