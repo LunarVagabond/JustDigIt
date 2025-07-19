@@ -25,6 +25,7 @@ public partial class Player : CharacterBody2D
 	public float currentOxygen;
 	public float currentEnergy;
 	public bool levelKey = false; // prob needs an array in stats for all level keys?
+	public bool roomOpened = false;
 	public bool beenToLevelOne = false;
 
 	public bool MiningRigEnabled = false;
@@ -156,6 +157,7 @@ public partial class Player : CharacterBody2D
 			// { "PosY", Position.Y },
 			{ "currentCoins", currentCoins },
 			{ "levelKey", levelKey },
+			{ "roomOpened", roomOpened },
 			{ "beenToLevelOne", beenToLevelOne}
 		};
 	}
@@ -177,9 +179,9 @@ public partial class Player : CharacterBody2D
 			if (level is not null) gameManager.LoadPlayer(level, "LevelOne"); // hard code for now?
 																			  // GD.Print(level, level.Name);
 																			  // GD.Print("Attempting to load Player...");
-			if (levelKey && level.Name == "LevelOne")
+			if (roomOpened && level.Name == "LevelOne")
 			{
-				hiddenRoomCovering.QueueFree();
+				hiddenRoomCovering.Visible = false;
 				hiddenRoom.SetCell(new Vector2I(9, 12), 4, new Vector2I(4, 10), 1);
 				hiddenRoom.SetCell(new Vector2I(9, 13), 4, new Vector2I(4, 11), 1);
 			}

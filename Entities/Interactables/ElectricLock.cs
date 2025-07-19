@@ -62,6 +62,7 @@ public partial class ElectricLock : Area2D
 		hiddenRoom.SetCell(new Vector2I(9, 13), 4, new Vector2I(4, 11), 1);
 		// background.SetCell(new Vector2I(9, 12), -1);
 		// background.SetCell(new Vector2I(9, 13), -1);
-		hiddenRoomCovering.QueueFree(); // Make Hidden Room fully visible
+		hiddenRoomCovering.Visible = false; // Make Hidden Room fully visible
+		player.roomOpened = true;
 	}
 }
