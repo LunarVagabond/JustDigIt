@@ -30,16 +30,19 @@ public partial class UserInterface : CanvasLayer
 		optionsMenu = GetNode<OptionsMenu>("MarginContainer/VMainContainer/CenterScreenContainer/OptionsMenu");
 		craftingMenu = GetNode<CraftingMenu>("MarginContainer/CraftingMenu");
 		player = GetParent() as Player;
-
+		
 		craftingMenu.Visible = false;
 		optionsMenu.Visible = false;
 		darknessEffect.Visible = true;
 		DialogAreaPanel.Visible = false;
 
-		// Set Initial Values
-		OxygenBar.Value = player.stats.oxygen;
-		LightBar.Value = player.stats.energy;
-		GoldCountLabel.Text = $"{player.stats.coins}";
+		// // Set Initial Values
+		// OxygenBar.Value = player.stats.maxOxygen;
+		// LightBar.Value = player.stats.maxEnergy; // can change this to saved energy
+		// GoldCountLabel.Text = $"{player.currentCoins}";
+		// DepthLevelLabel.Text = "Depth: Surface";
+
+		player.PlayerLoaded += SetInitialDisplayValues;
 	}
 
 	public override void _Input(InputEvent @event)
@@ -92,6 +95,15 @@ public partial class UserInterface : CanvasLayer
 		};
 	}
 
+	public void SetInitialDisplayValues()
+	{
+		// Set Initial Values
+		player = GetParent() as Player;
+		OxygenBar.Value = player.stats.maxOxygen;
+		LightBar.Value = player.stats.maxEnergy; // can change this to saved energy
+		GoldCountLabel.Text = $"{player.currentCoins}";
+		DepthLevelLabel.Text = "Depth: Surface";
+	}
 	// TODO: We can / should have some grand function that dictates why UI is visable when other UI is shown / hidden 
 	// For example when the Crafting menu is open we should hide the Oxygen / Energy bars
 }

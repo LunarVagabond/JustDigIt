@@ -25,16 +25,20 @@ public partial class Player : CharacterBody2D
 	public float currentOxygen;
 	public float currentEnergy;
 	public bool levelKey = false; // prob needs an array in stats for all level keys?
+	public bool beenToLevelOne = false;
 
 	public bool MiningRigEnabled = false;
 
 	public GameManager gameManager;
+	public bool loaded = false;
 
 
 	[Export]
 	public Timer poisonTimer;
 	[Export]
 	public CharacterStats stats;
+
+	[Signal] public delegate void PlayerLoadedEventHandler();
 
 	public override void _Ready()
 	{
@@ -47,11 +51,16 @@ public partial class Player : CharacterBody2D
 		ui = GetNode<UserInterface>("UI");
 		miningRig = GetNode<MiningRig>("MiningRig");
 
+		// if (!beenToLevelOne)
+		// {
+		// 	currentCoins = stats.coins;
+		// }
+
 		// Set current stat values
 		currentDepth = stats.depth;
-		currentCoins = stats.coins;
-		currentOxygen = stats.oxygen;
-		currentEnergy = stats.energy;
+		// currentCoins = stats.coins;
+		currentOxygen = stats.maxOxygen;
+		currentEnergy = stats.maxEnergy;
 		PoisonEffect = stats.PoisonEffect;
 		drain = OxygenLossRate;
 		ui.darknessEffect.UpdateDarknessLarge(GlobalPosition);
@@ -60,6 +69,8 @@ public partial class Player : CharacterBody2D
 
 		gameManager.player = this; // Set player in game manger once the player dictates it's ready
 		gameManager.ui = ui;
+
+		Ready += LoadPlayer;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -115,7 +126,7 @@ public partial class Player : CharacterBody2D
 		// currentCoins handled bu PickupCollected event in GameManager
 		// if (poisoned) currentOxygen -= (float)ui.OxygenBar.Step * PoisonEffect;
 		OxygenLossRate = MathF.Round(currentDepth / 10.0f, 1); // Can play around with this
-		// GD.Print($"Current rate of oxygen loss {OxygenLossRate}");
+															   // GD.Print($"Current rate of oxygen loss {OxygenLossRate}");
 		if (poisoned) drain = OxygenLossRate * PoisonEffect; // This is prob overcomplicated, but my brain hurts
 		currentOxygen -= (float)ui.OxygenBar.Step * drain;
 		currentDepth = miningRig.level.LocalToMap(GlobalPosition).Y + depthOffset;
@@ -127,13 +138,27 @@ public partial class Player : CharacterBody2D
 		ui.GoldCountLabel.Text = $"{currentCoins}";
 	}
 
-	private void SaveStats()
+	// private void SaveStats()
+	// {
+	// 	stats.oxygen = currentOxygen;
+	// 	stats.energy = currentEnergy;
+	// 	stats.depth = currentDepth;
+	// 	stats.coins = currentCoins;
+	// 	// other stats will be handled by CharacterStats itself, i.e. XP, player level, zone, skills, etc.
+	// }
+
+	public Godot.Collections.Dictionary<string, Variant> Save()
 	{
-		stats.oxygen = currentOxygen;
-		stats.energy = currentEnergy;
-		stats.depth = currentDepth;
-		stats.coins = currentCoins;
-		// other stats will be handled by CharacterStats itself, i.e. XP, player level, zone, skills, etc.
+		return new Godot.Collections.Dictionary<string, Variant>()
+		{
+			{ "Filename", SceneFilePath },
+			{ "Parent", GetParent().GetPath() },
+			// { "PosX", Position.X }, // Vector2 is not supported by JSON
+			// { "PosY", Position.Y },
+			{ "currentCoins", currentCoins },
+			{ "levelKey", levelKey },
+			{ "beenToLevelOne", beenToLevelOne}
+		};
 	}
 
 	private void HandlePoisonTimeout()
@@ -141,5 +166,21 @@ public partial class Player : CharacterBody2D
 		poisoned = false;
 		drain = OxygenLossRate;
 		GD.Print("Poison gone!");
+	}
+
+	private void LoadPlayer()
+	{
+		if (loaded == false)
+		{
+			GD.Print($"Current Coins before load: {currentCoins}");
+			Node2D level = GetNodeOrNull<Node2D>("/root/LevelOne");
+			if (level is null) level = GetNodeOrNull<Node2D>("/root/Homestead");
+			if (level is not null) gameManager.LoadLevel(level, "LevelOne"); // hard code for now?
+			GD.Print(level, level.Name);
+			GD.Print("Attempting to load Player...");
+			loaded = true;
+			GD.Print($"Current Coins after load: {currentCoins}");
+		}
+		EmitSignal(SignalName.PlayerLoaded);
 	}
 }

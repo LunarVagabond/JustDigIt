@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class MainMenu : Control
@@ -37,6 +38,23 @@ public partial class MainMenu : Control
 
   private void OnStartPress()
   {
+    String levelName = "LevelOne";
+    if (FileAccess.FileExists($"user://levels/{levelName}.save"))
+    {
+      using var saveFile = FileAccess.Open($"user://levels/{levelName}.save", FileAccess.ModeFlags.Write);
+      var nodeData = new Godot.Collections.Dictionary<string, Variant>()
+      {
+        { "Filename", "res://Entities/Player/player.tscn" },
+        { "Parent", "/root/LevelOne" },
+        // { "PosX", Position.X }, // Vector2 is not supported by JSON
+        // { "PosY", Position.Y },
+        { "currentCoins", 0 },
+        { "levelKey", false },
+        { "beenToLevelOne", false}
+      };
+      var jsonString = Json.Stringify(nodeData);
+      saveFile.StoreLine(jsonString);
+    }
     if (optionsMenu.Visible == true) optionsMenu.ToggleVisable();
     sceneTransition.ChangeScene(NextLevel);
   }
