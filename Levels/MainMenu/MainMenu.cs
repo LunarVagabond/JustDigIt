@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class MainMenu : Control
@@ -37,9 +38,40 @@ public partial class MainMenu : Control
 
   private void OnStartPress()
   {
+    ResetPlayer();
+    ResetLevel();
     if (optionsMenu.Visible == true) optionsMenu.ToggleVisable();
     sceneTransition.ChangeScene(NextLevel);
   }
   private void OnOptionsPress() => optionsMenu.ToggleVisable();
   private void OnExitPress() => GetTree().Quit();
+
+  private void ResetPlayer()
+  {
+    // if (FileAccess.FileExists($"user://Player/Player.save"))
+    using var saveFile = FileAccess.Open($"user://Player/Player.save", FileAccess.ModeFlags.Write);
+    var nodeData = new Godot.Collections.Dictionary<string, Variant>()
+    {
+      { "Filename", "res://Entities/Player/player.tscn" },
+      { "Parent", "/root/LevelOne" },
+      { "currentCoins", 0 },
+      { "levelKey", false },
+      { "roomOpened", false },
+      { "foundgrapplingHook", false },
+      { "beenToLevelOne", false}
+    };
+    var jsonString = Json.Stringify(nodeData);
+    saveFile.StoreLine(jsonString);
+  }
+
+  public void ResetLevel()
+  {
+    String savePath = $"user://levels/LevelOne.save";
+    if (FileAccess.FileExists(savePath))
+    {
+      GD.Print("Deleting file");
+      DirAccess.RemoveAbsolute(savePath);
+    }
+  }
+
 }

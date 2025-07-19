@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 using IA = CustomInputActions.InputActions;
 
@@ -13,6 +14,7 @@ public partial class PassagewayDown : Node2D
     private SceneTransition sceneTransition => GetNodeOrNull<SceneTransition>("/root/SceneTransition");
 
     private bool isOverlapping = false; // FIXME: this is a messy way of doing this but hey it works for now
+    private Player player;
 
     public override void _Ready()
     {
@@ -23,13 +25,16 @@ public partial class PassagewayDown : Node2D
     {
         if (@event.IsActionPressed(IA.INTERACT) && isOverlapping)
         {
-            sceneTransition.ChangeScene(NextLevel);
+            player.gameManager.SavePlayer();
+            player.gameManager.SaveLevel();
+            sceneTransition.ChangeScene(NextLevel);   
         }
     }
 
     private void OnBodyEntered(Node2D body)
     {
         InteractButtonLabel.Visible = body is Player ? true : false;
+        player = body as Player;
         isOverlapping = true;
     }
     private void OnBodyExited(Node2D body)

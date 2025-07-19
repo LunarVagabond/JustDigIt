@@ -25,16 +25,27 @@ public partial class Player : CharacterBody2D
 	public float currentOxygen;
 	public float currentEnergy;
 	public bool levelKey = false; // prob needs an array in stats for all level keys?
+	public bool roomOpened = false;
+	public bool beenToLevelOne = false;
+	public bool foundgrapplingHook = false;
 
 	public bool MiningRigEnabled = false;
 
 	public GameManager gameManager;
+	public bool loaded = false;
+	public TileMapLayer hiddenRoomCovering;
+	public TileMapLayer hiddenRoom;
+	public GrapplingHook displayGrapplingHook;
+	public Poison displayPoison;
+	public ElectricLock electricLock;
 
 
 	[Export]
 	public Timer poisonTimer;
 	[Export]
 	public CharacterStats stats;
+
+	[Signal] public delegate void PlayerLoadedEventHandler();
 
 	public override void _Ready()
 	{
@@ -46,12 +57,17 @@ public partial class Player : CharacterBody2D
 		playerSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		ui = GetNode<UserInterface>("UI");
 		miningRig = GetNode<MiningRig>("MiningRig");
+		hiddenRoomCovering = GetNodeOrNull<TileMapLayer>("/root/LevelOne/HiddenRoomCovering");
+		hiddenRoom = GetNodeOrNull<TileMapLayer>("/root/LevelOne/HiddenRoom");
+		displayGrapplingHook = GetNodeOrNull<GrapplingHook>("/root/LevelOne/GrapplingHook");
+		displayPoison = GetNodeOrNull<Poison>("/root/LevelOne/Poison");
+		electricLock = GetNodeOrNull<ElectricLock>("/root/LevelOne/ElectricLock");
 
 		// Set current stat values
 		currentDepth = stats.depth;
-		currentCoins = stats.coins;
-		currentOxygen = stats.oxygen;
-		currentEnergy = stats.energy;
+		// currentCoins = stats.coins; // unneeded, set by LoadPlayer
+		currentOxygen = stats.maxOxygen;
+		currentEnergy = stats.maxEnergy;
 		PoisonEffect = stats.PoisonEffect;
 		drain = OxygenLossRate;
 		ui.darknessEffect.UpdateDarknessLarge(GlobalPosition);
@@ -60,6 +76,8 @@ public partial class Player : CharacterBody2D
 
 		gameManager.player = this; // Set player in game manger once the player dictates it's ready
 		gameManager.ui = ui;
+
+		Ready += LoadPlayer;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -127,13 +145,20 @@ public partial class Player : CharacterBody2D
 		ui.GoldCountLabel.Text = $"{currentCoins}";
 	}
 
-	private void SaveStats()
+	public Godot.Collections.Dictionary<string, Variant> Save()
 	{
-		stats.oxygen = currentOxygen;
-		stats.energy = currentEnergy;
-		stats.depth = currentDepth;
-		stats.coins = currentCoins;
-		// other stats will be handled by CharacterStats itself, i.e. XP, player level, zone, skills, etc.
+		return new Godot.Collections.Dictionary<string, Variant>()
+		{
+			{ "Filename", SceneFilePath },
+			{ "Parent", GetParent().GetPath() },
+			// { "PosX", Position.X }, // Vector2 is not supported by JSON
+			// { "PosY", Position.Y },
+			{ "currentCoins", currentCoins },
+			{ "levelKey", levelKey },
+			{ "roomOpened", roomOpened },
+			{ "foundgrapplingHook", foundgrapplingHook },
+			{ "beenToLevelOne", beenToLevelOne}
+		};
 	}
 
 	private void HandlePoisonTimeout()
@@ -141,5 +166,28 @@ public partial class Player : CharacterBody2D
 		poisoned = false;
 		drain = OxygenLossRate;
 		GD.Print("Poison gone!");
+	}
+
+	private void LoadPlayer()
+	{
+		if (loaded == false)
+		{
+			// GD.Print($"Current Coins before load: {currentCoins}");
+			Node2D level = GetNodeOrNull<Node2D>("/root/LevelOne");
+			if (level is null) level = GetNodeOrNull<Node2D>("/root/Homestead");
+			if (level is not null) gameManager.LoadPlayer(level, "LevelOne"); // hard code for now?
+			if (roomOpened && level.Name == "LevelOne")
+			{
+				hiddenRoomCovering.Visible = false;
+				hiddenRoom.SetCell(new Vector2I(9, 12), 4, new Vector2I(4, 10), 1);
+				hiddenRoom.SetCell(new Vector2I(9, 13), 4, new Vector2I(4, 11), 1);
+				electricLock.QueueFree();
+			}
+			if (beenToLevelOne && displayPoison is not null) displayPoison.QueueFree();
+			if (foundgrapplingHook && displayGrapplingHook is not null)	displayGrapplingHook.QueueFree();
+			loaded = true;
+			// GD.Print($"Current Coins after load: {currentCoins}");
+		}
+		EmitSignal(SignalName.PlayerLoaded);
 	}
 }

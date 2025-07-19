@@ -120,9 +120,9 @@ public partial class CraftingMenu : Control
       player.ui.CurrentItem.Texture = itemTexture;
       if (skillType == Blueprint.ItemType.Pickaxe) // Messy
       {
-        GD.Print($"Mining skill before tool equipped: {player.stats.mining}");
-        player.stats.mining += skillValue;
-        GD.Print($"Mining skill after tool equipped: {player.stats.mining}");
+        GD.Print($"Mining skill before tool equipped: {player.stats.miningSkill}");
+        player.stats.miningSkill += skillValue;
+        GD.Print($"Mining skill after tool equipped: {player.stats.miningSkill}");
       }
       
     }
