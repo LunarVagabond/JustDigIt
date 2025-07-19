@@ -37,6 +37,7 @@ public partial class Player : CharacterBody2D
 	public TileMapLayer hiddenRoom;
 	public GrapplingHook displayGrapplingHook;
 	public Poison displayPoison;
+	public ElectricLock electricLock;
 
 
 	[Export]
@@ -60,6 +61,7 @@ public partial class Player : CharacterBody2D
 		hiddenRoom = GetNodeOrNull<TileMapLayer>("/root/LevelOne/HiddenRoom");
 		displayGrapplingHook = GetNodeOrNull<GrapplingHook>("/root/LevelOne/GrapplingHook");
 		displayPoison = GetNodeOrNull<Poison>("/root/LevelOne/Poison");
+		electricLock = GetNodeOrNull<ElectricLock>("/root/LevelOne/ElectricLock");
 
 		// Set current stat values
 		currentDepth = stats.depth;
@@ -190,6 +192,7 @@ public partial class Player : CharacterBody2D
 				hiddenRoomCovering.Visible = false;
 				hiddenRoom.SetCell(new Vector2I(9, 12), 4, new Vector2I(4, 10), 1);
 				hiddenRoom.SetCell(new Vector2I(9, 13), 4, new Vector2I(4, 11), 1);
+				electricLock.QueueFree();
 			}
 			if (beenToLevelOne && displayPoison is not null) displayPoison.QueueFree();
 			if (foundgrapplingHook && displayGrapplingHook is not null)	displayGrapplingHook.QueueFree();

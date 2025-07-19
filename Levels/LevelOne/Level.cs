@@ -94,7 +94,7 @@ public partial class Level : TileMapLayer
 
 		for (int i = -(int) rect.Size.X +1; i < rect.Size.X - 1; i += 1)
 		{
-			for (int k = 0; k < rect.Size.Y - 1; k += 1)
+			for (int k = -1; k < rect.Size.Y - 1; k += 1)
 			{
 				int cellID = GetCellSourceId(new Vector2I(i, k));
 				if (cellID == -1)
