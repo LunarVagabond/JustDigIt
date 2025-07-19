@@ -40,7 +40,7 @@ public partial class MainMenu : Control
   {
     // String levelName = "LevelOne";
     ResetPlayer();
-    // ResetLevel();
+    ResetLevel();
     // ResetHiddenRoom();
     if (optionsMenu.Visible == true) optionsMenu.ToggleVisable();
     sceneTransition.ChangeScene(NextLevel);
@@ -63,6 +63,17 @@ public partial class MainMenu : Control
       };
       var jsonString = Json.Stringify(nodeData);
       saveFile.StoreLine(jsonString);
+    }
+  }
+
+  public void ResetLevel()
+  {
+    String savePath = $"user://levels/LevelOne.save";
+    // if (ResourceLoader.Exists(savePath))
+    if (FileAccess.FileExists(savePath))
+    {
+      GD.Print("Deleting file");
+      DirAccess.RemoveAbsolute(savePath);
     }
   }
 

@@ -61,7 +61,7 @@ public partial class Level : TileMapLayer
 
 			Node2D level = GetNodeOrNull<Node2D>("/root/LevelOne");
 			// if (level is null) level = GetNodeOrNull<Node2D>("/root/Homestead");
-			if (level is not null)
+			if (level is not null && FileAccess.FileExists($"user://levels/{level.Name}.save"))
 			{
 				GD.Print("=====================");
 				GD.Print(level, level.Name);
@@ -92,7 +92,7 @@ public partial class Level : TileMapLayer
 		emptyCellsY = [];
 		// emptyCellsSave = [];
 
-		for (int i = 0; i < rect.Size.X - 1; i += 1)
+		for (int i = -(int) rect.Size.X +1; i < rect.Size.X - 1; i += 1)
 		{
 			for (int k = 0; k < rect.Size.Y - 1; k += 1)
 			{
