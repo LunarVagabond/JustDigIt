@@ -27,6 +27,7 @@ public partial class Player : CharacterBody2D
 	public bool levelKey = false; // prob needs an array in stats for all level keys?
 	public bool roomOpened = false;
 	public bool beenToLevelOne = false;
+	public bool foundgrapplingHook = false;
 
 	public bool MiningRigEnabled = false;
 
@@ -162,6 +163,7 @@ public partial class Player : CharacterBody2D
 			{ "currentCoins", currentCoins },
 			{ "levelKey", levelKey },
 			{ "roomOpened", roomOpened },
+			{ "foundgrapplingHook", foundgrapplingHook },
 			{ "beenToLevelOne", beenToLevelOne}
 		};
 	}
@@ -189,11 +191,8 @@ public partial class Player : CharacterBody2D
 				hiddenRoom.SetCell(new Vector2I(9, 12), 4, new Vector2I(4, 10), 1);
 				hiddenRoom.SetCell(new Vector2I(9, 13), 4, new Vector2I(4, 11), 1);
 			}
-			if (beenToLevelOne)
-			{
-				displayGrapplingHook.QueueFree();
-				displayPoison.QueueFree();
-			}
+			if (beenToLevelOne && displayPoison is not null) displayPoison.QueueFree();
+			if (foundgrapplingHook && displayGrapplingHook is not null)	displayGrapplingHook.QueueFree();
 			loaded = true;
 			// GD.Print($"Current Coins after load: {currentCoins}");
 		}

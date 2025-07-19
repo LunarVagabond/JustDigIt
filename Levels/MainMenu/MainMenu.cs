@@ -60,6 +60,7 @@ public partial class MainMenu : Control
         { "currentCoins", 0 },
         { "levelKey", false },
         { "roomOpened", false },
+        { "foundgrapplingHook", false },
         { "beenToLevelOne", false}
       };
       var jsonString = Json.Stringify(nodeData);
