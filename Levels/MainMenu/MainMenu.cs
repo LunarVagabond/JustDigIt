@@ -59,6 +59,7 @@ public partial class MainMenu : Control
         { "Parent", "/root/LevelOne" },
         { "currentCoins", 0 },
         { "levelKey", false },
+        { "roomOpened", false },
         { "beenToLevelOne", false}
       };
       var jsonString = Json.Stringify(nodeData);

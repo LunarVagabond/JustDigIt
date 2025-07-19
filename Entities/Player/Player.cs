@@ -34,6 +34,8 @@ public partial class Player : CharacterBody2D
 	public bool loaded = false;
 	public TileMapLayer hiddenRoomCovering;
 	public TileMapLayer hiddenRoom;
+	public GrapplingHook displayGrapplingHook;
+	public Poison displayPoison;
 
 
 	[Export]
@@ -55,6 +57,8 @@ public partial class Player : CharacterBody2D
 		miningRig = GetNode<MiningRig>("MiningRig");
 		hiddenRoomCovering = GetNodeOrNull<TileMapLayer>("/root/LevelOne/HiddenRoomCovering");
 		hiddenRoom = GetNodeOrNull<TileMapLayer>("/root/LevelOne/HiddenRoom");
+		displayGrapplingHook = GetNodeOrNull<GrapplingHook>("/root/LevelOne/GrapplingHook");
+		displayPoison = GetNodeOrNull<Poison>("/root/LevelOne/Poison");
 
 		// Set current stat values
 		currentDepth = stats.depth;
@@ -184,6 +188,11 @@ public partial class Player : CharacterBody2D
 				hiddenRoomCovering.Visible = false;
 				hiddenRoom.SetCell(new Vector2I(9, 12), 4, new Vector2I(4, 10), 1);
 				hiddenRoom.SetCell(new Vector2I(9, 13), 4, new Vector2I(4, 11), 1);
+			}
+			if (beenToLevelOne)
+			{
+				displayGrapplingHook.QueueFree();
+				displayPoison.QueueFree();
 			}
 			loaded = true;
 			// GD.Print($"Current Coins after load: {currentCoins}");

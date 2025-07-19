@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://ba8m4jeqc5qd5"]
+[gd_scene load_steps=33 format=4 uid="uid://ba8m4jeqc5qd5"]
 
 [ext_resource type="PackedScene" uid="uid://btsexkhcceg6k" path="res://Entities/Player/player.tscn" id="1_5ksg8"]
 [ext_resource type="Texture2D" uid="uid://dj8f3bseepj6a" path="res://Assets/TileSets/Brackeys/world_tileset.png" id="2_7pha4"]
@@ -16,6 +16,9 @@
 [ext_resource type="Script" uid="uid://co8om57qkxag2" path="res://Resources/Pickups/PickupRes.cs" id="12_725ab"]
 [ext_resource type="PackedScene" uid="uid://ke77f3n803ta" path="res://Resources/Blueprint/PickaxeBlueprint.tscn" id="14_xs6u6"]
 [ext_resource type="PackedScene" uid="uid://bhceeva2d5tp2" path="res://Entities/Interactables/electric_lock.tscn" id="15_7rx5l"]
+[ext_resource type="PackedScene" uid="uid://s32yxl1nq28" path="res://Resources/Pickups/poison.tscn" id="17_ht4by"]
+[ext_resource type="PackedScene" uid="uid://xs1miss75ng5" path="res://Shared/text_popper.tscn" id="18_1gu6f"]
+[ext_resource type="PackedScene" uid="uid://dguj0lo4n5d70" path="res://Entities/Interactables/Tools/grappling_hook.tscn" id="19_1gu6f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7pha4"]
 texture = ExtResource("2_hcdvr")
@@ -1788,6 +1791,9 @@ itemType = 0
 SoundEffect = ExtResource("11_725ab")
 metadata/_custom_type_script = "uid://co8om57qkxag2"
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_1gu6f"]
+radius = 13.0384
+
 [node name="LevelOne" type="Node2D"]
 
 [node name="Level" type="TileMapLayer" parent="." node_paths=PackedStringArray("player") groups=["miningLayer"]]
@@ -1832,3 +1838,27 @@ position = Vector2(-101, -10)
 
 [node name="ElectricLock" parent="." groups=["Persist"] instance=ExtResource("15_7rx5l")]
 position = Vector2(136, 216)
+
+[node name="Poison" parent="." instance=ExtResource("17_ht4by")]
+position = Vector2(18, -5)
+
+[node name="TextPopper" parent="Poison" instance=ExtResource("18_1gu6f")]
+DialogToShow = "Ooof -- That is rancid! Where is it coming from? Inhaling that stank sure makes it hard to breathe!"
+TimeToShow = 5.0
+
+[node name="GrapplingHook" parent="." instance=ExtResource("19_1gu6f")]
+visible = true
+position = Vector2(113, -9)
+
+[node name="TextPopper" parent="GrapplingHook" instance=ExtResource("18_1gu6f")]
+DialogToShow = "Oh, my trusty grappling hook. I can use it to get back home if I get too deep in the mine..."
+TimeToShow = 5.0
+
+[node name="Area2D" type="Area2D" parent="GrapplingHook"]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrapplingHook/Area2D"]
+shape = SubResource("CircleShape2D_1gu6f")
+
+[editable path="GrapplingHook"]
