@@ -38,10 +38,8 @@ public partial class MainMenu : Control
 
   private void OnStartPress()
   {
-    // String levelName = "LevelOne";
     ResetPlayer();
     ResetLevel();
-    // ResetHiddenRoom();
     if (optionsMenu.Visible == true) optionsMenu.ToggleVisable();
     sceneTransition.ChangeScene(NextLevel);
   }
@@ -51,7 +49,6 @@ public partial class MainMenu : Control
   private void ResetPlayer()
   {
     // if (FileAccess.FileExists($"user://Player/Player.save"))
-    // {
     using var saveFile = FileAccess.Open($"user://Player/Player.save", FileAccess.ModeFlags.Write);
     var nodeData = new Godot.Collections.Dictionary<string, Variant>()
     {
@@ -65,13 +62,11 @@ public partial class MainMenu : Control
     };
     var jsonString = Json.Stringify(nodeData);
     saveFile.StoreLine(jsonString);
-    // }
   }
 
   public void ResetLevel()
   {
     String savePath = $"user://levels/LevelOne.save";
-    // if (ResourceLoader.Exists(savePath))
     if (FileAccess.FileExists(savePath))
     {
       GD.Print("Deleting file");

@@ -8,7 +8,6 @@ using IA = CustomInputActions.InputActions;
 public partial class GameManager : Node
 {
     public Player player { get; set; }
-    // private CraftingMenu craftingMenu;
     public UserInterface ui { get; set; }
     public readonly PackedScene recipe = ResourceLoader.Load<PackedScene>("res://UserInterface/CraftingMenu/recipe.tscn");
     private const String GROUP_PLAYER = "Player";
@@ -62,8 +61,6 @@ public partial class GameManager : Node
     private void CreateRecipe(BlueprintRes blueprint)
     {
         Recipe newRecipe = recipe.Instantiate<Recipe>();
-        // Pickup newPickup = coin.Instantiate<Pickup>();
-        // newRecipe.Icon = (TextureRect) blueprint.craftItemTexture; // Prob need to change recipe scene
         // Should be give recipe a resource that this just becomes?
         newRecipe.GetNode<Label>("%RecipeName").Text = blueprint.craftItemTitle;
         newRecipe.GetNode<Label>("%RecipeDescription").Text = blueprint.craftItemDescription;
@@ -85,7 +82,6 @@ public partial class GameManager : Node
 
     // SAVE LEVEL
     // Copied from: https://docs.godotengine.org/en/stable/tutorials/io/saving_games.html
-    // public void SaveLevel(Node2D levelNode, String levelName)
     public void SavePlayer()
     {
         Node2D level;
@@ -140,7 +136,6 @@ public partial class GameManager : Node
     {
         Node2D level;
         level = GetNodeOrNull<Node2D>("/root/LevelOne");
-        // if (level is null) level = GetNodeOrNull<Node2D>("/root/Homestead");
         if (level is not null)
         {
             GD.Print(level, level.Name);
@@ -153,20 +148,12 @@ public partial class GameManager : Node
                 Level saveNode = level.GetTree().GetNodesInGroup(GROUP_MINING)[0] as Level;
                 GD.Print("Map on Save");
 		        saveNode.GetEmptyCellPositionsInRect();
-                // foreach (Node saveNode in saveNodes)
-                // {
-                // Check the node is an instanced scene so it can be instanced again during load.
-                // if (string.IsNullOrEmpty(saveNode.SceneFilePath))
-                // {
-                //     GD.Print($"persistent node '{saveNode.Name}' is not an instanced scene, skipped");
-                //     continue;
-                // }
 
                 // Check the node has a save function.
                 if (!saveNode.HasMethod("Save"))
                 {
                     GD.Print($"persistent node '{saveNode.Name}' is missing a Save() function, skipped");
-                    // continue;
+                    return;
                 }
 
                 // Call the node's save function.
@@ -179,7 +166,6 @@ public partial class GameManager : Node
 
                 // Store the save dictionary as a new line in the save file.
                 saveFile.StoreLine(jsonString);
-                // }
             }
         }
         else

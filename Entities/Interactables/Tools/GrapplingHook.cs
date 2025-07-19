@@ -54,6 +54,5 @@ public partial class GrapplingHook : Node2D
 			animationPlayer.Play(PICKUP_ANIMATION);
 			player.foundgrapplingHook = true;
 		}
-		
 	}
 }

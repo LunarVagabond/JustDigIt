@@ -145,15 +145,6 @@ public partial class Player : CharacterBody2D
 		ui.GoldCountLabel.Text = $"{currentCoins}";
 	}
 
-	// private void SaveStats()
-	// {
-	// 	stats.oxygen = currentOxygen;
-	// 	stats.energy = currentEnergy;
-	// 	stats.depth = currentDepth;
-	// 	stats.coins = currentCoins;
-	// 	// other stats will be handled by CharacterStats itself, i.e. XP, player level, zone, skills, etc.
-	// }
-
 	public Godot.Collections.Dictionary<string, Variant> Save()
 	{
 		return new Godot.Collections.Dictionary<string, Variant>()
@@ -185,8 +176,6 @@ public partial class Player : CharacterBody2D
 			Node2D level = GetNodeOrNull<Node2D>("/root/LevelOne");
 			if (level is null) level = GetNodeOrNull<Node2D>("/root/Homestead");
 			if (level is not null) gameManager.LoadPlayer(level, "LevelOne"); // hard code for now?
-																			  // GD.Print(level, level.Name);
-																			  // GD.Print("Attempting to load Player...");
 			if (roomOpened && level.Name == "LevelOne")
 			{
 				hiddenRoomCovering.Visible = false;
