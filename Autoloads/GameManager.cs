@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Godot;
 using IA = CustomInputActions.InputActions;
@@ -7,9 +9,11 @@ public partial class GameManager : Node
     public Player player { get; set; }
     // private CraftingMenu craftingMenu;
     public UserInterface ui { get; set; }
-
     public readonly PackedScene recipe = ResourceLoader.Load<PackedScene>("res://UserInterface/CraftingMenu/recipe.tscn");
-    // public readonly PackedScene coin = ResourceLoader.Load<PackedScene>("res://Entities/Interactables/Coin//coin.tscn");
+
+    // Track dialog key's we've seen (Funny enough learned this idea from: https://www.youtube.com/shorts/EP-fIhAe2Jo)
+    // Inbound Shovel's YT
+    private HashSet<string> dialogsSeen = new HashSet<string>();
 
 
     // NOTE: Moved this out from player so ALL scenes get this interaction by default
@@ -70,4 +74,8 @@ public partial class GameManager : Node
         if (player is null) await ToSignal(player, "ready");
         return player;
     }
+
+    // If seen return true otherwise false
+    public bool HasSeenDialog(string uuid) => dialogsSeen.Contains(uuid) ? true : false;
+    public void MarkDialogSeen(string uuid) => dialogsSeen.Add(uuid);
 }

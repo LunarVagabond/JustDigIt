@@ -18,6 +18,12 @@ public partial class SceneTransition : CanvasLayer
     tween.TweenProperty(fader, "color:a", 0.0, 1.0f).From(1f);
     audioManager.ResumeMusic();
   }
+  public void EarlyFadeOut()
+  {
+    Tween tween = GetTree().CreateTween();
+    tween.TweenProperty(fader, "color:a", 1.0, 1.0f);
+    tween.TweenInterval(0.1f);
+  }
 
   public void ChangeScene(string nextScene)
   {

@@ -25,7 +25,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3u71f")
-NextLevel = "uid://cjg683kf64875"
+NextLevel = "uid://blgy88r24j7h8"
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1

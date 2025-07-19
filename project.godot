@@ -26,7 +26,9 @@ resources_spreadsheet_view/freeze_first_column=true
 config/name="Just Dig It"
 run/main_scene="uid://bw8elrs4u8n2u"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
+boot_splash/image="uid://d0ulcsdave4ov"
 config/icon="res://icon.svg"
+boot_splash/minimum_display_time=5000
 
 [autoload]
 
