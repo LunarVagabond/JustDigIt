@@ -50,22 +50,22 @@ public partial class MainMenu : Control
 
   private void ResetPlayer()
   {
-    if (FileAccess.FileExists($"user://Player/Player.save"))
+    // if (FileAccess.FileExists($"user://Player/Player.save"))
+    // {
+    using var saveFile = FileAccess.Open($"user://Player/Player.save", FileAccess.ModeFlags.Write);
+    var nodeData = new Godot.Collections.Dictionary<string, Variant>()
     {
-      using var saveFile = FileAccess.Open($"user://Player/Player.save", FileAccess.ModeFlags.Write);
-      var nodeData = new Godot.Collections.Dictionary<string, Variant>()
-      {
-        { "Filename", "res://Entities/Player/player.tscn" },
-        { "Parent", "/root/LevelOne" },
-        { "currentCoins", 0 },
-        { "levelKey", false },
-        { "roomOpened", false },
-        { "foundgrapplingHook", false },
-        { "beenToLevelOne", false}
-      };
-      var jsonString = Json.Stringify(nodeData);
-      saveFile.StoreLine(jsonString);
-    }
+      { "Filename", "res://Entities/Player/player.tscn" },
+      { "Parent", "/root/LevelOne" },
+      { "currentCoins", 0 },
+      { "levelKey", false },
+      { "roomOpened", false },
+      { "foundgrapplingHook", false },
+      { "beenToLevelOne", false}
+    };
+    var jsonString = Json.Stringify(nodeData);
+    saveFile.StoreLine(jsonString);
+    // }
   }
 
   public void ResetLevel()
