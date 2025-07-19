@@ -139,9 +139,6 @@ public partial class MiningRig : Node2D
 		{
 			GD.Print("Hidden Room key revealed!");
 			vfxManager.SpawnKey(targetLocation);
-			// Key hiddenRoomKey = key.Instantiate<Key>();
-			// newPickup.GlobalPosition = spawnLocation;
-			// AddChild(newPickup);
 		}
 		else if (roll < probability)
 		{

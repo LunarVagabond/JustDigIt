@@ -30,6 +30,7 @@ public partial class GrapplingHook : Node2D
 	{
 		Visible = false;
 		Player player = GetParent<Player>();
+		player.gameManager.SavePlayer();
 		player.gameManager.SaveLevel();
 		sceneTransition.ChangeScene(NextLevel);
 	}

@@ -25,34 +25,8 @@ public partial class PassagewayDown : Node2D
     {
         if (@event.IsActionPressed(IA.INTERACT) && isOverlapping)
         {
+            player.gameManager.SavePlayer();
             player.gameManager.SaveLevel();
-            // // var root = GetNode("/root");
-            // Node2D level;
-            // level = GetNodeOrNull<Node2D>("/root/LevelOne");
-            // if (level is null) level = GetNodeOrNull<Node2D>("/root/Homestead");
-            // // Node2D homestead = GetNodeOrNull<Node2D>("/root/Homestead");
-            // if (level is not null)
-            // {
-            //     GD.Print(level, level.Name);
-            //     if (level.Name == "LevelOne")
-            //     {
-            //         player.beenToLevelOne = true;
-            //         player.gameManager.SaveLevel(level, "LevelOne");
-            //         GD.Print("Attempting to save Player in LevelOne");
-            //     }
-            //     // else if (level.Name == "Homestead") // && player.beenToLevelOne)
-            //     // {
-            //     //     sceneTransition.ChangeScene(NextLevel);
-            //     //     player.gameManager.LoadLevel(level, "LevelOne");
-            //     //     GD.Print("Attempting to load Player in LevelOne");
-            //     //     return;
-            //     // }
-            //     sceneTransition.ChangeScene(NextLevel);  
-            // }
-            // else
-            // {
-            //     GD.Print("HERE", level);
-            // }
             sceneTransition.ChangeScene(NextLevel);   
         }
     }

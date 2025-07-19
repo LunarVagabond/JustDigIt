@@ -51,14 +51,9 @@ public partial class Player : CharacterBody2D
 		ui = GetNode<UserInterface>("UI");
 		miningRig = GetNode<MiningRig>("MiningRig");
 
-		// if (!beenToLevelOne)
-		// {
-		// 	currentCoins = stats.coins;
-		// }
-
 		// Set current stat values
 		currentDepth = stats.depth;
-		// currentCoins = stats.coins;
+		// currentCoins = stats.coins; // unneeded, set by LoadPlayer
 		currentOxygen = stats.maxOxygen;
 		currentEnergy = stats.maxEnergy;
 		PoisonEffect = stats.PoisonEffect;
@@ -126,7 +121,7 @@ public partial class Player : CharacterBody2D
 		// currentCoins handled bu PickupCollected event in GameManager
 		// if (poisoned) currentOxygen -= (float)ui.OxygenBar.Step * PoisonEffect;
 		OxygenLossRate = MathF.Round(currentDepth / 10.0f, 1); // Can play around with this
-															   // GD.Print($"Current rate of oxygen loss {OxygenLossRate}");
+		// GD.Print($"Current rate of oxygen loss {OxygenLossRate}");
 		if (poisoned) drain = OxygenLossRate * PoisonEffect; // This is prob overcomplicated, but my brain hurts
 		currentOxygen -= (float)ui.OxygenBar.Step * drain;
 		currentDepth = miningRig.level.LocalToMap(GlobalPosition).Y + depthOffset;
@@ -172,14 +167,14 @@ public partial class Player : CharacterBody2D
 	{
 		if (loaded == false)
 		{
-			GD.Print($"Current Coins before load: {currentCoins}");
+			// GD.Print($"Current Coins before load: {currentCoins}");
 			Node2D level = GetNodeOrNull<Node2D>("/root/LevelOne");
 			if (level is null) level = GetNodeOrNull<Node2D>("/root/Homestead");
-			if (level is not null) gameManager.LoadLevel(level, "LevelOne"); // hard code for now?
-			GD.Print(level, level.Name);
-			GD.Print("Attempting to load Player...");
+			if (level is not null) gameManager.LoadPlayer(level, "LevelOne"); // hard code for now?
+			// GD.Print(level, level.Name);
+			// GD.Print("Attempting to load Player...");
 			loaded = true;
-			GD.Print($"Current Coins after load: {currentCoins}");
+			// GD.Print($"Current Coins after load: {currentCoins}");
 		}
 		EmitSignal(SignalName.PlayerLoaded);
 	}
