@@ -31,6 +31,8 @@ public partial class Player : CharacterBody2D
 
 	public GameManager gameManager;
 	public bool loaded = false;
+	public TileMapLayer hiddenRoomCovering;
+	public TileMapLayer hiddenRoom;
 
 
 	[Export]
@@ -50,6 +52,8 @@ public partial class Player : CharacterBody2D
 		playerSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		ui = GetNode<UserInterface>("UI");
 		miningRig = GetNode<MiningRig>("MiningRig");
+		hiddenRoomCovering = GetNodeOrNull<TileMapLayer>("/root/LevelOne/HiddenRoomCovering");
+		hiddenRoom = GetNodeOrNull<TileMapLayer>("/root/LevelOne/HiddenRoom");
 
 		// Set current stat values
 		currentDepth = stats.depth;
@@ -171,8 +175,14 @@ public partial class Player : CharacterBody2D
 			Node2D level = GetNodeOrNull<Node2D>("/root/LevelOne");
 			if (level is null) level = GetNodeOrNull<Node2D>("/root/Homestead");
 			if (level is not null) gameManager.LoadPlayer(level, "LevelOne"); // hard code for now?
-			// GD.Print(level, level.Name);
-			// GD.Print("Attempting to load Player...");
+																			  // GD.Print(level, level.Name);
+																			  // GD.Print("Attempting to load Player...");
+			if (levelKey && level.Name == "LevelOne")
+			{
+				hiddenRoomCovering.QueueFree();
+				hiddenRoom.SetCell(new Vector2I(9, 12), 4, new Vector2I(4, 10), 1);
+				hiddenRoom.SetCell(new Vector2I(9, 13), 4, new Vector2I(4, 11), 1);
+			}
 			loaded = true;
 			// GD.Print($"Current Coins after load: {currentCoins}");
 		}

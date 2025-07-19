@@ -40,6 +40,8 @@ public partial class MainMenu : Control
   {
     // String levelName = "LevelOne";
     ResetPlayer();
+    // ResetLevel();
+    // ResetHiddenRoom();
     if (optionsMenu.Visible == true) optionsMenu.ToggleVisable();
     sceneTransition.ChangeScene(NextLevel);
   }
