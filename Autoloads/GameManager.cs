@@ -14,6 +14,8 @@ public partial class GameManager : Node
     private const String GROUP_MINING = "miningLayer";
     private const String GROUP_PERSIST = "Persist";
 
+    public List<BlueprintRes> knownBlueprints = new List<BlueprintRes>();
+
     // Track dialog key's we've seen (Funny enough learned this idea from: https://www.youtube.com/shorts/EP-fIhAe2Jo)
     // Inbound Shovel's YT
     private HashSet<string> dialogsSeen = new HashSet<string>();
@@ -54,6 +56,7 @@ public partial class GameManager : Node
         if (body is Player player)
         {
             GD.Print($"Blueprint {blueprint.craftItem} Gathered!");
+            knownBlueprints.Add(blueprint);
             ui.craftingMenu.AddRecpie(blueprint);
         }
     }

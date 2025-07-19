@@ -78,6 +78,7 @@ public partial class Player : CharacterBody2D
 		gameManager.ui = ui;
 
 		Ready += LoadPlayer;
+		RebuildRecipes();
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -133,7 +134,7 @@ public partial class Player : CharacterBody2D
 		// currentCoins handled bu PickupCollected event in GameManager
 		// if (poisoned) currentOxygen -= (float)ui.OxygenBar.Step * PoisonEffect;
 		OxygenLossRate = MathF.Round(currentDepth / 10.0f, 1); // Can play around with this
-		// GD.Print($"Current rate of oxygen loss {OxygenLossRate}");
+																													 // GD.Print($"Current rate of oxygen loss {OxygenLossRate}");
 		if (poisoned) drain = OxygenLossRate * PoisonEffect; // This is prob overcomplicated, but my brain hurts
 		currentOxygen -= (float)ui.OxygenBar.Step * drain;
 		currentDepth = miningRig.level.LocalToMap(GlobalPosition).Y + depthOffset;
@@ -184,10 +185,17 @@ public partial class Player : CharacterBody2D
 				electricLock.QueueFree();
 			}
 			if (beenToLevelOne && displayPoison is not null) displayPoison.QueueFree();
-			if (foundgrapplingHook && displayGrapplingHook is not null)	displayGrapplingHook.QueueFree();
+			if (foundgrapplingHook && displayGrapplingHook is not null) displayGrapplingHook.QueueFree();
 			loaded = true;
 			// GD.Print($"Current Coins after load: {currentCoins}");
 		}
 		EmitSignal(SignalName.PlayerLoaded);
+	}
+	private void RebuildRecipes()
+	{
+		foreach (BlueprintRes entry in gameManager.knownBlueprints)
+		{
+			ui.craftingMenu.AddRecpie(entry);
+		}
 	}
 }
