@@ -38,6 +38,8 @@ public partial class Player : CharacterBody2D
 	public GrapplingHook displayGrapplingHook;
 	public Poison displayPoison;
 	public ElectricLock electricLock;
+	public String equippedItem;
+	public int currentMiningSkill;
 
 
 	[Export]
@@ -64,6 +66,7 @@ public partial class Player : CharacterBody2D
 		electricLock = GetNodeOrNull<ElectricLock>("/root/LevelOne/ElectricLock");
 
 		// Set current stat values
+		currentMiningSkill = stats.miningSkill;
 		currentDepth = stats.depth;
 		// currentCoins = stats.coins; // unneeded, set by LoadPlayer
 		currentOxygen = stats.maxOxygen;
@@ -188,6 +191,7 @@ public partial class Player : CharacterBody2D
 			if (beenToLevelOne && displayPoison is not null) displayPoison.QueueFree();
 			if (foundgrapplingHook && displayGrapplingHook is not null) displayGrapplingHook.QueueFree();
 			gameManager.LoadBlueprints();
+			gameManager.LoadTools();
 			RebuildRecipes();
 			loaded = true;
 			// GD.Print($"Current Coins after load: {currentCoins}");

@@ -28,6 +28,7 @@ public partial class PassagewayDown : Node2D
             player.gameManager.SavePlayer();
             player.gameManager.SaveLevel();
             player.gameManager.SaveBlueprints();
+            player.gameManager.SaveEquippedTools();
             sceneTransition.ChangeScene(NextLevel);   
         }
     }

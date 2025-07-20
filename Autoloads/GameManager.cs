@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Godot;
 using IA = CustomInputActions.InputActions;
 
@@ -207,6 +208,15 @@ public partial class GameManager : Node
         }
     }
 
+    public void SaveEquippedTools()
+    {
+        String filePathEquippedTool = "user://tool_equipped.save";
+        using var saveFileTool = FileAccess.Open(filePathEquippedTool, FileAccess.ModeFlags.Write);
+        // Store the save dictionary as a new line in the save file.
+        var jsonStringTool = Json.Stringify(player.equippedItem);
+        saveFileTool.StoreLine(jsonStringTool);
+    }
+
     // LOAD LEVEL
     public void LoadPlayer(Node2D levelNode, String levelName)
     {
@@ -345,11 +355,54 @@ public partial class GameManager : Node
                     Blueprint newBlueprint = pickaxe.Instantiate<Blueprint>();
                     knownBlueprints.Add(newBlueprint.Item);
                     ui.craftingMenu.AddRecpie(newBlueprint.Item); // Janks a lot
+                    newBlueprint.QueueFree();
                 }
             }
         }
         GD.Print(knownBlueprintNames.Count());
         GD.Print(knownBlueprints.Count());
         GD.Print("Blueprints Loading");
+    }
+
+    public void LoadTools()
+    {
+        // Get Equipped Tool
+        String filePathEquippedTool = "user://tool_equipped.save";
+        // String filePathEquippedTool = "user://bluprints.save";
+        if (FileAccess.FileExists(filePathEquippedTool))
+        {
+            GD.Print("Loading tool equipped data");
+            using var saveFileTool = FileAccess.Open(filePathEquippedTool, FileAccess.ModeFlags.Read);
+            while (saveFileTool.GetPosition() < saveFileTool.GetLength())
+            {
+                var jsonStringTool = saveFileTool.GetLine();
+                var json = new Json();
+                var parseResult = json.Parse(jsonStringTool);
+                if (parseResult != Error.Ok)
+                {
+                    GD.Print($"JSON Parse Error: {json.GetErrorMessage()} in {jsonStringTool} at line {json.GetErrorLine()}");
+                    continue;
+                }
+                GD.Print($"Tool save info: {json.Data}");
+                if (json.Data.ToString() == "Pickaxe")
+                {
+                    player.equippedItem = json.Data.ToString();
+                    Blueprint newBlueprint = pickaxe.Instantiate<Blueprint>();
+                    player.ui.CurrentItem.Texture = newBlueprint.Item.craftItemTexture;
+                    player.currentMiningSkill = player.stats.miningSkill + newBlueprint.Item.skillValue;
+                    GD.Print($"Pickaxe loaded: player mining skill {player.stats.miningSkill} + {newBlueprint.Item.skillValue} = {player.currentMiningSkill}");
+                    GD.Print($"Pickaxe loaded: player mining skill {player.currentMiningSkill}");
+                    newBlueprint.QueueFree();
+                }
+                else
+                {
+                    GD.Print($"Pickaxe loaded: player mining skill {player.currentMiningSkill}");
+                }
+            }
+        }
+        else
+        {
+            GD.Print("No tools equipped data");
+        }
     }
 }

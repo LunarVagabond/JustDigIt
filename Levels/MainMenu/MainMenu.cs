@@ -70,14 +70,15 @@ public partial class MainMenu : Control
     Godot.Collections.Array<String> paths =
     [
       $"user://levels/LevelOne.save",
-      $"user://blueprints.save"
+      $"user://blueprints.save",
+      $"user://tool_equipped.save"
     ];
 
     foreach (String path in paths)
     {
       if (FileAccess.FileExists(path))
       {
-        GD.Print("Deleting file");
+        GD.Print($"Deleting file: {path}");
         DirAccess.RemoveAbsolute(path);
       }
     }

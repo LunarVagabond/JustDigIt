@@ -45,6 +45,7 @@ public partial class GrapplingHook : Node2D
 		player.gameManager.SavePlayer();
 		player.gameManager.SaveLevel();
 		player.gameManager.SaveBlueprints();
+		player.gameManager.SaveEquippedTools();
 		sceneTransition.ChangeScene(NextLevel);
 	}
 
