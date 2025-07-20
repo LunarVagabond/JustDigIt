@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Godot;
 using IA = CustomInputActions.InputActions;
 
@@ -10,11 +11,14 @@ public partial class GameManager : Node
     public Player player { get; set; }
     public UserInterface ui { get; set; }
     public readonly PackedScene recipe = ResourceLoader.Load<PackedScene>("res://UserInterface/CraftingMenu/recipe.tscn");
+    public readonly PackedScene pickaxe = ResourceLoader.Load<PackedScene>("res://Resources/Blueprint/PickaxeBlueprint.tscn");
     private const String GROUP_PLAYER = "Player";
     private const String GROUP_MINING = "miningLayer";
     private const String GROUP_PERSIST = "Persist";
 
     public List<BlueprintRes> knownBlueprints = new List<BlueprintRes>();
+    // public List<String> knownBlueprintNames = new List<String>();
+    public Godot.Collections.Dictionary<string, int> knownBlueprintNames = [];
 
     // Track dialog key's we've seen (Funny enough learned this idea from: https://www.youtube.com/shorts/EP-fIhAe2Jo)
     // Inbound Shovel's YT
@@ -56,8 +60,16 @@ public partial class GameManager : Node
         if (body is Player player)
         {
             GD.Print($"Blueprint {blueprint.craftItem} Gathered!");
-            knownBlueprints.Add(blueprint);
-            ui.craftingMenu.AddRecpie(blueprint);
+            if (!knownBlueprintNames.ContainsKey(blueprint.craftItemTitle))
+            {
+                knownBlueprints.Add(blueprint);
+                knownBlueprintNames[blueprint.craftItem.ToString()] = 1;
+                ui.craftingMenu.AddRecpie(blueprint);
+            }
+            else
+            {
+                GD.Print("Recipe known");
+            }
         }
     }
 
@@ -150,7 +162,7 @@ public partial class GameManager : Node
 
                 Level saveNode = level.GetTree().GetNodesInGroup(GROUP_MINING)[0] as Level;
                 GD.Print("Map on Save");
-		        saveNode.GetEmptyCellPositionsInRect();
+                saveNode.GetEmptyCellPositionsInRect();
 
                 // Check the node has a save function.
                 if (!saveNode.HasMethod("Save"))
@@ -176,6 +188,33 @@ public partial class GameManager : Node
             GD.Print("HERE", level);
         }
 
+    }
+
+    // Save Blueprint
+    public void SaveBlueprints()
+    {
+        if (knownBlueprintNames.Count > 0)
+        {
+            String filePath = "user://blueprints.save";
+            using var saveFile = FileAccess.Open(filePath, FileAccess.ModeFlags.Write);
+
+            // Store the save dictionary as a new line in the save file.
+            var jsonString = Json.Stringify(knownBlueprintNames);
+            saveFile.StoreLine(jsonString);
+        }
+        else
+        {
+            GD.Print("No known blueprints");
+        }
+    }
+
+    public void SaveEquippedTools()
+    {
+        String filePathEquippedTool = "user://tool_equipped.save";
+        using var saveFileTool = FileAccess.Open(filePathEquippedTool, FileAccess.ModeFlags.Write);
+        // Store the save dictionary as a new line in the save file.
+        var jsonStringTool = Json.Stringify(player.equippedItem);
+        saveFileTool.StoreLine(jsonStringTool);
     }
 
     // LOAD LEVEL
@@ -276,6 +315,94 @@ public partial class GameManager : Node
                 int y = mapToLoad.emptyCellsY[i];
                 mapToLoad.SetCell(new Vector2I(x, y), -1);
             }
+        }
+    }
+
+    // }
+
+    public void LoadBlueprints()
+    {
+        String filePath = "user://blueprints.save";
+        if (!FileAccess.FileExists(filePath))
+        {
+            GD.Print("No Blueprints to load.");
+            return;
+        }
+
+        using var saveFile = FileAccess.Open(filePath, FileAccess.ModeFlags.Read);
+
+        while (saveFile.GetPosition() < saveFile.GetLength())
+        {
+            var jsonString = saveFile.GetLine();
+
+            // Creates the helper class to interact with JSON.
+            var json = new Json();
+            var parseResult = json.Parse(jsonString);
+            if (parseResult != Error.Ok)
+            {
+                GD.Print($"JSON Parse Error: {json.GetErrorMessage()} in {jsonString} at line {json.GetErrorLine()}");
+                continue;
+            }
+
+            var nodeData = new Godot.Collections.Dictionary<string, int>((Godot.Collections.Dictionary)json.Data);
+            GD.Print(nodeData);
+            knownBlueprintNames = nodeData;
+
+            foreach (var (key, value) in knownBlueprintNames)
+            {
+                if (key == "Pickaxe")
+                {
+                    Blueprint newBlueprint = pickaxe.Instantiate<Blueprint>();
+                    knownBlueprints.Add(newBlueprint.Item);
+                    ui.craftingMenu.AddRecpie(newBlueprint.Item); // Janks a lot
+                    newBlueprint.QueueFree();
+                }
+            }
+        }
+        GD.Print(knownBlueprintNames.Count());
+        GD.Print(knownBlueprints.Count());
+        GD.Print("Blueprints Loading");
+    }
+
+    public void LoadTools()
+    {
+        // Get Equipped Tool
+        String filePathEquippedTool = "user://tool_equipped.save";
+        // String filePathEquippedTool = "user://bluprints.save";
+        if (FileAccess.FileExists(filePathEquippedTool))
+        {
+            GD.Print("Loading tool equipped data");
+            using var saveFileTool = FileAccess.Open(filePathEquippedTool, FileAccess.ModeFlags.Read);
+            while (saveFileTool.GetPosition() < saveFileTool.GetLength())
+            {
+                var jsonStringTool = saveFileTool.GetLine();
+                var json = new Json();
+                var parseResult = json.Parse(jsonStringTool);
+                if (parseResult != Error.Ok)
+                {
+                    GD.Print($"JSON Parse Error: {json.GetErrorMessage()} in {jsonStringTool} at line {json.GetErrorLine()}");
+                    continue;
+                }
+                GD.Print($"Tool save info: {json.Data}");
+                if (json.Data.ToString() == "Pickaxe")
+                {
+                    player.equippedItem = json.Data.ToString();
+                    Blueprint newBlueprint = pickaxe.Instantiate<Blueprint>();
+                    player.ui.CurrentItem.Texture = newBlueprint.Item.craftItemTexture;
+                    player.currentMiningSkill = player.stats.miningSkill + newBlueprint.Item.skillValue;
+                    GD.Print($"Pickaxe loaded: player mining skill {player.stats.miningSkill} + {newBlueprint.Item.skillValue} = {player.currentMiningSkill}");
+                    GD.Print($"Pickaxe loaded: player mining skill {player.currentMiningSkill}");
+                    newBlueprint.QueueFree();
+                }
+                else
+                {
+                    GD.Print($"Pickaxe loaded: player mining skill {player.currentMiningSkill}");
+                }
+            }
+        }
+        else
+        {
+            GD.Print("No tools equipped data");
         }
     }
 }

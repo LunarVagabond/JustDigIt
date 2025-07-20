@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://drqsnqcyeblig"]
+
+[ext_resource type="Texture2D" uid="uid://bgx5qqrstt1yq" path="res://Assets/TileSets/Free Industrial Zone Tileset/3 Objects/Barrel3.png" id="1_1dyjg"]
+[ext_resource type="Texture2D" uid="uid://rwlmokln2h6y" path="res://Assets/TileSets/Free Industrial Zone Tileset/3 Objects/Barrel2.png" id="2_a1gll"]
+[ext_resource type="PackedScene" uid="uid://xs1miss75ng5" path="res://Shared/text_popper.tscn" id="3_toox2"]
+
+[node name="IndustrialWaste" type="Node2D"]
+position = Vector2(-7, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(16, -4)
+texture = ExtResource("1_1dyjg")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-2, -4)
+texture = ExtResource("2_a1gll")
+
+[node name="TextPopper" parent="." instance=ExtResource("3_toox2")]
+position = Vector2(6, -4)
+scale = Vector2(0.6, 0.6)
+DialogToShow = "Industrial waste!"
+TimeToShow = 2.0

@@ -16,6 +16,7 @@ public partial class CraftingMenu : Control
   private Player player;
   private Blueprint.ItemType skillType;
   private int skillValue;
+  private String itemName;
 
   public override void _Ready()
   {
@@ -66,6 +67,7 @@ public partial class CraftingMenu : Control
   {
     GD.Print("func emit");
     // change the data for the given recipe
+    itemName = r.GetNode<Label>("%RecipeName").Text;
     itemTexture = r.Icon.Texture;
     skillType = r.skillType;
     skillValue = r.skillValue;
@@ -113,16 +115,17 @@ public partial class CraftingMenu : Control
     GD.Print("Crafting Button Pushed", player, player.currentCoins);
     int cost;
     bool sufficient = int.TryParse(MatOneCost.Text, out cost);
-    if (player.currentCoins >= cost)
+    if (player.currentCoins >= cost && player.equippedItem != itemName) // Be careful
     {
       player.currentCoins -= cost;
       GD.Print("Tool crafted and equipped!");
       player.ui.CurrentItem.Texture = itemTexture;
       if (skillType == Blueprint.ItemType.Pickaxe) // Messy
       {
-        GD.Print($"Mining skill before tool equipped: {player.stats.miningSkill}");
-        player.stats.miningSkill += skillValue;
-        GD.Print($"Mining skill after tool equipped: {player.stats.miningSkill}");
+        GD.Print($"Mining skill before tool equipped: {player.currentMiningSkill}");
+        player.currentMiningSkill = player.stats.miningSkill + skillValue;
+        player.equippedItem = itemName;
+        GD.Print($"Mining skill after tool equipped: {player.currentMiningSkill}");
       }
       
     }

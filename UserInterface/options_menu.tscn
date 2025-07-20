@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dyyowyrojq34b"]
+[gd_scene load_steps=8 format=3 uid="uid://dyyowyrojq34b"]
 
 [ext_resource type="FontFile" uid="uid://gc7kn1gk7axp" path="res://Assets/Fonts/Libre/Literata/static/Literata-Bold.ttf" id="1_7xbpd"]
 [ext_resource type="Script" uid="uid://bps3i2c4ib364" path="res://UserInterface/OptionsMenu.cs" id="1_vmoy0"]
 [ext_resource type="FontFile" uid="uid://bgmj2a24edgt2" path="res://Assets/Fonts/Libre/Literata/static/Literata-Italic.ttf" id="2_vmoy0"]
+[ext_resource type="Theme" uid="uid://dtf1wfsufav3c" path="res://Assets/Themes/UIItalicTheme.tres" id="3_oxxwm"]
+[ext_resource type="Texture2D" uid="uid://c3mubjtuusca1" path="res://Assets/TileSets/Complete_UI_Essential_Pack_Free/Sprites/UI_Flat_ButtonCross01a.png" id="4_mrcyk"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gud16"]
 font = ExtResource("1_7xbpd")
@@ -26,6 +28,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -50.0
+offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -59,6 +63,18 @@ size_flags_vertical = 0
 text = "X"
 
 [node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ExitGameButton" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.0
+theme = ExtResource("3_oxxwm")
+text = "Exit Game"
+icon = ExtResource("4_mrcyk")
+
+[node name="HSeparator3" type="HSeparator" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="MasterContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
@@ -222,3 +238,4 @@ layout_mode = 2
 text = "LMB"
 
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="OnClosePressed"]
+[connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ExitGameButton" to="." method="OnClosePressed"]

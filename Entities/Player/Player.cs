@@ -38,6 +38,10 @@ public partial class Player : CharacterBody2D
 	public GrapplingHook displayGrapplingHook;
 	public Poison displayPoison;
 	public ElectricLock electricLock;
+	public Node2D industrialWaste;
+	public Node2D hiddenRoomNote;
+	public String equippedItem;
+	public int currentMiningSkill;
 
 
 	[Export]
@@ -62,8 +66,14 @@ public partial class Player : CharacterBody2D
 		displayGrapplingHook = GetNodeOrNull<GrapplingHook>("/root/LevelOne/GrapplingHook");
 		displayPoison = GetNodeOrNull<Poison>("/root/LevelOne/Poison");
 		electricLock = GetNodeOrNull<ElectricLock>("/root/LevelOne/ElectricLock");
+		industrialWaste = GetNodeOrNull<Node2D>("/root/LevelOne/IndustrialWaste");
+		hiddenRoomNote = GetNodeOrNull<Node2D>("/root/LevelOne/HiddenRoom1Note");
+
+		if (industrialWaste is not null) industrialWaste.Visible = false;
+		if(hiddenRoomNote is not null ) hiddenRoomNote.Visible = false;
 
 		// Set current stat values
+		currentMiningSkill = stats.miningSkill;
 		currentDepth = stats.depth;
 		// currentCoins = stats.coins; // unneeded, set by LoadPlayer
 		currentOxygen = stats.maxOxygen;
@@ -78,12 +88,13 @@ public partial class Player : CharacterBody2D
 		gameManager.ui = ui;
 
 		Ready += LoadPlayer;
-		RebuildRecipes();
+		// RebuildRecipes();
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		if (MiningRigEnabled) HandleStats();
+		ui.GoldCountLabel.Text = $"{currentCoins}"; // Do this on homestead, for crafting costs
 		Vector2 velocity = Velocity;
 
 		// Add the gravity.
@@ -143,7 +154,7 @@ public partial class Player : CharacterBody2D
 		// Update UI
 		ui.OxygenBar.Value = currentOxygen;
 		ui.DepthLevelLabel.Text = $"Depth: {currentDepth}m";
-		ui.GoldCountLabel.Text = $"{currentCoins}";
+		// ui.GoldCountLabel.Text = $"{currentCoins}";
 	}
 
 	public Godot.Collections.Dictionary<string, Variant> Save()
@@ -180,22 +191,31 @@ public partial class Player : CharacterBody2D
 			if (roomOpened && level.Name == "LevelOne")
 			{
 				hiddenRoomCovering.Visible = false;
+				industrialWaste.Visible = true;
+				hiddenRoomNote.Visible = true;
 				hiddenRoom.SetCell(new Vector2I(9, 12), 4, new Vector2I(4, 10), 1);
 				hiddenRoom.SetCell(new Vector2I(9, 13), 4, new Vector2I(4, 11), 1);
 				electricLock.QueueFree();
 			}
 			if (beenToLevelOne && displayPoison is not null) displayPoison.QueueFree();
 			if (foundgrapplingHook && displayGrapplingHook is not null) displayGrapplingHook.QueueFree();
+			gameManager.LoadBlueprints();
+			gameManager.LoadTools();
+			RebuildRecipes();
 			loaded = true;
 			// GD.Print($"Current Coins after load: {currentCoins}");
 		}
 		EmitSignal(SignalName.PlayerLoaded);
 	}
+
 	private void RebuildRecipes()
 	{
 		foreach (BlueprintRes entry in gameManager.knownBlueprints)
 		{
-			ui.craftingMenu.AddRecpie(entry);
+			if (!gameManager.knownBlueprintNames.ContainsKey(entry.craftItemTitle))
+			{
+				ui.craftingMenu.AddRecpie(entry);
+			}
 		}
 	}
 }

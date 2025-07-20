@@ -23,6 +23,11 @@ public partial class Blueprint : Area2D
 		audioManager = GetNode<AudioManager>("/root/AudioManager");
 		BodyEntered += OnItemBodyEnter;
 		animatedSprite.AnimationFinished += () => QueueFree();
+
+		if (gameManager.knownBlueprints.Contains(Item))
+		{
+			QueueFree();
+		}
 	}
 
 	public void OnItemBodyEnter(Node2D body)

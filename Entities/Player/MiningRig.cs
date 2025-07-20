@@ -68,6 +68,13 @@ public partial class MiningRig : Node2D
 				crackedTiles.RemoveAt(index);
 				coinProbability.RemoveAt(index);
 			}
+			// else if (player.currentMiningSkill > 1)
+			// {
+			// 	audioManager.PlaySfx(miningSFX);
+			// 	Vector2I atlasCoord = level.GetCellAtlasCoords(tile);
+			// 	float probability = GetResourceProbability(atlasCoord);
+			// 	level.SetCell(tile, -1); // deletes tile at layer 2 and pos
+			// }
 			else
 			{
 				// https://docs.godotengine.org/en/stable/classes/class_tilemap.html#class-tilemap-method-get-cell-source-id
@@ -78,6 +85,13 @@ public partial class MiningRig : Node2D
 
 				if (sourceID == 0)
 				{
+					if (player.currentMiningSkill > 1)
+					{
+						audioManager.PlaySfx(miningSFX);
+						level.SetCell(tile, -1); // deletes tile at layer 2 and pos
+						EmitSignal(SignalName.TileRemoved, miningTarget.GlobalPosition, probability, 0);
+						return;
+					}
 					level.SetCell(tile, 1, new Vector2I(5, 0)); // Vector2I is atlas coordinates
 					crackedTiles.Add(tile);
 					coinProbability.Add(probability);

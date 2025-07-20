@@ -9,6 +9,8 @@ public partial class OptionsMenu : Control
 	private LineEdit masterInput;
 	private LineEdit musicInput;
 	private LineEdit sfxInput;
+	private Button exitGameButton;
+	private GameManager gameManager;
 
 	public override void _Ready()
 	{
@@ -18,6 +20,9 @@ public partial class OptionsMenu : Control
 		musicInput = GetNode<LineEdit>("%MusicEntry");
 		sfxSlider = GetNode<HSlider>("%SFXVolumeSlider");
 		sfxInput = GetNode<LineEdit>("%SFXEntry");
+		exitGameButton = GetNode<Button>("%ExitGameButton");
+		gameManager = GetNode<GameManager>("/root/GameManager");
+
 		WireSignals();
 		InitVolumeUI("Master", masterSlider, masterInput);
 		InitVolumeUI("Music", musicSlider, musicInput);
@@ -34,6 +39,8 @@ public partial class OptionsMenu : Control
 		masterInput.TextSubmitted += (text) => OnTextChanged(text, "Master", masterSlider);
 		musicInput.TextSubmitted += (text) => OnTextChanged(text, "Music", musicSlider);
 		sfxInput.TextSubmitted += (text) => OnTextChanged(text, "SFX", sfxSlider);
+
+		exitGameButton.Pressed += OnExitGameButtonPressed;
 	}
 
 	private void InitVolumeUI(string busName, HSlider slider, LineEdit input)
@@ -74,4 +81,14 @@ public partial class OptionsMenu : Control
 
 	private void OnClosePressed() => Visible = false;
 	public void ToggleVisable() => Visible = !Visible;
+
+	public void OnExitGameButtonPressed()
+	{
+		gameManager.SavePlayer();
+		gameManager.SaveLevel();
+		gameManager.SaveBlueprints();
+		gameManager.SaveEquippedTools();
+
+		GetTree().Quit();
+	}
 }

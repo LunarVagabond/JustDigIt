@@ -8,6 +8,8 @@ public partial class ElectricLock : Area2D
 	private Player player;
 	private TileMapLayer hiddenRoom;
 	private TileMapLayer hiddenRoomCovering;
+	public Node2D industrialWaste;
+	public Node2D hiddenRoomNote;
 
 	private bool isOverlapping = false; // FIXME: this is a messy way of doing this but hey it works for now
 
@@ -15,6 +17,8 @@ public partial class ElectricLock : Area2D
 	{
 		hiddenRoom = GetNodeOrNull<TileMapLayer>("/root/LevelOne/HiddenRoom"); // FIXME: dynamically select level
 		hiddenRoomCovering = GetNodeOrNull<TileMapLayer>("/root/LevelOne/HiddenRoomCovering");
+		industrialWaste = GetNodeOrNull<Node2D>("/root/LevelOne/IndustrialWaste");
+		hiddenRoomNote = GetNodeOrNull<Node2D>("/root/LevelOne/HiddenRoom1Note");
 		InteractButtonLabel = GetNode<Label>("InteractionLabel");
 		InteractButtonLabel.Visible = false;
 		BodyEntered += OnBodyEntered;
@@ -62,6 +66,8 @@ public partial class ElectricLock : Area2D
 		hiddenRoom.SetCell(new Vector2I(9, 13), 4, new Vector2I(4, 11), 1);
 		hiddenRoomCovering.Visible = false; // Make Hidden Room fully visible
 		player.roomOpened = true;
+		industrialWaste.Visible = true;
+		hiddenRoomNote.Visible = true;
 		QueueFree();
 	}
 }
