@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dt24ywbucrf3v"]
+
+[ext_resource type="Texture2D" uid="uid://bm3t2fxaep30p" path="res://Assets/TileSets/Free Industrial Zone Tileset/3 Objects/Board3.png" id="1_g0kmc"]
+[ext_resource type="PackedScene" uid="uid://xs1miss75ng5" path="res://Shared/text_popper.tscn" id="2_l3kwe"]
+
+[node name="HiddenRoom1Note" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_g0kmc")
+
+[node name="TextPopper" parent="." instance=ExtResource("2_l3kwe")]
+position = Vector2(0, -5)
+rotation = -1.17286
+DialogToShow = "A torn paper. It reads, \"Had to shut down, locals were...\"  -- What could this about?"
+TimeToShow = 8.0

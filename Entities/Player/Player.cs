@@ -38,6 +38,8 @@ public partial class Player : CharacterBody2D
 	public GrapplingHook displayGrapplingHook;
 	public Poison displayPoison;
 	public ElectricLock electricLock;
+	public Node2D industrialWaste;
+	public Node2D hiddenRoomNote;
 	public String equippedItem;
 	public int currentMiningSkill;
 
@@ -64,6 +66,11 @@ public partial class Player : CharacterBody2D
 		displayGrapplingHook = GetNodeOrNull<GrapplingHook>("/root/LevelOne/GrapplingHook");
 		displayPoison = GetNodeOrNull<Poison>("/root/LevelOne/Poison");
 		electricLock = GetNodeOrNull<ElectricLock>("/root/LevelOne/ElectricLock");
+		industrialWaste = GetNodeOrNull<Node2D>("/root/LevelOne/IndustrialWaste");
+		hiddenRoomNote = GetNodeOrNull<Node2D>("/root/LevelOne/HiddenRoom1Note");
+
+		if (industrialWaste is not null) industrialWaste.Visible = false;
+		if(hiddenRoomNote is not null ) hiddenRoomNote.Visible = false;
 
 		// Set current stat values
 		currentMiningSkill = stats.miningSkill;
@@ -184,6 +191,8 @@ public partial class Player : CharacterBody2D
 			if (roomOpened && level.Name == "LevelOne")
 			{
 				hiddenRoomCovering.Visible = false;
+				industrialWaste.Visible = true;
+				hiddenRoomNote.Visible = true;
 				hiddenRoom.SetCell(new Vector2I(9, 12), 4, new Vector2I(4, 10), 1);
 				hiddenRoom.SetCell(new Vector2I(9, 13), 4, new Vector2I(4, 11), 1);
 				electricLock.QueueFree();
