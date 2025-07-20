@@ -67,11 +67,19 @@ public partial class MainMenu : Control
   public void ResetLevel()
   {
     String savePath = $"user://levels/LevelOne.save";
-    if (FileAccess.FileExists(savePath))
+    Godot.Collections.Array<String> paths =
+    [
+      $"user://levels/LevelOne.save",
+      $"user://blueprints.save"
+    ];
+
+    foreach (String path in paths)
     {
-      GD.Print("Deleting file");
-      DirAccess.RemoveAbsolute(savePath);
+      if (FileAccess.FileExists(path))
+      {
+        GD.Print("Deleting file");
+        DirAccess.RemoveAbsolute(path);
+      }
     }
   }
-
 }
