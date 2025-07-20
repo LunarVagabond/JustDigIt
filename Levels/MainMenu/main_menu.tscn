@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bw8elrs4u8n2u"]
+[gd_scene load_steps=14 format=3 uid="uid://bw8elrs4u8n2u"]
 
 [ext_resource type="Script" uid="uid://cqf4v58ixcgnm" path="res://Levels/MainMenu/MainMenu.cs" id="1_3u71f"]
 [ext_resource type="Texture2D" uid="uid://cd34cg6bn50jd" path="res://Assets/Images/JDIBanner.png" id="1_q7u2s"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://lrdgi2iq8dkf" path="res://Assets/TileSets/Complete_UI_Essential_Pack_Free/Sprites/UI_Flat_ButtonPlay01a.png" id="7_exb2m"]
 [ext_resource type="Texture2D" uid="uid://c27bn4ulxqfbf" path="res://Assets/TileSets/Complete_UI_Essential_Pack_Free/Sprites/UI_Flat_IconCross01a.png" id="8_exb2m"]
 [ext_resource type="PackedScene" uid="uid://dyyowyrojq34b" path="res://UserInterface/options_menu.tscn" id="9_cq3bu"]
+[ext_resource type="PackedScene" uid="uid://dfwv2nmjkvo30" path="res://Levels/Credits/credits.tscn" id="11_nuf5y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qfsla"]
 font_size = 54
@@ -18,7 +19,7 @@ font_color = Color(1, 0.419608, 0.419608, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_5ggjr"]
 font_color = Color(0.305882, 0.305882, 0.313726, 1)
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("credits")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,6 +29,7 @@ grow_vertical = 2
 script = ExtResource("1_3u71f")
 StartLevel = "uid://blgy88r24j7h8"
 ContinueLevel = "uid://cjg683kf64875"
+credits = NodePath("MarginContainer/Credits")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -125,6 +127,13 @@ theme = ExtResource("4_4syi3")
 text = "Options"
 icon = ExtResource("7_cq3bu")
 
+[node name="Credits" type="Button" parent="MarginContainer/VBoxContainer/ButtonsContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("4_4syi3")
+text = "Credits
+"
+icon = ExtResource("7_cq3bu")
+
 [node name="ExitButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsContainer/CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -133,6 +142,7 @@ text = "Exit"
 icon = ExtResource("8_exb2m")
 
 [node name="OptionsMenu" parent="MarginContainer/VBoxContainer/ButtonsContainer" instance=ExtResource("9_cq3bu")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -141,3 +151,9 @@ layout_mode = 2
 theme = ExtResource("4_4syi3")
 text = "By Jerry Jank & Lunar Vagabond"
 horizontal_alignment = 2
+
+[node name="Credits" parent="MarginContainer" instance=ExtResource("11_nuf5y")]
+visible = false
+layout_mode = 2
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsContainer/CenterContainer/VBoxContainer/Credits" to="." method="OnCreditsPressed"]
