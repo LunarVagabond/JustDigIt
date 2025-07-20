@@ -78,12 +78,13 @@ public partial class Player : CharacterBody2D
 		gameManager.ui = ui;
 
 		Ready += LoadPlayer;
-		RebuildRecipes();
+		// RebuildRecipes();
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		if (MiningRigEnabled) HandleStats();
+		ui.GoldCountLabel.Text = $"{currentCoins}"; // Do this on homestead, for crafting costs
 		Vector2 velocity = Velocity;
 
 		// Add the gravity.
@@ -143,7 +144,7 @@ public partial class Player : CharacterBody2D
 		// Update UI
 		ui.OxygenBar.Value = currentOxygen;
 		ui.DepthLevelLabel.Text = $"Depth: {currentDepth}m";
-		ui.GoldCountLabel.Text = $"{currentCoins}";
+		// ui.GoldCountLabel.Text = $"{currentCoins}";
 	}
 
 	public Godot.Collections.Dictionary<string, Variant> Save()
@@ -186,16 +187,22 @@ public partial class Player : CharacterBody2D
 			}
 			if (beenToLevelOne && displayPoison is not null) displayPoison.QueueFree();
 			if (foundgrapplingHook && displayGrapplingHook is not null) displayGrapplingHook.QueueFree();
+			gameManager.LoadBlueprints();
+			RebuildRecipes();
 			loaded = true;
 			// GD.Print($"Current Coins after load: {currentCoins}");
 		}
 		EmitSignal(SignalName.PlayerLoaded);
 	}
+
 	private void RebuildRecipes()
 	{
 		foreach (BlueprintRes entry in gameManager.knownBlueprints)
 		{
-			ui.craftingMenu.AddRecpie(entry);
+			if (!gameManager.knownBlueprintNames.ContainsKey(entry.craftItemTitle))
+			{
+				ui.craftingMenu.AddRecpie(entry);
+			}
 		}
 	}
 }
