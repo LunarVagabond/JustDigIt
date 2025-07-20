@@ -1,0 +1,134 @@
+[gd_scene load_steps=10 format=3 uid="uid://dfwv2nmjkvo30"]
+
+[ext_resource type="FontFile" uid="uid://gc7kn1gk7axp" path="res://Assets/Fonts/Libre/Literata/static/Literata-Bold.ttf" id="1_8w086"]
+[ext_resource type="Script" uid="uid://cqbrmnh4acxig" path="res://Levels/Credits/Credits.cs" id="1_rblhn"]
+[ext_resource type="PackedScene" uid="uid://c16j45jhhi061" path="res://Levels/Credits/asset_credit_template.tscn" id="2_rblhn"]
+[ext_resource type="FontFile" uid="uid://bgmj2a24edgt2" path="res://Assets/Fonts/Libre/Literata/static/Literata-Italic.ttf" id="3_xawtr"]
+[ext_resource type="Texture2D" uid="uid://c27bn4ulxqfbf" path="res://Assets/TileSets/Complete_UI_Essential_Pack_Free/Sprites/UI_Flat_IconCross01a.png" id="4_qksey"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8aq4f"]
+bg_color = Color(0, 0, 0, 0.862745)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_8aq4f"]
+font = ExtResource("3_xawtr")
+font_size = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8w086"]
+bg_color = Color(0.757189, 0.563951, 0.151525, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.756863, 0.564706, 0.152941, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rblhn"]
+font = ExtResource("1_8w086")
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rblhn")
+CreditTemplateScene = ExtResource("2_rblhn")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(1200, 700)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_8aq4f")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="CreditContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/PanelContainer/MarginContainer/CreditContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/PanelContainer/MarginContainer/CreditContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Thank You for Playing Just Dig It. Made by Two Tired Devs
+JerryJank & LunarVagabond"
+label_settings = SubResource("LabelSettings_8aq4f")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/ScrollContainer/PanelContainer/MarginContainer/CreditContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 0
+icon = ExtResource("4_qksey")
+icon_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/ScrollContainer/PanelContainer/MarginContainer/CreditContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+theme_override_styles/separator = SubResource("StyleBoxFlat_8w086")
+
+[node name="Header" type="HBoxContainer" parent="MarginContainer/ScrollContainer/PanelContainer/MarginContainer/CreditContainer"]
+layout_mode = 2
+
+[node name="Author" type="Label" parent="MarginContainer/ScrollContainer/PanelContainer/MarginContainer/CreditContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Author"
+label_settings = SubResource("LabelSettings_rblhn")
+horizontal_alignment = 1
+
+[node name="Use" type="Label" parent="MarginContainer/ScrollContainer/PanelContainer/MarginContainer/CreditContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Used For"
+label_settings = SubResource("LabelSettings_rblhn")
+horizontal_alignment = 1
+
+[node name="AssetName" type="Label" parent="MarginContainer/ScrollContainer/PanelContainer/MarginContainer/CreditContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Asset Name"
+label_settings = SubResource("LabelSettings_rblhn")
+horizontal_alignment = 1
+
+[node name="URL" type="Label" parent="MarginContainer/ScrollContainer/PanelContainer/MarginContainer/CreditContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Location
+(Click to Copy)"
+label_settings = SubResource("LabelSettings_rblhn")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/ScrollContainer/PanelContainer/MarginContainer/CreditContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+theme_override_styles/separator = SubResource("StyleBoxFlat_8w086")
+
+[connection signal="pressed" from="MarginContainer/ScrollContainer/PanelContainer/MarginContainer/CreditContainer/HBoxContainer/Button" to="." method="OnClosePressed"]

@@ -6,6 +6,7 @@ public partial class MainMenu : Control
   #region Exports
   [Export(PropertyHint.File, "*.tscn")] string StartLevel;
   [Export(PropertyHint.File, "*.tscn")] string ContinueLevel;
+  [Export] Credits credits;
   #endregion
 
   #region Required UI (Not Exported)
@@ -29,6 +30,7 @@ public partial class MainMenu : Control
     optionsMenu = GetNode<OptionsMenu>("MarginContainer/VBoxContainer/ButtonsContainer/OptionsMenu"); // Maybe use unique name here
     optionsMenu.Visible = false;
     sceneTransition.FadeIn();
+    credits.Hide();
     WireSignals();
   }
 
@@ -101,5 +103,11 @@ public partial class MainMenu : Control
         DirAccess.RemoveAbsolute(path);
       }
     }
+  }
+
+  private void OnCreditsPressed()
+  {
+    if (credits.Visible) credits.Hide();
+    else credits.Show();
   }
 }

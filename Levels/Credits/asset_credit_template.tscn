@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://c16j45jhhi061"]
+
+[ext_resource type="FontFile" uid="uid://gc7kn1gk7axp" path="res://Assets/Fonts/Libre/Literata/static/Literata-Bold.ttf" id="1_ap0mp"]
+[ext_resource type="Script" uid="uid://cdg2ua1bpqlyy" path="res://Levels/Credits/AssetCreditTemplate.cs" id="1_hp5t1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp5t1"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_rblhn"]
+font = ExtResource("1_ap0mp")
+font_color = Color(1, 0.419608, 0.419608, 1)
+
+[node name="AssetCreditTemplate" type="MarginContainer" node_paths=PackedStringArray("AuthorLabel", "UseLabel", "AssetNameLabel", "URLLabel")]
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 3
+script = ExtResource("1_hp5t1")
+AuthorLabel = NodePath("PanelContainer/AssetCredit/Author")
+UseLabel = NodePath("PanelContainer/AssetCredit/Use")
+AssetNameLabel = NodePath("PanelContainer/AssetCredit/AssetName")
+URLLabel = NodePath("PanelContainer/AssetCredit/URL")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hp5t1")
+
+[node name="AssetCredit" type="GridContainer" parent="PanelContainer"]
+layout_mode = 2
+columns = 4
+
+[node name="Author" type="Label" parent="PanelContainer/AssetCredit"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Author"
+label_settings = SubResource("LabelSettings_rblhn")
+autowrap_mode = 3
+
+[node name="Use" type="Label" parent="PanelContainer/AssetCredit"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Used For"
+autowrap_mode = 3
+
+[node name="AssetName" type="Label" parent="PanelContainer/AssetCredit"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Asset Name"
+label_settings = SubResource("LabelSettings_rblhn")
+autowrap_mode = 3
+
+[node name="URL" type="Button" parent="PanelContainer/AssetCredit"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Location"
+alignment = 0
+autowrap_mode = 3
+
+[connection signal="pressed" from="PanelContainer/AssetCredit/URL" to="." method="OnClickUrl"]
