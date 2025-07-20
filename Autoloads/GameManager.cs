@@ -157,7 +157,12 @@ public partial class GameManager : Node
             if (level.Name == "LevelOne")
             {
                 GD.Print("Attempting to save Map in LevelOne");
-
+                // Ensure the directory exists
+                var dir = DirAccess.Open("user://");
+                if (!dir.DirExists("levels"))
+                {
+                    dir.MakeDir("levels");
+                }
                 using var saveFile = FileAccess.Open($"user://levels/{level.Name}.save", FileAccess.ModeFlags.Write);
 
                 Level saveNode = level.GetTree().GetNodesInGroup(GROUP_MINING)[0] as Level;
