@@ -20,6 +20,7 @@ rotation = -1.17286
 DialogToShow = "A torn paper. It reads, \"Had to shut down, locals were...\"  -- What could this about?"
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
