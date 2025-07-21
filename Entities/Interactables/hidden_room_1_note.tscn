@@ -18,9 +18,10 @@ texture = ExtResource("1_g0kmc")
 position = Vector2(0, -5)
 rotation = -1.17286
 DialogToShow = "A torn paper. It reads, \"Had to shut down, locals were...\"  -- What could this about?"
+TimeToShow = 5.0
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 7.0
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2
