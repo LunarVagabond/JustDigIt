@@ -23,6 +23,11 @@ public partial class TextPopperAndEnder : Node
 
 	private void HandleTrasnition()
 	{
+		gameManager.SaveEquippedTools();
+		gameManager.SavePlayer();
+		gameManager.SaveLevel();
+		gameManager.SaveBlueprints();
+		
 		st.ChangeScene(nextScene);
 	}
 }
