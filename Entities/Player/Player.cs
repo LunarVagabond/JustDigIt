@@ -191,8 +191,8 @@ public partial class Player : CharacterBody2D
 			if (roomOpened && level.Name == "LevelOne")
 			{
 				hiddenRoomCovering.Visible = false;
-				industrialWaste.Visible = true;
-				hiddenRoomNote.Visible = true;
+				if (industrialWaste is not null) industrialWaste.Visible = true;
+				if (hiddenRoomNote is not null) hiddenRoomNote.Visible = true;
 				hiddenRoom.SetCell(new Vector2I(9, 12), 4, new Vector2I(4, 10), 1);
 				hiddenRoom.SetCell(new Vector2I(9, 13), 4, new Vector2I(4, 11), 1);
 				electricLock.QueueFree();
